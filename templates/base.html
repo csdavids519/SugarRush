@@ -19,9 +19,14 @@
 </head>
 <body>
     BASE.HTML
-    <header class="container-fluid fixed-top">
-        <h1 class="logo-font">Sugar Rush</h1>
-    </header>
+
+    <ul>
+        <li><a href="{% url 'profiles:profiles' %}"> PROFILES</a></li>
+        <li><a href="{% url 'checkout:checkout' %}"> CHECKOUT</a></li>
+        <li><a href="{% url 'products:products' %}"> PRODUCTS</a></li>
+    </ul>
+
+
 
     {% block content %}
     {% endblock %}
