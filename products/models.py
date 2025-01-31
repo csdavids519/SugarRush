@@ -10,7 +10,7 @@ class Products(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2, null=False)
     stocked = models.BooleanField(default=False, null=False, blank=False)
     description = models.TextField(null=True, blank=True)
-    size = models.CharField(blank=True, null=True)
+    size = models.CharField(max_length=254,blank=True, null=True)
 
     def __str__(self):
         return str(self.product_id)
