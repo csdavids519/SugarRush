@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load static %}
 
 {% block content %}
 PRODUCTS.HTML
@@ -8,9 +8,11 @@ PRODUCTS.HTML
             <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
                 <div class="card h-100 border-3">
                     <div class="card-body pb-3">
-                        <img class="card-img-top img-fluid" src="{{ product.product_image.url }}" alt="{{ product.name }}">
-                        <p class="mb-3">product_id:  {{ product.product_id }}</p>
-                        <p class="mb-3">product_name:  {{ product.product_name }}</p>
+                        <a href="{% url 'products:product_detail' product_id=product.id %}">
+                            <img class="card-img-top img-fluid" src="{{ product.product_image.url }}" alt="{{ product.name }}">
+                            <p class="mb-3">product_id:  {{ product.product_id }}</p>
+                            <p class="mb-3">product_name:  {{ product.product_name }}</p>
+                        </a>
                         <p class="mb-3">stocked:  {{ product.stocked }}</p>
                         <p class="mb-3">description:  {{ product.description }}</p>
                         <p class="mb-3">size:  {{ product.size }}</p>
