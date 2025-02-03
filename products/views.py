@@ -7,4 +7,9 @@ from .models import Product
 def products(request):
     """ A view to return the index page """
     products = Product.objects.all()  # fetch all product data
-    return render(request, 'products.html', {'products': products})
+
+    context = {
+        'products': products,
+    }
+
+    return render(request, 'products.html', context)
