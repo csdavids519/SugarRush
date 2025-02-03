@@ -1,11 +1,11 @@
 from django.db import models
-from products.models import Products
+from products.models import Product
 
 
 # Create your models here.
 class Orders(models.Model):
     order_id = models.IntegerField(unique=True, null=True, blank=True)
-    product_id = models.ForeignKey(Products, on_delete=models.SET_NULL,
+    product_id = models.ForeignKey(Product, on_delete=models.SET_NULL,
                                     null=True, blank=True)
     order_status = models.CharField(max_length=254)
     order_date = models.DateField()
@@ -16,7 +16,7 @@ class Orders(models.Model):
 
 class Wishlist(models.Model):
     wishlist_id = models.IntegerField(unique=True, null=True, blank=True)
-    product_id = models.ForeignKey(Products, on_delete=models.SET_NULL,
+    product_id = models.ForeignKey(Product, on_delete=models.SET_NULL,
                                     null=True, blank=True)
 
     def __str__(self):

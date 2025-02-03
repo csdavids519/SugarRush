@@ -3,8 +3,8 @@ from django.db import models
 # Create your models here.
 
 
-class Products(models.Model):
-    product_id = models.IntegerField(unique=True, null=False, editable=False)
+class Product(models.Model):
+    product_id = models.IntegerField(unique=True, null=False)
     product_name = models.CharField(max_length=254)
     product_image = models.ImageField(null=True, blank=True)
     price = models.DecimalField(max_digits=6, decimal_places=2, null=False)
