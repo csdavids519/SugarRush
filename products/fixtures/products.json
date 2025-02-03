@@ -1,0 +1,652 @@
+[
+    {
+        "model": "products.product",
+        "pk": 1,
+        "fields": {
+            "product_id": 1,
+            "product_name": "product 1",
+            "product_image": "OustElon_small.png",
+            "price": "25.99",
+            "stocked": true,
+            "description": "adffsadfsdafsdaf",
+            "size": "M"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 2,
+        "fields": {
+            "product_id": 2,
+            "product_name": "product 2",
+            "product_image": "noimage.png",
+            "price": "2132.99",
+            "stocked": true,
+            "description": "dfasfsadfsdaf",
+            "size": "M"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 3,
+        "fields": {
+            "product_id": 3,
+            "product_name": "product 3",
+            "product_image": "OustElon_small.png",
+            "price": "99.99",
+            "stocked": true,
+            "description": "Premium quality product with advanced features for comfort and convenience.",
+            "size": "S"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 4,
+        "fields": {
+            "product_id": 4,
+            "product_name": "product 4",
+            "product_image": "noimage.png",
+            "price": "149.99",
+            "stocked": true,
+            "description": "Top-of-the-line performance with sleek design and incredible functionality.",
+            "size": "L"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 5,
+        "fields": {
+            "product_id": 5,
+            "product_name": "product 5",
+            "product_image": "OustElon_small.png",
+            "price": "89.50",
+            "stocked": true,
+            "description": "Sleek and stylish design for everyday use with exceptional durability.",
+            "size": "XL"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 6,
+        "fields": {
+            "product_id": 6,
+            "product_name": "product 6",
+            "product_image": "noimage.png",
+            "price": "199.99",
+            "stocked": true,
+            "description": "Comfort meets modern technology for a seamless user experience.",
+            "size": "M"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 7,
+        "fields": {
+            "product_id": 7,
+            "product_name": "product 7",
+            "product_image": "OustElon_small.png",
+            "price": "320.00",
+            "stocked": true,
+            "description": "Crafted with precision, offering both luxury and practicality.",
+            "size": "S"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 8,
+        "fields": {
+            "product_id": 8,
+            "product_name": "product 8",
+            "product_image": "noimage.png",
+            "price": "135.75",
+            "stocked": true,
+            "description": "Designed for the active individual, combining style with performance.",
+            "size": "L"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 9,
+        "fields": {
+            "product_id": 9,
+            "product_name": "product 9",
+            "product_image": "OustElon_small.png",
+            "price": "54.99",
+            "stocked": true,
+            "description": "Perfectly engineered for efficiency and ease of use, ideal for daily tasks.",
+            "size": "M"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 10,
+        "fields": {
+            "product_id": 10,
+            "product_name": "product 10",
+            "product_image": "noimage.png",
+            "price": "212.99",
+            "stocked": true,
+            "description": "A blend of technology and craftsmanship, built for maximum comfort.",
+            "size": "S"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 11,
+        "fields": {
+            "product_id": 11,
+            "product_name": "product 11",
+            "product_image": "OustElon_small.png",
+            "price": "45.99",
+            "stocked": true,
+            "description": "A classic design with modern features for everyday elegance.",
+            "size": "L"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 12,
+        "fields": {
+            "product_id": 12,
+            "product_name": "product 12",
+            "product_image": "noimage.png",
+            "price": "65.99",
+            "stocked": true,
+            "description": "Durable and practical, made to last through daily wear and tear.",
+            "size": "XL"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 13,
+        "fields": {
+            "product_id": 13,
+            "product_name": "product 13",
+            "product_image": "OustElon_small.png",
+            "price": "128.50",
+            "stocked": true,
+            "description": "Sophisticated and elegant, designed to enhance your lifestyle.",
+            "size": "S"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 14,
+        "fields": {
+            "product_id": 14,
+            "product_name": "product 14",
+            "product_image": "noimage.png",
+            "price": "199.95",
+            "stocked": true,
+            "description": "A versatile product that adapts to any occasion or need.",
+            "size": "M"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 15,
+        "fields": {
+            "product_id": 15,
+            "product_name": "product 15",
+            "product_image": "OustElon_small.png",
+            "price": "77.25",
+            "stocked": true,
+            "description": "Crafted for comfort and style, perfect for any casual outfit.",
+            "size": "L"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 16,
+        "fields": {
+            "product_id": 16,
+            "product_name": "product 16",
+            "product_image": "noimage.png",
+            "price": "50.00",
+            "stocked": true,
+            "description": "High-performance design with comfort in mind, suitable for all-day use.",
+            "size": "XL"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 17,
+        "fields": {
+            "product_id": 17,
+            "product_name": "product 17",
+            "product_image": "OustElon_small.png",
+            "price": "199.99",
+            "stocked": true,
+            "description": "An ideal choice for those who prioritize performance and design.",
+            "size": "M"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 18,
+        "fields": {
+            "product_id": 18,
+            "product_name": "product 18",
+            "product_image": "noimage.png",
+            "price": "350.00",
+            "stocked": true,
+            "description": "Premium materials and craftsmanship make this a standout choice.",
+            "size": "S"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 19,
+        "fields": {
+            "product_id": 19,
+            "product_name": "product 19",
+            "product_image": "OustElon_small.png",
+            "price": "450.99",
+            "stocked": true,
+            "description": "A luxurious product that blends style with functionality.",
+            "size": "L"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 20,
+        "fields": {
+            "product_id": 20,
+            "product_name": "product 20",
+            "product_image": "noimage.png",
+            "price": "124.99",
+            "stocked": true,
+            "description": "Designed for durability and reliability, with a focus on style.",
+            "size": "XL"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 21,
+        "fields": {
+            "product_id": 21,
+            "product_name": "product 21",
+            "product_image": "OustElon_small.png",
+            "price": "299.99",
+            "stocked": true,
+            "description": "A versatile item built to handle everyday wear and tear with style.",
+            "size": "M"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 22,
+        "fields": {
+            "product_id": 22,
+            "product_name": "product 22",
+            "product_image": "noimage.png",
+            "price": "45.00",
+            "stocked": true,
+            "description": "Lightweight, durable, and ideal for daily activities and use.",
+            "size": "S"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 23,
+        "fields": {
+            "product_id": 23,
+            "product_name": "product 23",
+            "product_image": "OustElon_small.png",
+            "price": "78.49",
+            "stocked": true,
+            "description": "An exceptional product designed for those who value both quality and style.",
+            "size": "L"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 24,
+        "fields": {
+            "product_id": 24,
+            "product_name": "product 24",
+            "product_image": "noimage.png",
+            "price": "500.00",
+            "stocked": true,
+            "description": "Elegant and luxurious, made with top-tier materials for utmost comfort.",
+            "size": "M"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 25,
+        "fields": {
+            "product_id": 25,
+            "product_name": "product 25",
+            "product_image": "OustElon_small.png",
+            "price": "110.99",
+            "stocked": true,
+            "description": "Versatile and stylish, perfect for both casual and formal wear.",
+            "size": "S"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 26,
+        "fields": {
+            "product_id": 26,
+            "product_name": "product 26",
+            "product_image": "noimage.png",
+            "price": "240.00",
+            "stocked": true,
+            "description": "State-of-the-art product, blending luxury with functionality.",
+            "size": "L"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 27,
+        "fields": {
+            "product_id": 27,
+            "product_name": "product 27",
+            "product_image": "OustElon_small.png",
+            "price": "399.99",
+            "stocked": true,
+            "description": "Crafted for elegance and performance, this product elevates your experience.",
+            "size": "XL"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 28,
+        "fields": {
+            "product_id": 28,
+            "product_name": "product 28",
+            "product_image": "noimage.png",
+            "price": "189.00",
+            "stocked": true,
+            "description": "Sophisticated and modern, ideal for the discerning buyer.",
+            "size": "M"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 29,
+        "fields": {
+            "product_id": 29,
+            "product_name": "product 29",
+            "product_image": "OustElon_small.png",
+            "price": "59.99",
+            "stocked": true,
+            "description": "High-end quality with cutting-edge design for top performance.",
+            "size": "S"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 30,
+        "fields": {
+            "product_id": 30,
+            "product_name": "product 30",
+            "product_image": "noimage.png",
+            "price": "89.99",
+            "stocked": true,
+            "description": "Perfectly designed for modern needs with comfort and reliability.",
+            "size": "L"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 31,
+        "fields": {
+            "product_id": 31,
+            "product_name": "product 31",
+            "product_image": "OustElon_small.png",
+            "price": "99.99",
+            "stocked": true,
+            "description": "Combining performance with style, designed for everyday tasks.",
+            "size": "M"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 32,
+        "fields": {
+            "product_id": 32,
+            "product_name": "product 32",
+            "product_image": "noimage.png",
+            "price": "89.99",
+            "stocked": true,
+            "description": "Ideal for those who prioritize both aesthetics and functionality.",
+            "size": "S"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 33,
+        "fields": {
+            "product_id": 33,
+            "product_name": "product 33",
+            "product_image": "OustElon_small.png",
+            "price": "145.00",
+            "stocked": true,
+            "description": "A perfect blend of elegance and durability for everyday wear.",
+            "size": "L"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 34,
+        "fields": {
+            "product_id": 34,
+            "product_name": "product 34",
+            "product_image": "noimage.png",
+            "price": "170.00",
+            "stocked": true,
+            "description": "Designed for performance with a focus on durability and practicality.",
+            "size": "XL"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 35,
+        "fields": {
+            "product_id": 35,
+            "product_name": "product 35",
+            "product_image": "OustElon_small.png",
+            "price": "349.99",
+            "stocked": true,
+            "description": "State-of-the-art design meets cutting-edge technology for everyday use.",
+            "size": "M"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 36,
+        "fields": {
+            "product_id": 36,
+            "product_name": "product 36",
+            "product_image": "noimage.png",
+            "price": "249.99",
+            "stocked": true,
+            "description": "A luxurious item that offers both sophistication and comfort.",
+            "size": "S"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 37,
+        "fields": {
+            "product_id": 37,
+            "product_name": "product 37",
+            "product_image": "OustElon_small.png",
+            "price": "549.99",
+            "stocked": true,
+            "description": "Carefully designed for those who seek top-tier performance and style.",
+            "size": "L"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 38,
+        "fields": {
+            "product_id": 38,
+            "product_name": "product 38",
+            "product_image": "noimage.png",
+            "price": "649.00",
+            "stocked": true,
+            "description": "Made from premium materials for unparalleled luxury and reliability.",
+            "size": "M"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 39,
+        "fields": {
+            "product_id": 39,
+            "product_name": "product 39",
+            "product_image": "OustElon_small.png",
+            "price": "39.99",
+            "stocked": true,
+            "description": "Compact and versatile for daily use, without compromising on quality.",
+            "size": "S"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 40,
+        "fields": {
+            "product_id": 40,
+            "product_name": "product 40",
+            "product_image": "noimage.png",
+            "price": "45.00",
+            "stocked": true,
+            "description": "Lightweight yet durable, ideal for everyday tasks and outdoor activities.",
+            "size": "L"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 41,
+        "fields": {
+            "product_id": 41,
+            "product_name": "product 41",
+            "product_image": "OustElon_small.png",
+            "price": "89.99",
+            "stocked": true,
+            "description": "Sturdy, high-quality, and perfect for those who love adventure.",
+            "size": "M"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 42,
+        "fields": {
+            "product_id": 42,
+            "product_name": "product 42",
+            "product_image": "noimage.png",
+            "price": "120.00",
+            "stocked": true,
+            "description": "A combination of design and comfort, perfect for your daily needs.",
+            "size": "S"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 43,
+        "fields": {
+            "product_id": 43,
+            "product_name": "product 43",
+            "product_image": "OustElon_small.png",
+            "price": "199.99",
+            "stocked": true,
+            "description": "An elegant design, offering luxury and style for those who demand quality.",
+            "size": "L"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 44,
+        "fields": {
+            "product_id": 44,
+            "product_name": "product 44",
+            "product_image": "noimage.png",
+            "price": "80.00",
+            "stocked": true,
+            "description": "Perfect for modern individuals who value efficiency and ease of use.",
+            "size": "M"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 45,
+        "fields": {
+            "product_id": 45,
+            "product_name": "product 45",
+            "product_image": "OustElon_small.png",
+            "price": "129.99",
+            "stocked": true,
+            "description": "Crafted with care, designed for maximum performance and reliability.",
+            "size": "XL"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 46,
+        "fields": {
+            "product_id": 46,
+            "product_name": "product 46",
+            "product_image": "noimage.png",
+            "price": "149.99",
+            "stocked": true,
+            "description": "A strong and durable product, ideal for everyday adventures.",
+            "size": "S"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 47,
+        "fields": {
+            "product_id": 47,
+            "product_name": "product 47",
+            "product_image": "OustElon_small.png",
+            "price": "189.00",
+            "stocked": true,
+            "description": "Perfectly designed for those who need both performance and style.",
+            "size": "L"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 48,
+        "fields": {
+            "product_id": 48,
+            "product_name": "product 48",
+            "product_image": "noimage.png",
+            "price": "99.99",
+            "stocked": true,
+            "description": "A reliable and stylish product designed for modern living.",
+            "size": "S"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 49,
+        "fields": {
+            "product_id": 49,
+            "product_name": "product 49",
+            "product_image": "OustElon_small.png",
+            "price": "75.00",
+            "stocked": true,
+            "description": "Built to last and designed for those who appreciate quality craftsmanship.",
+            "size": "M"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 50,
+        "fields": {
+            "product_id": 50,
+            "product_name": "product 50",
+            "product_image": "noimage.png",
+            "price": "300.00",
+            "stocked": true,
+            "description": "Premium quality and craftsmanship, made for those with discerning taste.",
+            "size": "L"
+        }
+    }
+]
