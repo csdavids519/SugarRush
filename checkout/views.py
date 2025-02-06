@@ -7,9 +7,6 @@ from checkout.models import Basket
 
 def checkout(request):
     """ A view to return the index page """
+    baskets = Basket.objects.prefetch_related('basket_products__product')
 
-    context = {
-        'basket_list': Basket,
-    }
-
-    return render(request, 'checkout.html', context)
+    return render(request, 'checkout.html', {'baskets': baskets})

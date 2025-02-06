@@ -1,9 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
-  CHECKOUT.HTML
-  <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-    {% for basket.basket_id in basket%}
-      <p class="mb-3">product_id: {{ product.product_id }}</p>
+  <h1>Basket Contents</h1>
+  <div class="row">
+    {% for basket in baskets %}
+      <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
+        <h3>Basket ID: {{ basket.basket_id }}</h3>
+        <ul>
+          {% for basket_product in basket.basket_products.all %}
+            <div>
+              <p>Name: {{ basket_product.product.name }} Quantity: {{ basket_product.quantity }} Price: ${{ basket_product.product.price }}</p>
+            </div>
+          {% empty %}
+            <p>No products in this basket.</p>
+          {% endfor %}
+        </ul>
+      </div>
+    {% empty %}
+      <p>No baskets found.</p>
     {% endfor %}
-    </div>
+  </div>
 {% endblock %}
