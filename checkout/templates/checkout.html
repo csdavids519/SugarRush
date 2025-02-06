@@ -1,9 +1,9 @@
 {% extends "base.html" %}
-
-
 {% block content %}
-CHECKOUT.HTML
-
+  CHECKOUT.HTML
+  <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
+    {% for basket.basket_id in basket%}
+      <p class="mb-3">product_id: {{ product.product_id }}</p>
+    {% endfor %}
+    </div>
 {% endblock %}
-
-
