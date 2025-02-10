@@ -66,6 +66,14 @@
                 <p class="my-0">
                   ${{ grand_total|floatformat:2 }}
                 </p>
+                 <!-- user log in display -->
+                {% if user.is_authenticated %}
+                  <p class="text-end m-3 fw-light text-dark">You are logged in as
+                  {{ user }}</p>
+                {% else %}
+                  <p class="text-end m-3 fw-light text-dark">You are not logged
+                  in</p>
+                {% endif %}
             </div>
         </a>
         </div>
@@ -100,7 +108,9 @@
         <li><a href="{% url 'profiles:profiles' %}"> PROFILES</a></li>
         <li><a href="{% url 'checkout:checkout' %}"> CHECKOUT</a></li>
         <li><a href="{% url 'products:products' %}"> PRODUCTS</a></li>
-        <li><a href="{% url 'home:home' %}"> LOG IN</a></li>
+        <li><a href="{% url 'account_signup' %}"> SIGN UP</a></li>
+        <li><a href="{% url 'account_login' %}"> LOG IN</a></li>
+        <li><a href="{% url 'account_logout' %}"> LOG OUT</a></li>
       </ul>
     </div>
 
