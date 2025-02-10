@@ -13,3 +13,4 @@ def update_basket_total(request):
     print(f"total price: {total_price}")
 
     return {'grand_total': total_price}
+
