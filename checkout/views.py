@@ -15,6 +15,7 @@ def checkout(request):
 
 
 def add_to_basket(request, item_id):
+    """ A view to add current product to the basket list """
     product = get_object_or_404(Product, pk=item_id)
     quantity = int(request.POST.get('quantity', 1))
 
