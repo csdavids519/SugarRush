@@ -2,21 +2,21 @@
 {% block content %}
   <h1>Basket Contents</h1>
   <div class="row">
-    {% for basket in baskets %}
-      <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-        <h3>Basket ID: {{ basket.user }}</h3>
-        <ul>
-          {% for basket_product in basket.basket_products.all %}
-            <div>
-              <p>Name: {{ basket_product.product.name }} Quantity: {{ basket_product.quantity }} Price: ${{ basket_product.product.price }}</p>
-            </div>
-          {% empty %}
-            <p>No products in this basket.</p>
-          {% endfor %}
-        </ul>
-      </div>
-    {% empty %}
-      <p>No baskets found.</p>
-    {% endfor %}
-  </div>
+    {% if basket_results %}
+    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
+      <h3>Basket ID: {{ basket_results.user }}</h3>
+      <ul>
+        {% for i in basket_results.basket_products.all %}
+          <div>
+            <p>Name: {{ i.product.name }} Quantity: {{ i.quantity }} Price: ${{ i.product.price }}</p>
+          </div>
+        {% empty %}
+          <p>No products in this basket.</p>
+        {% endfor %}
+      </ul>
+    </div>
+  {% else %}
+    <p>No basket found for the current user. {{user}}</p>
+  {% endif %}
+</div>
 {% endblock %}

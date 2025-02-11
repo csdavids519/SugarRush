@@ -9,9 +9,15 @@ from products.models import Product
 
 def checkout(request):
     """ A view to return the index page """
-    baskets = Basket.objects.prefetch_related('basket_products__product')
-
-    return render(request, 'checkout.html', {'baskets': baskets})
+    # find the basket based on user name
+    try:
+        basket = Basket.objects.get(user=request.user)
+        print('checkout: basket found')
+    except Basket.DoesNotExist:
+        print('checkout: basket does not exist')
+        basket = Basket.objects.create(user=request.user)
+        return render(request, 'checkout.html', {'basket_results': None})
+    return render(request, 'checkout.html', {'basket_results': basket})
 
 
 def add_to_basket(request, item_id):
