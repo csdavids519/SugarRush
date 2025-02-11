@@ -11,10 +11,9 @@ class BasketProductInline(admin.TabularInline):
 
 @admin.register(Basket)
 class BasketAdmin(admin.ModelAdmin):
-    list_display = ['user', 'get_products']
-    inlines = [BasketProductInline]
+    list_display = ['id', 'user', 'get_products']
 
-    #Code reference chatGPT to create def git_products
+    # Code reference chatGPT to create def git_products
     def get_products(self, obj):
         return ", ".join(f"{i.product.name} (x{i.quantity})" for i in obj.basket_products.all())
     get_products.short_description = "Products"

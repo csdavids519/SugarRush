@@ -1,13 +1,15 @@
 from .models import Basket
+from django.shortcuts import get_object_or_404
 
 
 def update_basket_total(request):
 
     if request.user.is_authenticated:
-        basket = Basket.objects.get(user=request.user)
+        print('contexts: update_basket_total: user authenticated')
+        user = request.user
 
         # update basket pice total
-        basket = Basket.objects.get(basket)
+        basket = get_object_or_404(Basket, user=user)
 
         basket_products = basket.basket_products.all()
         print(f"Basket ID: {basket.user}")
@@ -17,4 +19,3 @@ def update_basket_total(request):
 
         return {'grand_total': total_price}
     return {'grand_total': 0.00}
-
