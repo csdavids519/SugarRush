@@ -59,24 +59,28 @@
             </div>
           </form>
         </div>
-        <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
+        <li class="list-inline-item">
           <a class="{% if grand_total %}text-info font-weight-bold{% else %}text-black{% endif %} nav-link" href="{% url 'checkout:checkout' %}">
-            <div class="text-center">
-                <div><i class="fas fa-shopping-bag fa-lg"></i></div>
-                <p class="my-0">
-                  ${{ grand_total|floatformat:2 }}
-                </p>
-                 <!-- user log in display -->
-                {% if user.is_authenticated %}
-                  <p class="text-end m-3 fw-light text-dark">You are logged in as
-                  {{ user }}</p>
-                {% else %}
+              <div>
+                  <div><i class="fas fa-shopping-bag fa-lg"></i></div>
+                  <p class= "text-end m-3 fw-light text-dark">
+                    {% if user.is_authenticated %}
+                          ${{ grand_total|floatformat:2 }}
+                      {% else %}
+                          log in
+                      {% endif %}
+                  </p>
+                   <!-- user log in display -->
+                  {% if user.is_authenticated %}
+                      <p class="text-end m-3 fw-light text-dark">You are logged in as
+                      {{ user }}</p>
+                  {% else %}
                   <p class="text-end m-3 fw-light text-dark">You are not logged
-                  in</p>
-                {% endif %}
-            </div>
-        </a>
-        </div>
+                      in</p>
+                  {% endif %}
+              </div>
+          </a>
+      </li>
       </div>
       <div class="row bg-white">
         <nav class="navbar navbar-expand-lg navbar-light w-100">
@@ -101,19 +105,20 @@
         </div>
       </div>
     </header>
-    <div style="margin-top: 120px">
-      BASE.HTML
-      <ul>
-        <li><a href="{% url 'home:home' %}"> HOME</a></li>
-        <li><a href="{% url 'profiles:profiles' %}"> PROFILES</a></li>
-        <li><a href="{% url 'checkout:checkout' %}"> CHECKOUT</a></li>
-        <li><a href="{% url 'products:products' %}"> PRODUCTS</a></li>
-        <li><a href="{% url 'account_signup' %}"> SIGN UP</a></li>
-        <li><a href="{% url 'account_login' %}"> LOG IN</a></li>
-        <li><a href="{% url 'account_logout' %}"> LOG OUT</a></li>
-      </ul>
-    </div>
-
+    <div class="m-3">
+        <div style="margin-top: 250px">
+          BASE.HTML
+          <ul>
+            <li><a href="{% url 'home:home' %}"> HOME</a></li>
+            <li><a href="{% url 'profiles:profiles' %}"> PROFILES</a></li>
+            <li><a href="{% url 'checkout:checkout' %}"> CHECKOUT</a></li>
+            <li><a href="{% url 'products:products' %}"> PRODUCTS</a></li>
+            <li><a href="{% url 'account_signup' %}"> SIGN UP</a></li>
+            <li><a href="{% url 'account_login' %}"> LOG IN</a></li>
+            <li><a href="{% url 'account_logout' %}"> LOG OUT</a></li>
+          </ul>
+        </div>
+      </div>
     {% block content %} {% endblock %}
   </body>
 </html>
