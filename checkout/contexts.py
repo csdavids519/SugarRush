@@ -3,14 +3,18 @@ from .models import Basket
 
 def update_basket_total(request):
 
-    # update basket pice total
-    basket = Basket.objects.get(basket_id=1)
+    if request.user.is_authenticated:
+        basket = Basket.objects.get(user=request.user)
 
-    basket_products = basket.basket_products.all()
-    print(f"Basket ID: {basket.basket_id}")
+        # update basket pice total
+        basket = Basket.objects.get(basket)
 
-    total_price = sum(i.product.price * i.quantity for i in basket_products)
-    print(f"total price: {total_price}")
+        basket_products = basket.basket_products.all()
+        print(f"Basket ID: {basket.user}")
 
-    return {'grand_total': total_price}
+        total_price = sum(i.product.price * i.quantity for i in basket_products)
+        print(f"total price: {total_price}")
+
+        return {'grand_total': total_price}
+    return {'grand_total': 0.00}
 

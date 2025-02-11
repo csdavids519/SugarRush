@@ -4,7 +4,7 @@
   <div class="row">
     {% for basket in baskets %}
       <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-        <h3>Basket ID: {{ basket.basket_id }}</h3>
+        <h3>Basket ID: {{ basket.user }}</h3>
         <ul>
           {% for basket_product in basket.basket_products.all %}
             <div>

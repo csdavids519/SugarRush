@@ -16,14 +16,21 @@ def checkout(request):
 
 def add_to_basket(request, item_id):
     """ A view to add current product to the basket list """
-    product = get_object_or_404(Product, pk=item_id)
-    quantity = int(request.POST.get('quantity', 1))
+    if request.user.is_authenticated:
+        product = get_object_or_404(Product, pk=item_id)
+        quantity = int(request.POST.get('quantity', 1))
 
-    basket, created = Basket.objects.get_or_create(basket_id=1)
-    basket_product, created = BasketProduct.objects.get_or_create(basket=basket, product=product)
+    # find the basket based on user name
+    try:
+        basket = Basket.objects.get(user=request.user)
+    except Basket.DoesNotExist:
+        basket = Basket.objects.create(user=request.user)
 
-    basket_product.quantity += quantity
-    basket_product.save()
+        # check for existing matching products or create new
+        basket_product, created = BasketProduct.objects.get_or_create(basket=basket, product=product)
 
-    redirect_url = request.POST.get('redirect_url', '/')
+        basket_product.quantity += quantity
+        basket_product.save()
+
+        redirect_url = request.POST.get('redirect_url', '/')
     return redirect(redirect_url)
