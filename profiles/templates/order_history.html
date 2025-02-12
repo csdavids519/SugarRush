@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Order</h1>
+  <div class="row">
+    {% if order_results %}
+    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
+      <h3>Basket ID: {{ order_results.user }}</h3>
+      <ul>
+        {% for i in basket_results.basket_products.all %}
+          <div>
+            <p>Name: {{ i.product.name }} Quantity: {{ i.quantity }} Price: ${{ i.product.price }}</p>
+          </div>
+        {% empty %}
+          <p>No order history for this user.</p>
+        {% endfor %}
+      </ul>
+    </div>
+  {% else %}
+    <p>No basket found for the current user. {{user}}</p>
+  {% endif %}
+</div>
+{% endblock %}
