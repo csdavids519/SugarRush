@@ -4,8 +4,10 @@ from django.shortcuts import (
 from checkout.models import Basket, BasketProduct
 from products.models import Product
 
-# Create your views here.
+from .models import Orders
+from .forms import OrderForm
 
+# Create your views here.
 
 def checkout(request):
     """ A view to return the index page """
@@ -51,6 +53,8 @@ def add_to_basket(request, item_id):
 
 def payment(request):
     """ A view to return the checkout page """
+    order_form = OrderForm()
+
     # find the basket based on user name
     try:
         basket = Basket.objects.get(user=request.user)
@@ -59,7 +63,17 @@ def payment(request):
         print('payment: basket does not exist')
         basket = Basket.objects.create(user=request.user)
         return render(request, 'payment.html', {'order_results': None})
-    return render(request, 'payment.html', {'order_results': basket})
+    return render(request, 'payment.html', {'order_results': basket, 'order_form': order_form})
+
+
+def submit_payment(request):
+    if request.method == "POST":
+        order_form = Orders(request.POST)
+
+        if order_form.is_valid():
+            print(order_form.fields)  # Debugging
+
+    return render(request, 'checkout.html')
 
 
 def update_basket(request, basket_product_id):

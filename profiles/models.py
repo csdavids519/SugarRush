@@ -1,18 +1,19 @@
 from django.db import models
 from products.models import Product
 from django.contrib.auth.models import User
+from checkout.models import Orders
 
 # Create your models here.
 
 
-class Orders(models.Model):
-    product_id = models.ForeignKey(Product, on_delete=models.SET_NULL,
-                                    null=True, blank=True)
-    order_status = models.CharField(max_length=254)
-    order_date = models.DateField()
+# class Orders(models.Model):
+#     product_id = models.ForeignKey(Product, on_delete=models.SET_NULL,
+#                                     null=True, blank=True)
+#     order_status = models.CharField(max_length=254)
+#     order_date = models.DateField()
 
-    def __str__(self):
-        return str(self.orders_id)
+#     def __str__(self):
+#         return str(self.orders_id)
 
 
 class Customer(models.Model):

@@ -16,7 +16,7 @@
           <p>Price: ${{ i.product.price }}</p>
 
         <form action="{% url 'checkout:update_basket' i.id %}" method="POST">
-          {% csrf_token %}
+          {% csrf_token %}f
           <input type="number" name="quantity" value="{{ i.quantity }}" min="1">
           <button type="submit">Update</button>
           <input type="hidden" name="redirect_url" value="{{ request.path }}" />
