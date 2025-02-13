@@ -47,3 +47,37 @@ def add_to_basket(request, item_id):
 
     redirect_url = request.POST.get('redirect_url', '/')
     return redirect(redirect_url)
+
+
+def payment(request):
+    """ A view to return the checkout page """
+    # find the basket based on user name
+    try:
+        basket = Basket.objects.get(user=request.user)
+        print('payment: basket found')
+    except Basket.DoesNotExist:
+        print('payment: basket does not exist')
+        basket = Basket.objects.create(user=request.user)
+        return render(request, 'payment.html', {'order_results': None})
+    return render(request, 'payment.html', {'order_results': basket})
+
+
+def update_basket(request, basket_product_id):
+    basket_list = get_object_or_404(BasketProduct, id=basket_product_id)
+
+    if request.method == "POST":
+        qty_update = int(request.POST.get("quantity", 1))
+        if qty_update > 0:
+            basket_list.quantity = qty_update
+            basket_list.save()
+
+    redirect_url = request.POST.get('redirect_url', '/')
+    return redirect(redirect_url)
+
+
+def remove_from_basket(request, basket_product_id):
+    basket_list = get_object_or_404(BasketProduct, id=basket_product_id, user=request.user)
+    basket_list.delete()
+
+    redirect_url = request.POST.get('redirect_url', '/')
+    return redirect(redirect_url)

@@ -19,3 +19,4 @@ class BasketProduct(models.Model):
 
     def __str__(self):
         return f"{self.product.name} in Basket {self.basket.user}"
+

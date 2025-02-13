@@ -1,22 +1,37 @@
 {% extends "base.html" %}
 {% block content %}
   <h1>Basket Contents</h1>
+  <div class='m-5'>
+    <a href="{% url 'checkout:payment' %}"> PAYMENT PAGE</a>
+  </div>
   <div class="row">
     {% if basket_results %}
     <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
       <h3>Basket ID: {{ basket_results.user }}</h3>
       <ul>
         {% for i in basket_results.basket_products.all %}
-          <div>
-            <p>Name: {{ i.product.name }} Quantity: {{ i.quantity }} Price: ${{ i.product.price }}</p>
-          </div>
+        <div>
+          <p>Name: {{ i.product.name }}</p>
+          <p>Quantity: {{ i.quantity }}</p>
+          <p>Price: ${{ i.product.price }}</p>
+
+        <form action="{% url 'checkout:update_basket' i.id %}" method="POST">
+          {% csrf_token %}
+          <input type="number" name="quantity" value="{{ i.quantity }}" min="1">
+          <button type="submit">Update</button>
+          <input type="hidden" name="redirect_url" value="{{ request.path }}" />
+        </form>      
+
+        <!-- Link to remove item from basket -->
+        <a href="{% url 'checkout:remove_from_basket' i.id %}">Remove</a>
+        </div>
         {% empty %}
           <p>No products in this basket.</p>
         {% endfor %}
-      </ul>
-    </div>
-  {% else %}
-    <p>No basket found for the current user. {{user}}</p>
+        </ul>
+        </div>
+    {% else %}
+      <p>No basket found for the current user. {{user}}</p>
   {% endif %}
 </div>
 {% endblock %}
