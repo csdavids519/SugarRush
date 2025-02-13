@@ -22,16 +22,18 @@
           <input type="hidden" name="redirect_url" value="{{ request.path }}" />
         </form>      
 
-        <!-- Link to remove item from basket -->
-        <a href="{% url 'checkout:remove_from_basket' i.id %}">Remove</a>
-        </div>
+        <form action="{% url 'checkout:remove_from_basket' i.id %}" method="POST">
+          {% csrf_token %}
+          <input type="hidden" name="redirect_url" value="{{ request.path }}" />
+          <button type="submit">Remove</button>
+        </form>     
         {% empty %}
-          <p>No products in this basket.</p>
-        {% endfor %}
-        </ul>
-        </div>
-    {% else %}
-      <p>No basket found for the current user. {{user}}</p>
-  {% endif %}
+        <p>No products in this basket.</p>
+      {% endfor %}
+      </ul>
+      </div>
+        {% else %}
+          <p>No basket found for the current user. {{user}}</p>
+        {% endif %}
 </div>
 {% endblock %}

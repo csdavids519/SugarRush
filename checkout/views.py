@@ -76,7 +76,7 @@ def update_basket(request, basket_product_id):
 
 
 def remove_from_basket(request, basket_product_id):
-    basket_list = get_object_or_404(BasketProduct, id=basket_product_id, user=request.user)
+    basket_list = get_object_or_404(BasketProduct, id=basket_product_id)
     basket_list.delete()
 
     redirect_url = request.POST.get('redirect_url', '/')
