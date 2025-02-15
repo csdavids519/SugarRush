@@ -1,13 +1,19 @@
+import stripe
 from django.shortcuts import (
     render, redirect, get_object_or_404
     )
+from django.views import View
+from djagno.conf import settings
+from django.http import JsonResponse
+
 from checkout.models import Basket, BasketProduct
 from products.models import Product
 
 from .models import Orders
 from .forms import OrderForm
 
-# Create your views here.
+stripe.api_key = settings.STRIPE_SECRET_KEY
+
 
 def checkout(request):
     """ A view to return the index page """
@@ -95,3 +101,25 @@ def remove_from_basket(request, basket_product_id):
 
     redirect_url = request.POST.get('redirect_url', '/')
     return redirect(redirect_url)
+
+
+class CreateCheckoutSessionView(View):
+    def post(self, request, *args, **kwargs):
+        YOUR_DOMAIN = 'checkout.html'
+        try:
+            session = stripe.checkout.Session.create(
+                ui_mode = 'embedded',
+                line_items=[
+                    {
+                        # Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+                        'price': '{{PRICE_ID}}',
+                        'quantity': 1,
+                    },
+                ],
+                mode='payment',
+                return_url=YOUR_DOMAIN + '/return.html?session_id={CHECKOUT_SESSION_ID}',
+            )
+        except Exception as e:
+            return str(e)
+
+        return JsonResponse(clientSecret=session.client_secret)

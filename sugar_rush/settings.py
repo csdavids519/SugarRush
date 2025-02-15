@@ -26,6 +26,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-3(^)-6j187u!7=z=8(a)a0a#k$820-@0p9^r*fu4-p))f%o+@_'
 
+STRIPE_PUBLIC_KEY = ''
+STRIPE_SECRET_KEY = ''
+STRIPE_WEBHOOK_SECRET = ''
+
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
