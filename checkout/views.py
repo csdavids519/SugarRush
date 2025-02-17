@@ -114,7 +114,7 @@ def create_checkout_session(request):
                 ui_mode = 'embedded',
                 line_items=[{
                     'price_data': {
-                        'currency': 'usd',
+                        'currency': 'euro',
                         'product_data': {
                             'name': 'T-shirt',
                         },
