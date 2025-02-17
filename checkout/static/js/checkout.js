@@ -3,10 +3,13 @@ const stripe = Stripe("pk_test_51QsjeH02ahKmoBWWiupTVTSOypH3073b25gWzF4vB0vk9SIv
 
 initialize();
 
+document.write("Hello, World! checkout static");
+console.log("Sanity check! checkout folder");
+
 // Create a Checkout Session
 async function initialize() {
     const fetchClientSecret = async () => {
-        const response = await fetch("/create-checkout-session", {
+        const response = await fetch("/checkout/create-checkout-session/", {
             method: "POST",
         });
         const { clientSecret } = await response.json();

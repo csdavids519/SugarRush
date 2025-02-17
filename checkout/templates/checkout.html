@@ -2,7 +2,10 @@
 {% block content %}
   <h1>Basket Contents</h1>
   <div class='m-5'>
-    <a href="{% url 'checkout:payment' %}"> PAYMENT PAGE</a>
+    <ul>
+      <li><a href="{% url 'checkout:payment' %}"> PAYMENT PAGE</a></li>
+      <li><a href="{% url 'checkout:create_checkout_session' %}"> CHECKOUT PAGE</a></li>
+    </ul>
   </div>
   <div class="row">
     {% if basket_results %}

@@ -1,9 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
+{% load static %}
 {% load crispy_forms_tags %}
 
 <script src="https://js.stripe.com/v3/"></script>
-<script src="checkout.js" defer></script>
+<script src="{% static 'js/checkout.js' %}"></script>
+
+
+ 
 
   <h1>PAYMENT</h1>
   <div class="row">
@@ -41,13 +45,22 @@
         <button type="submit">Submit</button>
     </form>
   </div>
+  <section class="section">
+    <div class="container">
+      <button class="button is-primary" id="submitBtn">Purchase!</button>
+    </div>
+  </section>
 
   <div class="col-12 col-lg-6">
     <!-- Display a payment form -->
     <div id="checkout">
     <!-- Checkout will insert the payment form here -->
     </div>
+    <h1>end of payment div</h1>
   </div>
 
+  <div>
+    <h1>end of payment page</h1>
+  </div>
 
 {% endblock %}

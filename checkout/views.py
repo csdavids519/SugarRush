@@ -108,23 +108,27 @@ def remove_from_basket(request, basket_product_id):
 @csrf_exempt
 def create_checkout_session(request):
     if request.method == "POST":
-        YOUR_DOMAIN = 'checkout.html'
+        YOUR_DOMAIN = 'http://localhost:8000'
         try:
             session = stripe.checkout.Session.create(
                 ui_mode = 'embedded',
-                line_items=[
-                    {
-                        # Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-                        'price': '9999',
-                        'quantity': 1,
+                line_items=[{
+                    'price_data': {
+                        'currency': 'usd',
+                        'product_data': {
+                            'name': 'T-shirt',
+                        },
+                        'unit_amount': 2000,  # Amount in cents
                     },
-                ],
+                    'quantity': 1,
+                }],
                 mode='payment',
                 return_url=YOUR_DOMAIN + '/return.html?session_id={CHECKOUT_SESSION_ID}',
             )
             return JsonResponse({"clientSecret": session.client_secret})
         except Exception as e:
             return JsonResponse({"error": str(e)}, status=400)
+
     return JsonResponse({"error": "Invalid request"}, status=400)
 
 
