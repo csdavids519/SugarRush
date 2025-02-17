@@ -2,6 +2,9 @@
 {% block content %}
 {% load crispy_forms_tags %}
 
+<script src="https://js.stripe.com/v3/"></script>
+<script src="checkout.js" defer></script>
+
   <h1>PAYMENT</h1>
   <div class="row">
   {% if order_results %}
@@ -37,9 +40,14 @@
         {{ order_form|crispy }}
         <button type="submit">Submit</button>
     </form>
+  </div>
 
-
-
+  <div class="col-12 col-lg-6">
+    <!-- Display a payment form -->
+    <div id="checkout">
+    <!-- Checkout will insert the payment form here -->
+    </div>
+  </div>
 
 
 {% endblock %}

@@ -2,8 +2,8 @@ import stripe
 from django.shortcuts import (
     render, redirect, get_object_or_404
     )
-from django.views import View
-from djagno.conf import settings
+
+from django.conf import settings
 from django.http import JsonResponse
 
 from checkout.models import Basket, BasketProduct
@@ -11,6 +11,8 @@ from products.models import Product
 
 from .models import Orders
 from .forms import OrderForm
+
+from django.views.decorators.csrf import csrf_exempt
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -103,8 +105,9 @@ def remove_from_basket(request, basket_product_id):
     return redirect(redirect_url)
 
 
-class CreateCheckoutSessionView(View):
-    def post(self, request, *args, **kwargs):
+@csrf_exempt
+def create_checkout_session(request):
+    if request.method == "POST":
         YOUR_DOMAIN = 'checkout.html'
         try:
             session = stripe.checkout.Session.create(
@@ -112,14 +115,25 @@ class CreateCheckoutSessionView(View):
                 line_items=[
                     {
                         # Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-                        'price': '{{PRICE_ID}}',
+                        'price': '9999',
                         'quantity': 1,
                     },
                 ],
                 mode='payment',
                 return_url=YOUR_DOMAIN + '/return.html?session_id={CHECKOUT_SESSION_ID}',
             )
+            return JsonResponse({"clientSecret": session.client_secret})
         except Exception as e:
-            return str(e)
+            return JsonResponse({"error": str(e)}, status=400)
+    return JsonResponse({"error": "Invalid request"}, status=400)
 
-        return JsonResponse(clientSecret=session.client_secret)
+
+def session_status(request):
+    session_id = request.GET.get("session_id")
+    if session_id:
+        session = stripe.checkout.Session.retrieve(session_id)
+        return JsonResponse({
+            "status": session.status,
+            "customer_email": session.customer_details.email if session.customer_details else None
+        })
+    return JsonResponse({"error": "Session ID required"}, status=400)
