@@ -23,13 +23,13 @@ class BasketProduct(models.Model):
 
 
 class Orders(models.Model):
-    full_name = models.CharField(max_length=50, null=False, blank=False)
-    email = models.EmailField(max_length=254, null=False, blank=False)
-    phone_number = models.CharField(max_length=20, null=False, blank=False)
-    country = CountryField(blank_label='Country *', null=False, blank=False)
+    full_name = models.CharField(max_length=50, null=True, blank=True)
+    email = models.EmailField(max_length=254, null=True, blank=True)
+    phone_number = models.CharField(max_length=20, null=True, blank=True)
+    country = CountryField(blank_label='Country *', null=True, blank=True)
     postcode = models.CharField(max_length=20, null=True, blank=True)
-    town_or_city = models.CharField(max_length=40, null=False, blank=False)
-    street_address1 = models.CharField(max_length=80, null=False, blank=False)
+    town_or_city = models.CharField(max_length=40, null=True, blank=True)
+    street_address1 = models.CharField(max_length=80, null=True, blank=True)
     street_address2 = models.CharField(max_length=80, null=True, blank=True)
     state = models.CharField(max_length=80, null=True, blank=True)
     date = models.DateTimeField(auto_now_add=True)

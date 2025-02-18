@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Basket, BasketProduct
+from .models import Basket, BasketProduct, Orders
 
 # Register your models here.
 
@@ -18,3 +18,11 @@ class BasketAdmin(admin.ModelAdmin):
         return ", ".join(f"{i.product.name} (x{i.quantity})" for i in obj.basket_products.all())
     get_products.short_description = "Products"
 
+
+
+@admin.register(Orders)
+class OrdersAdmin(admin.ModelAdmin):
+    list_display = ['full_name',
+                    'email',
+                    'date',
+                    ]
