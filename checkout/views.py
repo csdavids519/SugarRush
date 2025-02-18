@@ -5,6 +5,7 @@ from django.shortcuts import (
 
 from django.conf import settings
 from django.http import JsonResponse
+from django.db.models import Sum, F
 
 from checkout.models import Basket, BasketProduct
 from products.models import Product
@@ -107,6 +108,12 @@ def remove_from_basket(request, basket_product_id):
 
 @csrf_exempt
 def create_checkout_session(request):
+    basket = Basket.objects.get(user=request.user)
+    total_price = basket.basket_products.aggregate(
+        total=Sum(F('product__price') * F('quantity'))
+    )['total']
+    print(f'total_price: {total_price}')
+
     if request.method == "POST":
         YOUR_DOMAIN = 'http://localhost:8000'
         try:
@@ -114,11 +121,11 @@ def create_checkout_session(request):
                 ui_mode = 'embedded',
                 line_items=[{
                     'price_data': {
-                        'currency': 'euro',
+                        'currency': 'eur',
                         'product_data': {
-                            'name': 'T-shirt',
+                            'name': f'Basket for {basket.user}',
                         },
-                        'unit_amount': 2000,  # Amount in cents
+                        'unit_amount': int(total_price*100)  # Amount in cents
                     },
                     'quantity': 1,
                 }],
