@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Basket Contents</h1>
+  <h1>BASKET EDIT</h1>
   <div class='m-5'>
     <ul>
       <li><a href="{% url 'checkout:payment' %}"> PAYMENT PAGE</a></li>
-      <li><a href="{% url 'checkout:create_checkout_session' %}"> CHECKOUT PAGE</a></li>
+      <li><a href="{% url 'checkout:shipping_info' %}"> SHIPPING PAGE</a></li>
+      <li><a href="{% url 'checkout:checkout' %}"> CHECKOUT PAGE</a></li>
     </ul>
   </div>
   <div class="row">

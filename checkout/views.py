@@ -19,6 +19,7 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 def checkout(request):
+
     """ A view to return the index page """
     # find the basket based on user name
     try:
@@ -29,6 +30,21 @@ def checkout(request):
         basket = Basket.objects.create(user=request.user)
         return render(request, 'checkout.html', {'basket_results': None})
     return render(request, 'checkout.html', {'basket_results': basket})
+
+
+def shipping_info(request):
+    """ A view to return the shipping page """
+    order_form = OrderForm()
+
+    # find the basket based on user name
+    try:
+        basket = Basket.objects.get(user=request.user)
+        print('payment: basket found')
+    except Basket.DoesNotExist:
+        print('payment: basket does not exist')
+        basket = Basket.objects.create(user=request.user)
+        return render(request, 'shipping.html', {'order_results': None})
+    return render(request, 'shipping.html', {'order_results': basket, 'order_form': order_form})
 
 
 def add_to_basket(request, item_id):
