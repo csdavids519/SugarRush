@@ -3,6 +3,7 @@ from django.db import models
 from products.models import Product
 from django.contrib.auth.models import User
 from django_countries.fields import CountryField
+from django.utils import timezone
 
 
 class Basket(models.Model):
@@ -15,7 +16,7 @@ class Basket(models.Model):
 
 class BasketProduct(models.Model):
     basket = models.ForeignKey(Basket, on_delete=models.CASCADE, related_name='basket_products')
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='basket_products')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='products_in_basket')
     quantity = models.PositiveIntegerField(default=1)
 
     def __str__(self):
@@ -32,20 +33,9 @@ class Orders(models.Model):
     street_address1 = models.CharField(max_length=80, null=True, blank=True)
     street_address2 = models.CharField(max_length=80, null=True, blank=True)
     state = models.CharField(max_length=80, null=True, blank=True)
-    date = models.DateTimeField(auto_now_add=True)
-
-
-
-
-
-
-
-
-
-
-
-
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='orders_products', null=True, blank=True)
+    quantity = models.PositiveIntegerField(default=1)
+    date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return self
-
+        return self.full_name
