@@ -13,6 +13,8 @@ from products.models import Product
 from .models import Orders
 from .forms import OrderForm
 
+from .signals import basket_cleared_signal
+
 from django.views.decorators.csrf import csrf_exempt
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -24,12 +26,23 @@ def checkout(request):
     # find the basket based on user name
     try:
         basket = Basket.objects.get(user=request.user)
-        print('checkout: basket found')
     except Basket.DoesNotExist:
-        print('checkout: basket does not exist')
         basket = Basket.objects.create(user=request.user)
         return render(request, 'checkout.html', {'basket_results': None})
+
+    if request.method == "POST":
+        order_form = OrderForm(request.POST)
+        if order_form.is_valid():
+            order = order_form.save(commit=False)
+            order.save()
+
     return render(request, 'checkout.html', {'basket_results': basket})
+
+
+def success(request):
+    print('SUCCESS VIEW CALLED')
+    basket_cleared_signal.send(sender=None, user=request.user)
+    return render(request, 'success.html')
 
 
 def shipping_info(request):
@@ -39,9 +52,7 @@ def shipping_info(request):
     # find the basket based on user name
     try:
         basket = Basket.objects.get(user=request.user)
-        print('payment: basket found')
     except Basket.DoesNotExist:
-        print('payment: basket does not exist')
         basket = Basket.objects.create(user=request.user)
         return render(request, 'shipping.html', {'order_results': None})
     return render(request, 'shipping.html', {'order_results': basket, 'order_form': order_form})
@@ -51,14 +62,11 @@ def add_to_basket(request, item_id):
     """ A view to add current product to the basket list """
     product = get_object_or_404(Product, pk=item_id)
     quantity = int(request.POST.get('quantity', 0))
-    print(f'qty: {quantity}')
 
     # find the basket based on user name
     try:
         basket = Basket.objects.get(user=request.user)
-        print('add_to_basket: basket found')
     except Basket.DoesNotExist:
-        print('add_to_basket: basket does not exist')
         basket = Basket.objects.create(user=request.user)
 
     # check for existing matching products or create new
@@ -83,9 +91,7 @@ def payment(request):
     # find the basket based on user name
     try:
         basket = Basket.objects.get(user=request.user)
-        print('payment: basket found')
     except Basket.DoesNotExist:
-        print('payment: basket does not exist')
         basket = Basket.objects.create(user=request.user)
         return render(request, 'payment.html', {'order_results': None})
     return render(request, 'payment.html', {'order_results': basket, 'order_form': order_form})
