@@ -137,7 +137,7 @@ def create_checkout_session(request):
     print(f'total_price: {total_price}')
 
     if request.method == "POST":
-        YOUR_DOMAIN = 'http://localhost:8000'
+        YOUR_DOMAIN = 'http://localhost:8000/checkout/'
         try:
             session = stripe.checkout.Session.create(
                 ui_mode = 'embedded',
@@ -152,7 +152,7 @@ def create_checkout_session(request):
                     'quantity': 1,
                 }],
                 mode='payment',
-                return_url=YOUR_DOMAIN + '/return.html?session_id={CHECKOUT_SESSION_ID}',
+                return_url=YOUR_DOMAIN + 'success/',
             )
             return JsonResponse({"clientSecret": session.client_secret})
         except Exception as e:
