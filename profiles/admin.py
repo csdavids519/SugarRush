@@ -4,6 +4,7 @@ from .models import Customer
 # Register your models here.
 
 
+
 @admin.register(Customer)
 class BasketAdmin(admin.ModelAdmin):
     list_display = ['id',
@@ -16,4 +17,3 @@ class BasketAdmin(admin.ModelAdmin):
     fields = ['first_name',
               'last_name',
             ]
-

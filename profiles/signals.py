@@ -14,3 +14,4 @@ def create_customer_profile(sender, instance, created, **kwargs):
         # Link basket to the customer
         customer.basket_id = basket
         customer.save()
+
