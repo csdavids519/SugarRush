@@ -1,5 +1,4 @@
 from .models import Basket
-from django.shortcuts import get_object_or_404
 
 
 def update_basket_total(request):
@@ -9,7 +8,7 @@ def update_basket_total(request):
         user = request.user
 
         # update basket pice total
-        basket = get_object_or_404(Basket, user=user)
+        basket = Basket.objects.filter(user=user).first()
 
         basket_products = basket.basket_products.all()
         print(f"Basket ID: {basket.user}")

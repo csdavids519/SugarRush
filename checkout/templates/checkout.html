@@ -11,7 +11,7 @@
   <div class="row">
     {% if basket_results %}
     <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-      <h3>Basket ID: {{ basket_results.user }}</h3>
+      <h3>Basket ID: {{ basket_results.user }} {{ basket_results.id }}</h3>
       <ul>
         {% for i in basket_results.basket_products.all %}
         <div>

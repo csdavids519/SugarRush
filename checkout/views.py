@@ -10,10 +10,10 @@ from django.db.models import Sum, F
 from checkout.models import Basket, BasketProduct
 from products.models import Product
 
-from .models import Orders
+from .models import ShippingInfo
 from .forms import OrderForm
 
-from .signals import basket_cleared_signal
+from .signals import basket_cleared_signal, order_placed_signal
 
 from django.views.decorators.csrf import csrf_exempt
 
@@ -24,11 +24,13 @@ def checkout(request):
 
     """ A view to return the index page """
     # find the basket based on user name
-    try:
-        basket = Basket.objects.get(user=request.user)
-    except Basket.DoesNotExist:
-        basket = Basket.objects.create(user=request.user)
-        return render(request, 'checkout.html', {'basket_results': None})
+    basket = None
+    if request.user.is_authenticated:
+        try:
+            basket = Basket.objects.filter(user=request.user).last()
+        except Basket.DoesNotExist:
+            basket = Basket.objects.create(user=request.user)
+            return render(request, 'checkout.html', {'basket_results': None})
 
     if request.method == "POST":
         order_form = OrderForm(request.POST)
@@ -41,7 +43,10 @@ def checkout(request):
 
 def success(request):
     print('SUCCESS VIEW CALLED')
-    basket_cleared_signal.send(sender=None, user=request.user)
+    # basket_cleared_signal.send(sender=None, user=request.user)
+    user = request.user
+    shipping_info = ShippingInfo.objects.last()
+    order_placed_signal.send(sender=None, user=user, shipping_info_id=shipping_info.id)
     return render(request, 'success.html')
 
 
@@ -51,7 +56,7 @@ def shipping_info(request):
 
     # find the basket based on user name
     try:
-        basket = Basket.objects.get(user=request.user)
+        basket = Basket.objects.filter(user=request.user).last()
     except Basket.DoesNotExist:
         basket = Basket.objects.create(user=request.user)
         return render(request, 'shipping.html', {'order_results': None})
@@ -65,7 +70,7 @@ def add_to_basket(request, item_id):
 
     # find the basket based on user name
     try:
-        basket = Basket.objects.get(user=request.user)
+        basket = Basket.objects.filter(user=request.user).last()
     except Basket.DoesNotExist:
         basket = Basket.objects.create(user=request.user)
 
@@ -90,7 +95,7 @@ def payment(request):
 
     # find the basket based on user name
     try:
-        basket = Basket.objects.get(user=request.user)
+        basket = Basket.objects.filter(user=request.user).last()
     except Basket.DoesNotExist:
         basket = Basket.objects.create(user=request.user)
         return render(request, 'payment.html', {'order_results': None})
@@ -99,7 +104,7 @@ def payment(request):
 
 def submit_payment(request):
     if request.method == "POST":
-        order_form = Orders(request.POST)
+        order_form = ShippingInfo(request.POST)
 
         if order_form.is_valid():
             print(order_form.fields)  # Debugging
@@ -130,7 +135,7 @@ def remove_from_basket(request, basket_product_id):
 
 @csrf_exempt
 def create_checkout_session(request):
-    basket = Basket.objects.get(user=request.user)
+    basket = Basket.objects.filter(user=request.user).last()
     total_price = basket.basket_products.aggregate(
         total=Sum(F('product__price') * F('quantity'))
     )['total']
