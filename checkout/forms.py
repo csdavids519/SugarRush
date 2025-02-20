@@ -1,5 +1,5 @@
 from django import forms
-from .models import Orders
+from .models import ShippingInfo
 
 
 class OrderForm(forms.ModelForm):
@@ -8,7 +8,7 @@ class OrderForm(forms.ModelForm):
     postcode = forms.CharField(required=True)
 
     class Meta:
-        model = Orders
+        model = ShippingInfo
         fields = ('full_name', 'email', 'phone_number',
                   'street_address1', 'street_address2',
                   'town_or_city', 'postcode', 'country',
