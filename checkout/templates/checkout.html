@@ -1,6 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
   <h1>BASKET EDIT</h1>
+  <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active" aria-current="page">Edit Basket</li>
+      <li class="breadcrumb-item"><a href="{% url 'checkout:shipping_info' %}">Shipping Details</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'checkout:payment' %}">Review and Payment</a></li>
+    </ol>
+  </nav>
+
   <div class='m-5'>
     <ul>
       <li><a href="{% url 'checkout:payment' %}"> PAYMENT PAGE</a></li>
