@@ -3,7 +3,6 @@ from django.db import models
 from products.models import Product
 from django.contrib.auth.models import User
 from django_countries.fields import CountryField
-from django.utils import timezone
 
 
 class Basket(models.Model):
@@ -35,7 +34,6 @@ class ShippingInfo(models.Model):
     street_address1 = models.CharField(max_length=80, null=True, blank=True)
     street_address2 = models.CharField(max_length=80, null=True, blank=True)
     state = models.CharField(max_length=80, null=True, blank=True)
-    date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.full_name

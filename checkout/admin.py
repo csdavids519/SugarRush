@@ -38,4 +38,4 @@ class ShippingInfoAdmin(admin.ModelAdmin):
                        'street_address1',
                        'street_address2',
                        'state',
-                       'date']
+                       ]

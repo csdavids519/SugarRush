@@ -2,6 +2,7 @@ from django.db import models
 from products.models import Product
 from django.contrib.auth.models import User
 from checkout.models import Basket, ShippingInfo
+from django.utils import timezone
 
 # Create your models here.
 
@@ -22,3 +23,4 @@ class Orders(models.Model):
                                     null=True, blank=True)
     shipping_order = models.ForeignKey(ShippingInfo, on_delete=models.SET_NULL,
                                     null=True, blank=True)
+    date = models.DateTimeField(default=timezone.now)
