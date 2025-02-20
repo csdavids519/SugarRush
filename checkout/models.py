@@ -7,7 +7,8 @@ from django.utils import timezone
 
 
 class Basket(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='basket', null=True, blank=True)
+    # user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='basket', null=True, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='basket', null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
     def __str__(self):
@@ -23,7 +24,8 @@ class BasketProduct(models.Model):
         return f"{self.product.name} in Basket {self.basket.user}"
 
 
-class Orders(models.Model):
+class ShippingInfo(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='shipping_user', null=True, blank=True)
     full_name = models.CharField(max_length=50, null=True, blank=True)
     email = models.EmailField(max_length=254, null=True, blank=True)
     phone_number = models.CharField(max_length=20, null=True, blank=True)
@@ -33,8 +35,6 @@ class Orders(models.Model):
     street_address1 = models.CharField(max_length=80, null=True, blank=True)
     street_address2 = models.CharField(max_length=80, null=True, blank=True)
     state = models.CharField(max_length=80, null=True, blank=True)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='orders_products', null=True, blank=True)
-    quantity = models.PositiveIntegerField(default=1)
     date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
