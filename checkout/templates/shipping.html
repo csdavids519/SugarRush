@@ -7,11 +7,12 @@
 <script src="{% static 'js/checkout.js' %}"></script>
 
 <div class='container-fluid '>
+  {% comment %} breadcrumbs  {% endcomment %}
   <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="{% url 'checkout:checkout' %}">Edit Basket</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Shipping Details</li>
-      <li class="breadcrumb-item"><a href="{% url 'checkout:payment' %}">Review and Payment</a></li>
+      <li class="breadcrumb-item text-secondary" aria-current="page" >Edit Basket</li>
+      <li class="breadcrumb-item text-dark" aria-current="page" style='text-decoration: underline;'>Shipping Details</li>
+      <li class="breadcrumb-item text-secondary" aria-current="page" >Review and Payment</li>
     </ol>
   </nav>
 
