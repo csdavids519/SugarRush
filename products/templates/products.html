@@ -2,11 +2,11 @@
 {% load static %}
 {% block content %}
 
-<div class='container-fluid m-5'>
+<div class='container-fluid p-3'>
   <div class="row">
     {% for product in products %}
-    <div class="col mb-5">
-      <div class="card h-100 border-3 p-1" style="width: 30rem;">
+    <div class="col-12 col-md-6 col-lg-4 mb-5 p-5">
+      <div class="card h-100 border-3 p-1">
         {% comment %} card header  {% endcomment %}
         <div class="card-header">
           <p class="lead text-center font-weight-bold fs-2">{{ product.name }}</p>
@@ -18,10 +18,26 @@
         {% comment %} card footer  {% endcomment %}
         <div class="card-footer text-body-secondary">
           <div class="row">
-            <div class="col">
-              <p class="lead text-center font-weight-bold">
+            <div class="col d-flex align-items-center">
+              <p class="text-start font-weight-bold m-0 fs-4 ">
                 ${{ product.price }}
               </p>
+            </div>
+            <div class='col d-flex justify-content-end'>       
+              <form
+                class="form " action="{% url 'checkout:add_to_basket' product.id %}" method="POST" >
+                {% csrf_token %}
+                {% if user.is_authenticated %}
+                <input type="hidden" name="quantity" value="1" />
+                <input type="hidden" name="redirect_url" value="{{ request.path }}" />
+                <input type="submit" class="btn fs-5" value="Quick Buy" />
+                {% else %}
+                <a href="{% url 'account_login' %}" class="btn btn-outline-dark rounded-0">
+                  <i class="fas fa-chevron-left me-2"></i>
+                  <span class="text-uppercase">Login</span>
+                </a>
+                {% endif %}
+              </form>
             </div>
           </div>
         </div>
