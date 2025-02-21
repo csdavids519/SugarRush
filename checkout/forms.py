@@ -2,7 +2,7 @@ from django import forms
 from .models import ShippingInfo
 
 
-class OrderForm(forms.ModelForm):
+class ShippingForm(forms.ModelForm):
     class Meta:
         model = ShippingInfo
         fields = ('full_name', 'email', 'phone_number',

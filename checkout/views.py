@@ -11,7 +11,7 @@ from checkout.models import Basket, BasketProduct
 from products.models import Product
 
 from .models import ShippingInfo
-from .forms import OrderForm
+from .forms import ShippingForm
 
 from .signals import basket_cleared_signal, order_placed_signal
 
@@ -33,12 +33,30 @@ def checkout(request):
             return render(request, 'checkout.html', {'basket_results': None})
 
     if request.method == "POST":
-        order_form = OrderForm(request.POST)
+        order_form = ShippingForm(request.POST)
         if order_form.is_valid():
             order = order_form.save(commit=False)
             order.save()
 
     return render(request, 'checkout.html', {'basket_results': basket})
+
+
+def shipping_info(request):
+    """ A view to return the shipping page """
+    shipping_form = ShippingForm()
+
+    return render(request, 'shipping.html', {'shipping_form': shipping_form})
+
+
+def payment(request):
+    """ A view to return the checkout page """
+    # find the basket based on user name
+    try:
+        basket = Basket.objects.filter(user=request.user).last()
+    except Basket.DoesNotExist:
+        basket = Basket.objects.create(user=request.user)
+        return render(request, 'payment.html', {'order_results': None})
+    return render(request, 'payment.html', {'order_results': basket})
 
 
 def success(request):
@@ -48,19 +66,6 @@ def success(request):
     shipping_info = ShippingInfo.objects.last()
     order_placed_signal.send(sender=None, user=user, shipping_info_id=shipping_info.id)
     return render(request, 'success.html')
-
-
-def shipping_info(request):
-    """ A view to return the shipping page """
-    order_form = OrderForm()
-
-    # find the basket based on user name
-    try:
-        basket = Basket.objects.filter(user=request.user).last()
-    except Basket.DoesNotExist:
-        basket = Basket.objects.create(user=request.user)
-        return render(request, 'shipping.html', {'order_results': None})
-    return render(request, 'shipping.html', {'order_results': basket, 'order_form': order_form})
 
 
 def add_to_basket(request, item_id):
@@ -87,19 +92,6 @@ def add_to_basket(request, item_id):
 
     redirect_url = request.POST.get('redirect_url', '/')
     return redirect(redirect_url)
-
-
-def payment(request):
-    """ A view to return the checkout page """
-    order_form = OrderForm()
-
-    # find the basket based on user name
-    try:
-        basket = Basket.objects.filter(user=request.user).last()
-    except Basket.DoesNotExist:
-        basket = Basket.objects.create(user=request.user)
-        return render(request, 'payment.html', {'order_results': None})
-    return render(request, 'payment.html', {'order_results': basket, 'order_form': order_form})
 
 
 def submit_payment(request):
