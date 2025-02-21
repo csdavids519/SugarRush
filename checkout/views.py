@@ -32,12 +32,6 @@ def checkout(request):
             basket = Basket.objects.create(user=request.user)
             return render(request, 'checkout.html', {'basket_results': None})
 
-    if request.method == "POST":
-        order_form = ShippingForm(request.POST)
-        if order_form.is_valid():
-            order = order_form.save(commit=False)
-            order.save()
-
     return render(request, 'checkout.html', {'basket_results': basket})
 
 
@@ -56,6 +50,13 @@ def payment(request):
     except Basket.DoesNotExist:
         basket = Basket.objects.create(user=request.user)
         return render(request, 'payment.html', {'order_results': None})
+    
+    if request.method == "POST":
+        order_form = ShippingForm(request.POST)
+        if order_form.is_valid():
+            order = order_form.save(commit=False)
+            order.save()
+
     return render(request, 'payment.html', {'order_results': basket})
 
 
