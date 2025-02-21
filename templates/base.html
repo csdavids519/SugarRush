@@ -25,12 +25,12 @@
   </head>
   <body>
     <header class="container-fluid fixed-top">
-      <div id="topnav" class="row bg-white pt-lg-2 d-none d-lg-flex min-vh-75">
+      <div id="topheader" class="row bg-white pt-lg-2 d-none d-lg-flex ">
         {% comment %} logo  {% endcomment %}
         <div class="mx-auto my-auto py-1 py-lg-0 text-center" >
           <a href="{% url 'home:home' %}" class="nav-link main-logo-link">
             <h2 class="logo-font text-black my-0">
-              <strong>Sugar</strong> Rush<i class="fa-regular fa-thumbs-up"></i>
+              <strong>Sugar</strong> Rush
             </h2>
           </a>
         </div>
@@ -40,10 +40,10 @@
       </div>
     </header>
 
-    <div class="m-3">
-      <div style="margin-top: 300px"></div>
+    <div style="margin-top: 200px;">
+      {% block content %} {% endblock %}
     </div>
 
-    {% block content %} {% endblock %}
+
   </body>
 </html>

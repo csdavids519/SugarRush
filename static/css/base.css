@@ -1,6 +1,7 @@
 /* Large screens (lg) and up */
 @media (min-width: 992px) { 
-    #topnav {
-        min-height: 200px; 
-    }
+    #topheader {
+        min-height: 100px;
+        
+    } 
 }
