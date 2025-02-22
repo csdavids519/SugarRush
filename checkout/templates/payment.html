@@ -15,18 +15,43 @@
       <li class="breadcrumb-item text-dark" aria-current="page" style='text-decoration: underline;'>Review and Payment</li>
     </ol>
   </nav>
-
-  <div class='m-5'>
-    <ul>
-      <li><a href="{% url 'checkout:payment' %}"> PAYMENT PAGE</a></li>
-      <li><a href="{% url 'checkout:shipping_info' %}"> SHIPPING PAGE</a></li>
-      <li><a href="{% url 'checkout:checkout' %}"> CHECKOUT PAGE</a></li>
-    </ul>
+  <div class='row'>
+    <!-- Display basket contents-->
+    <div class="col-3 col-lg-3" style="margin-top: 25vh;">
+      <table class=" mt-25vh table table-sm table-borderless">
+        <thead>
+          <tr>
+            <th class="table-light" scope="col">Product</th>
+            <th class="table-light" scope="col">Quantity</th>
+            <th class="table-light" scope="col">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in order_results.basket_products.all %}
+          <tr>
+            <td class="table-light" scope="row">{{ i.product.name }}</td>
+            <td class="table-light">{{ i.quantity }}</td>
+            <td class="table-light">${% widthratio i.quantity 1 i.product.price %}</td>
+          </tr>
+          {% endfor %}
+          <tr>
+            <th class="table-light" scope="row"></th>
+            <td class="table-light"></td>
+            <td class="table-light"><strong>${{ grand_total | floatformat:2 }}</strong></td>
+          </tr>
+        </tbody>
+      </table>
+        {% comment %} buttons  {% endcomment %}
+  <div class="container-fluid d-flex justify-content-center align-items-center">
+    <a href="{% url 'checkout:checkout' %}" class="btn btn-outline-dark m-3" style="min-width: 10rem;">Edit Basket</a>
   </div>
-  <div class="col-12 col-lg-6">
+    </div>
     <!-- Display a payment form -->
-    <div id="checkout">
-      <!-- Checkout will insert the payment form here -->
+    <div class="col-12 col-lg-6">
+      <div id="checkout">
+        <!-- Checkout will insert the payment form here -->
+      </div>
     </div>
   </div>
+</div>
 {% endblock %}
