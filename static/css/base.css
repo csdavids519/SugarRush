@@ -18,6 +18,12 @@ body {
     background-color: #FBF8CC;
 }
 
+.no-link-style {
+    text-decoration: none;
+    color: inherit;
+}
+
+
 .btn-1 {
     background-color: #8EECF5;
 }
