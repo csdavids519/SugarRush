@@ -1,3 +1,32 @@
+/* color pallet:  
+FBF8CC
+FDE4CF
+FFCFD2
+F1C0E8
+CFBAF0
+A3C4F3
+90DBF4
+8EECF5
+98F5E1
+B9FBC0 */
+
+header {
+    background-color: #F1C0E8;
+}
+
+body {
+    background-color: #FBF8CC;
+}
+
+.btn-1 {
+    background-color: #8EECF5;
+}
+
+.btn-2 {
+    background-color: #CFBAF0;
+}
+
+
 /* Large screens (lg) and up */
 @media (min-width: 992px) { 
     #topheader {
