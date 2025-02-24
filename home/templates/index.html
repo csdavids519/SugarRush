@@ -1,34 +1,40 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block content %}
 <!-- What's New Promo -->
 <div style="background: url('/media/kid_xl.jpg') no-repeat center center; 
             background-size: cover; 
             width: 100%; 
             min-height: 50vh;">
-    <div class="container" style="padding-top: 150px;">
-        <div class="row justify-content-center">
-            <div class="col-12 col-md-6 text-center p-1">
-                <h2 class="my-4"><uppercase>See What's New!</uppercase></h2>
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-12 col-md-6 p-3 d-flex align-items-center flex-column flex-md-row">
-                <div class="flex-shrink-0 me-3 mb-3 mb-md-0">
-                    <a href="{% url 'products:product_detail' product_id=promo_new.id %}">
-                        <img src="{{ promo_new.product_image.url }}" alt="{{ promo_new.name }}" class="rounded-4" style="max-height:200px; max-width: auto;">
-                    </a>
+            <div class="container" style="padding-top: 150px;">
+                {% comment %} new product promo  {% endcomment %}
+                <div class="row justify-content-end">
+                    <div class="col-12 col-md-6 text-center p-1">
+                        <h2 class="my-4"><uppercase>See What's New!</uppercase></h2>
+                    </div>
                 </div>
-                <div class="flex-grow-1">
-                    <a href="{% url 'products:product_detail' product_id=promo_new.id %}" class="text-decoration-none no-link-style">
-                        <h3>{{ promo_new.name }}</h3>
-                    </a>
-                    <p>{{ promo_new.description }}</p>
-                    <p>{{ promo_new.flavor }}</p>
+                <div class="row justify-content-end">
+                    <div class="col-12 col-md-6 d-flex flex-column flex-md-row align-items-center rounded-4"  style=' background-color: rgba(144, 219, 244, 0.5);'>
+                        {% comment %} promo product image  {% endcomment %}
+                        <div class='p-3 rounded-4'>
+                            <div class="flex-shrink-0 mb-3 mb-md-0">
+                                <a href="{% url 'products:product_detail' product_id=promo_new.id %}">
+                                    <img src="{{ promo_new.product_image.url }}" alt="{{ promo_new.name }}" class="rounded-4" style="max-height:200px; max-width: auto;">
+                                </a>
+                            </div>
+                        </div>
+                        {% comment %} promo product text  {% endcomment %}
+                        <div class="p-3 d-flex flex-column justify-content-center align-items-start ms-md-4">
+                            <a href="{% url 'products:product_detail' product_id=promo_new.id %}" class="text-decoration-none no-link-style">
+                                <h3>{{ promo_new.name }}</h3>
+                            </a>
+                            <p>{{ promo_new.description }}</p>
+                            <p>{{ promo_new.flavor }}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
+            
 </div>
 
 <!-- What's Popular Promo -->
@@ -37,49 +43,55 @@
             width: 100%; 
             min-height: 50vh;">
     <div class="container" style="padding-top: 150px;">
-        <div class="row justify-content-center">
-            <div class="col-12 col-md-6 text-center p-1">
+        <div class="row justify-content-start">
+            <div class="col-6 col-md-6 text-center p-1 ">
                 <h2 class="my-4"><uppercase>See What's Popular!</uppercase></h2>
             </div>
         </div>
-        <div class="row justify-content-center">
+        <div class="row justify-content-start">
             {% comment %} Promo Popular 1  {% endcomment %}
-            <div class="col-12 col-md-4 p-3 d-flex align-items-center flex-column">
-                <div class="flex-shrink-0 me-3 mb-3 mb-md-0">
-                    <a href="{% url 'products:product_detail' product_id=promo_popular_1.id %}">
-                        <img src="{{ promo_popular_1.product_image.url }}" alt="{{ promo_popular_1.name }}" class="rounded-4" style="max-height:200px; max-width: auto;">
+            <div class="col col-md-4 p-3 d-flex align-items-center flex-column">
+                <div class='p-3 rounded-4' style=' background-color: rgba(255, 207, 210, 0.5);'>
+                    <div class="flex-shrink-0 me-3 mb-3 mb-md-0">
+                        <a href="{% url 'products:product_detail' product_id=promo_popular_1.id %}">
+                            <img src="{{ promo_popular_1.product_image.url }}" alt="{{ promo_popular_1.name }}" class="rounded-4" style="max-height:200px; max-width: auto;">
+                        </a>
+                    </div>
+                    <a href="{% url 'products:product_detail' product_id=promo_popular_1.id %}" class="text-decoration-none no-link-style">
+                        <h3>{{ promo_popular_1.name }}</h3>
                     </a>
+                    <p>{{ promo_popular_1.flavor }}</p>
                 </div>
-                <a href="{% url 'products:product_detail' product_id=promo_popular_1.id %}" class="text-decoration-none no-link-style">
-                    <h3>{{ promo_popular_1.name }}</h3>
-                </a>
-                <p>{{ promo_popular_1.flavor }}</p>
             </div>
 
             {% comment %} Promo Popular 2  {% endcomment %}
-            <div class="col-12 col-md-4 p-3 d-flex align-items-center flex-column">
-                <div class="flex-shrink-0 me-3 mb-3 mb-md-0">
-                    <a href="{% url 'products:product_detail' product_id=promo_popular_2.id %}">
-                        <img src="{{ promo_popular_2.product_image.url }}" alt="{{ promo_popular_2.name }}" class="rounded-4" style="max-height:200px; max-width: auto;">
+            <div class="col col-md-4 d-flex align-items-center flex-column rounded-4">
+                <div class='p-3 rounded-4' style=' background-color: rgba(255, 207, 210, 0.5);'>
+                    <div class="flex-shrink-0 me-3 mb-3 mb-md-0">
+                        <a href="{% url 'products:product_detail' product_id=promo_popular_2.id %}">
+                            <img src="{{ promo_popular_2.product_image.url }}" alt="{{ promo_popular_2.name }}" class="rounded-4" style="max-height:200px; max-width: auto;">
+                        </a>
+                    </div>
+                    <a href="{% url 'products:product_detail' product_id=promo_popular_2.id %}" class="text-decoration-none no-link-style">
+                        <h3>{{ promo_popular_2.name }}</h3>
                     </a>
+                    <p>{{ promo_popular_2.flavor }}</p>
                 </div>
-                <a href="{% url 'products:product_detail' product_id=promo_popular_2.id %}" class="text-decoration-none no-link-style">
-                    <h3>{{ promo_popular_2.name }}</h3>
-                </a>
-                <p>{{ promo_popular_2.flavor }}</p>
             </div>
 
             {% comment %} Promo Popular 3  {% endcomment %}
-            <div class="col-12 col-md-4 p-3 d-flex align-items-center flex-column">
-                <div class="flex-shrink-0 me-3 mb-3 mb-md-0">
-                    <a href="{% url 'products:product_detail' product_id=promo_popular_3.id %}">
-                        <img src="{{ promo_popular_3.product_image.url }}" alt="{{ promo_popular_3.name }}" class="rounded-4" style="max-height:200px; max-width: auto;">
+            <div class="col col-md-4 d-flex align-items-center flex-column">
+                <div class='p-3 rounded-4' style=' background-color: rgba(255, 207, 210, 0.5);'>
+                    <div class="flex-shrink-0 me-3 mb-3 mb-md-0">
+                        <a href="{% url 'products:product_detail' product_id=promo_popular_3.id %}">
+                            <img src="{{ promo_popular_3.product_image.url }}" alt="{{ promo_popular_3.name }}" class="rounded-4" style="max-height:200px; max-width: auto;">
+                        </a>
+                    </div>
+                    <a href="{% url 'products:product_detail' product_id=promo_popular_3.id %}" class="text-decoration-none no-link-style">
+                        <h3>{{ promo_popular_3.name }}</h3>
                     </a>
+                    <p>{{ promo_popular_3.flavor }}</p>
                 </div>
-                <a href="{% url 'products:product_detail' product_id=promo_popular_3.id %}" class="text-decoration-none no-link-style">
-                    <h3>{{ promo_popular_3.name }}</h3>
-                </a>
-                <p>{{ promo_popular_3.flavor }}</p>
             </div>
         </div>
     </div>
