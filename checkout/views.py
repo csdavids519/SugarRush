@@ -12,7 +12,7 @@ from products.models import Product
 
 from .models import ShippingInfo
 from .forms import ShippingForm
-
+from checkout.contexts import update_basket_total
 from .signals import basket_cleared_signal, order_placed_signal
 
 from django.views.decorators.csrf import csrf_exempt
@@ -85,11 +85,15 @@ def add_to_basket(request, item_id):
         basket_product = BasketProduct.objects.get(basket=basket, product=product)
         basket_product.quantity += quantity
         basket_product.save()
+
     # when new item is added to basket, subtract qty 1 from customer requested qty    
     except BasketProduct.DoesNotExist:
         basket_product, created = BasketProduct.objects.get_or_create(basket=basket, product=product)
         basket_product.quantity += quantity-1
         basket_product.save()
+
+    # update the basket total cost count
+    update = update_basket_total(request)
 
     redirect_url = request.POST.get('redirect_url', '/')
     return redirect(redirect_url)
