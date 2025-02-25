@@ -18,6 +18,10 @@ body {
     background-color: #FBF8CC;
 }
 
+.navbar-style {
+    z-index: 1200;
+}
+
 .no-link-style {
     text-decoration: none;
     color: inherit;
@@ -33,6 +37,10 @@ body {
 
 .hidden-small {
     display: none;
+}        
+
+.hidden-large {
+    display: block;
 }        
 
 .payment-style {
@@ -55,6 +63,10 @@ body {
     .block-content-top {
         margin-top: 120px;
     }
+
+    .hidden-small {
+        display: block;
+    }        
 
     .hidden-large {
             display: none;

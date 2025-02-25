@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg rounded border border-black" style='background-color: #8EECF5'>
+<nav class=" hidden-small navbar navbar-expand-lg rounded" style='background-color: #8EECF5'>
   <div class="container-fluid">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -18,6 +18,11 @@
         {% else %}
         <li class="nav-item">
           <a class="nav-link {% if request.resolver_match.url_name == 'account_login' %}active{% endif %}" href="{% url 'account_login' %}">Login</a>
+        </li>
+        {% endif %}
+        {% if user.is_superuser %}
+        <li class="nav-item">
+          <a class="nav-link {% if request.resolver_match.url_name == 'admin' %}active{% endif %}" href="{% url 'admin:index' %}">Management</a>
         </li>
         {% endif %}
       </ul>
