@@ -2,10 +2,10 @@
 {% load static %}
 {% block content %}
 
-<div class='container-fluid p-3'>
+<div class='container-fluid p-3 mt-5'>
   <div class="row">
     {% for product in products %}
-    <div class="col-12 col-md-6 col-lg-4 mb-5 p-5">
+    <div class="col-12 col-md-6 col-lg-4 py-3 px-5">
       <div class="card h-100 border-3 p-1" style="border: 2px solid #F1C0E8; background-color: #FFCFD2;">
         <a href="{% url 'products:product_detail' product_id=product.id %}" class="no-link-style">
           {% comment %} card header  {% endcomment %}

@@ -31,12 +31,36 @@ body {
     background-color: #CFBAF0;
 }
 
+.hidden-small {
+    display: none;
+}        
+
+.payment-style {
+    margin-top: 5rem;
+}
+
+
+/* medium screens  and up */
+@media (min-width: 800px) {
+
+}
+
 
 /* Large screens (lg) and up */
 @media (min-width: 992px) { 
     #topheader {
-        min-height: 100px;
-        
-    } 
-}
+        min-height: 50px;
+    }
 
+    .block-content-top {
+        margin-top: 120px;
+    }
+
+    .hidden-large {
+            display: none;
+        }        
+
+    .payment-style {
+        margin-top: 25vh;
+    }
+}

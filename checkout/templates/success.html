@@ -1,18 +1,19 @@
 {% extends "base.html" %}
-{% block content %}
 {% load static %}
-{% load crispy_forms_tags %}
 
-<script src="https://js.stripe.com/v3/"></script>
-<script src="{% static 'js/checkout.js' %}"></script>
-
-  <h1>SUCCESS</h1>
-  <div class='m-5'>
-    <ul>
-      <li><a href="{% url 'checkout:payment' %}"> PAYMENT PAGE</a></li>
-      <li><a href="{% url 'checkout:shipping_info' %}"> SHIPPING PAGE</a></li>
-      <li><a href="{% url 'checkout:checkout' %}"> CHECKOUT PAGE</a></li>
-    </ul>
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center text-center">
+      <div class="col-12 col-md-6">
+        <div class="justify-content-center mt-5 p-5 rounded-4" style='border min-height:50vh; background-color: rgba(144, 219, 244, 0.5);'>
+          <h2>SUCCESS</h2>
+          <p>Candy is on the way!</p>
+        </div>
+      </div>
+      <div class="container-fluid d-flex justify-content-center align-items-center">
+        <a href="{% url 'home:home' %}" class="btn btn-outline-dark m-3 btn-2" style="min-width: 10rem;">Back Home</a>
+      </div>
+    </div>
   </div>
-
-  {% endblock %}
+</div>
+{% endblock %}
