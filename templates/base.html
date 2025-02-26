@@ -37,43 +37,51 @@
           </a>
         </div>
       </div>
+      <!-- Navbar -->
       <div>
         {% include 'includes/main-nav.html' %} 
         {% include 'includes/nav-mobile.html' %}
       </div>
     </header>
 
-    {% if messages %}
-    <div class="message-container">
-      {% for message in messages %}
-        {% with message.level as level %}
-          {% if level == 40 %}
-            {% include 'includes/toasts/toast_error.html' %}
-          {% elif level == 30 %}
-            {% include 'includes/toasts/toast_warning.html' %}
-          {% elif level == 25 %}
-            {% include 'includes/toasts/toast_success.html' %}
-          {% else %}
-            {% include 'includes/toasts/toast_info.html' %}
-          {% endif %}
-          {% endwith %}
-          {% endfor %}
+    <!-- Toasts -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+      <div id="toastMessage" class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="d-flex">
+              <div class="toast-body">
+                  {{ message }}
+              </div>
+              <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+      </div>
     </div>
-    {% endif %}
 
+    <!-- Block Content -->
     <div class='block-content-top mobile-margin'>
       {% block content %} {% endblock %}
     </div>
 
+    <!-- Block Footer -->
     <div>
       {% include 'includes/main-footer.html' %}
     </div>
-    
-    {% block postloadjs %}
-    <script type="text/javascript">
-        $('.toast').toast('show');
-    </script>
-    {% endblock %}
-
+        
+    <!-- Toast messages JS-->
+    <div>
+        {% if messages %}
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                {% for message in messages %}
+                    var toastElement = document.getElementById('toastMessage');
+                    if (toastElement) {
+                        toastElement.querySelector('.toast-body').innerText = "{{ message }}";
+                        var toast = new bootstrap.Toast(toastElement);
+                        toast.show();
+                    }
+                {% endfor %}
+            });
+        </script> 
+        {% endif %}
+    </div>
   </body>
 </html>

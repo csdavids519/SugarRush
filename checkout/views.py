@@ -50,7 +50,7 @@ def payment(request):
     except Basket.DoesNotExist:
         basket = Basket.objects.create(user=request.user)
         return render(request, 'payment.html', {'order_results': None})
-    
+
     if request.method == "POST":
         order_form = ShippingForm(request.POST)
         if order_form.is_valid():
@@ -66,6 +66,7 @@ def success(request):
     user = request.user
     shipping_info = ShippingInfo.objects.last()
     order_placed_signal.send(sender=None, user=user, shipping_info_id=shipping_info.id)
+    messages.success(request, 'Thanks for your purchase, your candy is on the way!')
     return render(request, 'success.html')
 
 
@@ -119,6 +120,8 @@ def update_basket(request, basket_product_id):
             basket_list.quantity = qty_update
             basket_list.save()
 
+    messages.success(request, 'Basket updated!')
+
     redirect_url = request.POST.get('redirect_url', '/')
     return redirect(redirect_url)
 
@@ -127,6 +130,8 @@ def remove_from_basket(request, basket_product_id):
     basket_list = get_object_or_404(BasketProduct, id=basket_product_id)
     basket_list.delete()
 
+    messages.success(request, 'Basket updated!')
+    
     redirect_url = request.POST.get('redirect_url', '/')
     return redirect(redirect_url)
 
