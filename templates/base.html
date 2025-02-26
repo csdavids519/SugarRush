@@ -42,6 +42,28 @@
         {% include 'includes/main-nav.html' %} 
         {% include 'includes/nav-mobile.html' %}
       </div>
+      <div class='container-fluid rounded border border-dark'>
+        <div class='container-fluid d-flex align-items-center justify-content-end'>
+          <div class="ms-auto ">
+              <a class='nav-link' href="{% url 'checkout:checkout' %}">
+                <p class= "text-end fw-light text-dark m-0">
+                  <i class="fa-solid fa-user"></i>
+                  {% if user.is_authenticated %}
+                    {{ user }} | 
+                  {% else %}
+                    | 
+                  {% endif %}
+        
+                  {% if user.is_authenticated %}
+                        ${{ grand_total|floatformat:2 }}
+                    {% else %}
+                        log in
+                    {% endif %}
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </p>
+              </a>
+          </div>
+      </div>
     </header>
 
     <!-- Toasts -->
