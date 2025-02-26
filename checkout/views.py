@@ -9,7 +9,7 @@ from django.db.models import Sum, F
 
 from checkout.models import Basket, BasketProduct
 from products.models import Product
-
+from django.contrib import messages
 from .models import ShippingInfo
 from .forms import ShippingForm
 from checkout.contexts import update_basket_total
@@ -94,6 +94,7 @@ def add_to_basket(request, item_id):
 
     # update the basket total cost count
     update = update_basket_total(request)
+    messages.success(request, 'Candy is in the bag!')
 
     redirect_url = request.POST.get('redirect_url', '/')
     return redirect(redirect_url)
