@@ -1,2 +1,1 @@
-web: gunicorn 
-sugar_rush.wsgi:application
+web: gunicorn sugar_rush.wsgi
