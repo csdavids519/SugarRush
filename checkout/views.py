@@ -37,7 +37,31 @@ def checkout(request):
 
 def shipping_info(request):
     """ A view to return the shipping page """
-    shipping_form = ShippingForm()
+    print('SHIPPING: VIEW LOADED')
+    # Attempt to preload the shipping details from user data
+    if request.user.is_authenticated:
+        shipping_data = ShippingInfo.objects.filter(user=request.user).last()
+        # print(f'SHIPPING: {shipping_data.user}')
+        # print(f'SHIPPING: {shipping_data.id}')
+        if shipping_data:
+            shipping_form = ShippingForm(initial={
+                'full_name': shipping_data.full_name,
+                'email': shipping_data.email,
+                'phone_number': shipping_data.phone_number,
+                'country': shipping_data.country,
+                'postcode': shipping_data.postcode,
+                'town_or_city': shipping_data.town_or_city,
+                'street_address1': shipping_data.street_address1,
+                'street_address2': shipping_data.street_address2,
+                'state': shipping_data.state,
+            })
+            print('SHIPPING FORM LOADED')
+        else:
+            shipping_form = ShippingForm()
+            print('SHIPPING: NO SHIPPING DATA FOUND')
+    else:
+        shipping_form = ShippingForm()
+        print('SHIPPING: NO USER AUTH')
 
     return render(request, 'shipping.html', {'shipping_form': shipping_form})
 
@@ -51,11 +75,13 @@ def payment(request):
         basket = Basket.objects.create(user=request.user)
         return render(request, 'payment.html', {'order_results': None})
 
+    #Save shipping form with user name
     if request.method == "POST":
-        order_form = ShippingForm(request.POST)
-        if order_form.is_valid():
-            order = order_form.save(commit=False)
-            order.save()
+        shipping_form = ShippingForm(request.POST)
+        if shipping_form.is_valid():
+            shipping_info = shipping_form.save(commit=False)
+            shipping_info.user = request.user
+            shipping_info.save()
 
     return render(request, 'payment.html', {'order_results': basket})
 
