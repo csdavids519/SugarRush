@@ -40,7 +40,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['localhost',
                  '127.0.0.1',
-                 'sugar-rush-7a055e26dddb.herokuapp.com/',
+                 'sugar-rush-7a055e26dddb.herokuapp.com',
                  ]
 
 
