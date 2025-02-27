@@ -13,6 +13,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+from django.conf import settings
 from django.contrib.messages import constants as messages  # REQUIRED???
 if os.path.isfile('env.py'):
     import env
@@ -23,16 +27,16 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-3(^)-6j187u!7=z=8(a)a0a#k$820-@0p9^r*fu4-p))f%o+@_'
-
-STRIPE_PUBLIC_KEY = 'pk_test_51QsjeH02ahKmoBWWiupTVTSOypH3073b25gWzF4vB0vk9SIvAWpCFPVkE5Dp5P2R6eNmvBRevBxR07Xzyv1QHV6s00IWGTX1Cx'
-STRIPE_SECRET_KEY = 'sk_test_51QsjeH02ahKmoBWWDKB4d6JywKA2nQYtQnA2g6W9eyqSoBGxRS449orIhWoK24c1Ypmt3BVVr1HsOTMm6U0aAPvq00RMCjkJh2'
-STRIPE_WEBHOOK_SECRET = ''
+SECRET_KEY = os.getenv('SECRET_KEY')
+STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY')
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
+STRIPE_WEBHOOK_SECRET = os.getenv('STRIPE_WEBHOOK_SECRET')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -44,9 +48,7 @@ ALLOWED_HOSTS = ['localhost',
                  ]
 
 
-CSRF_TRUSTED_ORIGINS = ['localhost',
-                        '127.0.0.1',
-                        ]
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8000']
 
 # Application definition
 
@@ -66,6 +68,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     'django_countries',
     'crispy_bootstrap5',
+    'cloudinary',
+    'cloudinary_storage',
 
 
     # project apps
@@ -87,6 +91,11 @@ ACCOUNT_USERNAME_MIN_LENGTH = 4
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
 
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
