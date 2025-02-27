@@ -3,7 +3,7 @@
 
 
 {% block content %}
-<div class='container-fluid pt-3'>
+<div class='container-fluid pt-3'> 
   {% comment %} breadcrumbs  {% endcomment %}
   <nav class='hidden-small' style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -13,7 +13,7 @@
     </ol>
   </nav>
   {% comment %} basket list  {% endcomment %}
-  <div class="container rounded-4">
+  <div class="container rounded-4" style='margin-top: 5rem;'>
     {% if not basket_results %}
       <p>Nothing here, keep shopping!</p>
     {% else %}
