@@ -33,22 +33,12 @@
       </h2>
     </div>
     <div class="ms-auto">
-      <a class='nav-link' href="{% url 'checkout:checkout' %}">
-        <p class= "text-end m-3 fw-light text-dark">
-          <i class="fa-solid fa-user"></i>
-          {% if user.is_authenticated %}
-            {{ user }} | 
-          {% else %}
-            | 
-          {% endif %}
-
-          {% if user.is_authenticated %}
-                ${{ grand_total|floatformat:2 }}
-            {% else %}
-                log in
-            {% endif %}
-            <i class="fa-solid fa-cart-shopping"></i>
-        </p>
-      </a>
+      <p class= "text-end m-3 fw-light text-dark">
+        {% if user.is_authenticated %}
+          Logged in as: {{ user }} | Total: ${{ grand_total|floatformat:2 }}
+        {% else %}
+          user not logged in
+        {% endif %}
+      </p>
   </div>
 </nav>
