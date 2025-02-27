@@ -1,0 +1,81 @@
+/* color pallet:  
+FBF8CC
+FDE4CF
+FFCFD2
+F1C0E8
+CFBAF0
+A3C4F3
+90DBF4
+8EECF5
+98F5E1
+B9FBC0 */
+
+header {
+    background-color: #F1C0E8;
+}
+
+body {
+    background-color: #FBF8CC;
+}
+
+.navbar-style {
+    z-index: 1200;
+}
+
+.no-link-style {
+    text-decoration: none;
+    color: inherit;
+}
+
+.btn-1 {
+    background-color: #8EECF5;
+}
+
+.btn-2 {
+    background-color: #CFBAF0;
+}
+
+.hidden-small {
+    display: none;
+}        
+
+.hidden-large {
+    display: block;
+}        
+
+.payment-style {
+    margin-top: 5rem;
+}
+
+.mobile-margin {
+    margin-top: 5rem;
+}
+
+/* medium screens  and up */
+@media (min-width: 800px) {
+
+}
+
+
+/* Large screens (lg) and up */
+@media (min-width: 992px) { 
+    #topheader {
+        min-height: 50px;
+    }
+
+    .block-content-top {
+        margin-top: 120px;
+    }
+
+    .hidden-small {
+        display: block;
+    }        
+
+    .hidden-large {
+            display: none;
+        }        
+
+    .payment-style {
+        margin-top: 25vh;
+    }
+}
