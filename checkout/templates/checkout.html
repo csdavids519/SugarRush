@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
 
-
 {% block content %}
 <div class='container-fluid pt-3'> 
   {% comment %} breadcrumbs  {% endcomment %}
@@ -22,7 +21,7 @@
     <div class="row m-3 justify-content-md-center rounded-4" style='background-color: #FFCFD2;'>
       {% comment %} images  {% endcomment %}
       <div class="col m-1 col-lg-2  d-flex justify-content-center align-items-center" >
-        <img src="{{ i.product.product_image.url }}" alt="{{ product.name }}" class='rounded' style='max-height: 100px; width: auto'/>
+        <img src="{{ i.product.product_image.url }}" alt="{{ product.name }}" class='rounded' style='max-height: 100px; width: auto'>
       </div>
       {% comment %} product detail  {% endcomment %}
       <div class="col m-1 col-lg-4 text-start">
@@ -41,14 +40,14 @@
             <div class="row">
             <button class="btn btn-outline-dark" type="submit" style='background-color:#B9FBC0;'>Update</button>
             </div>
-            <input type="hidden" name="redirect_url" value="{{ request.path }}" />
+            <input type="hidden" name="redirect_url" value="{{ request.path }}" >
           </form>
         </div>
         {% comment %} qty edit buttons  {% endcomment %}
         <div class="col g-3">
           <form action="{% url 'checkout:remove_from_basket' i.id %}" method="POST">
             {% csrf_token %}
-            <input type="hidden" name="redirect_url" value="{{ request.path }}" />
+            <input type="hidden" name="redirect_url" value="{{ request.path }}" >
             <button class="btn btn-outline-dark g-3" type="submit" style="width: 80px; background-color: #F1C0E8;">Remove</button>
           </form>     
         </div>

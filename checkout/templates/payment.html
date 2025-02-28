@@ -21,23 +21,23 @@
       <table class=" mt-25vh table table-sm table-borderless ">
         <thead>
           <tr>
-            <th class="" scope="col">Product</th>
-            <th class="" scope="col">Quantity</th>
-            <th class="" scope="col">Total</th>
+            <th scope="col">Product</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Total</th>
           </tr>
         </thead>
         <tbody>
           {% for i in order_results.basket_products.all %}
           <tr>
-            <td class="" scope="row">{{ i.product.name }}</td>
-            <td class="">{{ i.quantity }}</td>
-            <td class="">${% widthratio i.quantity 1 i.product.price %}</td>
+            <th scope="row">{{ i.product.name }}</th>
+            <td>{{ i.quantity }}</td>
+            <td>${% widthratio i.quantity 1 i.product.price %}</td>
           </tr>
           {% endfor %}
           <tr>
-            <th class="" scope="row"></th>
-            <td class=""></td>
-            <td class=""><strong>${{ grand_total | floatformat:2 }}</strong></td>
+            <th scope="row"></th>
+            <td></td>
+            <td><strong>${{ grand_total | floatformat:2 }}</strong></td>
           </tr>
         </tbody>
       </table>
