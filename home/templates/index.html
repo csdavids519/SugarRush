@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 <!-- What's New Promo -->
-<div style="background: url('/media/kid_xl.jpg') no-repeat center center; 
+<div style="background: url('https://res.cloudinary.com/dyrqrlk7s/image/upload/v1740721892/kid_xl_hhxjzu.jpg') no-repeat center center; 
             background-size: cover; 
             width: 100%; 
             min-height: 50vh;">
@@ -19,7 +19,7 @@
                         <div class='p-3 rounded-4'>
                             <div class="flex-shrink-0 mb-3 mb-md-0">
                                 <a href="{% url 'products:product_detail' product_id=promo_new.id %}">
-                                    <img src="{{ promo_new.product_image.url }}" alt="{{ promo_new.name }}" class="rounded-4" style="max-height:200px; max-width: auto;">
+                                    <img src="{{ promo_new.image.url }}" alt="{{ promo_new.name }}" class="rounded-4" style="max-height:200px; max-width: auto;">
                                 </a>
                             </div>
                         </div>
@@ -38,7 +38,7 @@
 </div>
 
 <!-- What's Popular Promo -->
-<div style="background: url('/media/candy_girl_xl.jpg') no-repeat center center; 
+<div style="background: url('https://res.cloudinary.com/dyrqrlk7s/image/upload/v1740721891/candy_girl_xl_yjvymu.jpg') no-repeat center center; 
             background-size: cover; 
             width: 100%; 
             min-height: 50vh;">
@@ -54,7 +54,7 @@
                 <div class='p-3 rounded-4' style=' background-color: rgba(255, 207, 210, 0.5);'>
                     <div class="flex-shrink-0 me-3 mb-3 mb-md-0">
                         <a href="{% url 'products:product_detail' product_id=promo_popular_1.id %}">
-                            <img src="{{ promo_popular_1.product_image.url }}" alt="{{ promo_popular_1.name }}" class="rounded-4" style="max-height:200px; max-width: auto;">
+                            <img src="{{ promo_popular_1.image.url }}" alt="{{ promo_popular_1.name }}" class="rounded-4" style="max-height:200px; max-width: auto;">
                         </a>
                     </div>
                     <a href="{% url 'products:product_detail' product_id=promo_popular_1.id %}" class="text-decoration-none no-link-style">
@@ -69,7 +69,7 @@
                 <div class='p-3 rounded-4' style=' background-color: rgba(255, 207, 210, 0.5);'>
                     <div class="flex-shrink-0 me-3 mb-3 mb-md-0">
                         <a href="{% url 'products:product_detail' product_id=promo_popular_2.id %}">
-                            <img src="{{ promo_popular_2.product_image.url }}" alt="{{ promo_popular_2.name }}" class="rounded-4" style="max-height:200px; max-width: auto;">
+                            <img src="{{ promo_popular_2.image.url }}" alt="{{ promo_popular_2.name }}" class="rounded-4" style="max-height:200px; max-width: auto;">
                         </a>
                     </div>
                     <a href="{% url 'products:product_detail' product_id=promo_popular_2.id %}" class="text-decoration-none no-link-style">
@@ -84,7 +84,7 @@
                 <div class='p-3 rounded-4' style=' background-color: rgba(255, 207, 210, 0.5);'>
                     <div class="flex-shrink-0 me-3 mb-3 mb-md-0">
                         <a href="{% url 'products:product_detail' product_id=promo_popular_3.id %}">
-                            <img src="{{ promo_popular_3.product_image.url }}" alt="{{ promo_popular_3.name }}" class="rounded-4" style="max-height:200px; max-width: auto;">
+                            <img src="{{ promo_popular_3.image.url }}" alt="{{ promo_popular_3.name }}" class="rounded-4" style="max-height:200px; max-width: auto;">
                         </a>
                     </div>
                     <a href="{% url 'products:product_detail' product_id=promo_popular_3.id %}" class="text-decoration-none no-link-style">

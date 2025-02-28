@@ -26,6 +26,5 @@ class Product(models.Model):
     flavor = models.CharField(max_length=254,blank=True, null=True, choices=FLAVOR)
     type = models.CharField(max_length=254,blank=True, null=True, choices=TYPE)
 
-
     def __str__(self):
         return str(self.product_id)
