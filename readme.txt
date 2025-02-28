@@ -8,18 +8,23 @@ Stripe integration
 
 # E-commerce website
 
-**Deployed website: [Link to website](https://wowder.onrender.com)**
+![Main image](documentation/images/header.png)
 
-
-![Main image](documentation/readme_header.png)
-
-**Card number for payment testing: 4242424242424242**
 ## About
 
 Candy Rush is an e-commerce website that allows customers to buy unique candy products. It utlizes a log in system that maintains the shopping basket data for each user.
 users can see new and popular candy items on the home page that might spark their interest. Once in the 'Our Candy' section of the website, the full selection of candy products is shown, users can opt to select 'quick buy' to quickly add an item to their shpping cart. Or click the product to view more details and add multiple quanities to the basket at onece.
 Once shoppers are happy with their candy selections, we have a simple checkout process, where users will be given an opertunity to make edits to the baasket and confirm, then enter their desired shipping data, this data is saved and strored for the users next perchase so the chekout process is made even more easy with auto completed shipping forms. 
 at the payment screen users can see the current basket items and their total and given a selection of payemnt options to use via Stripe. Once completed a notification is displayed as well as a conformation email is sent with the order info.
+
+
+The live site can be found here: [Sugar Rush](https://onehotel-764151fc8ccf.herokuapp.com/)
+
+The github repository can be found here:[GitHub](https://github.com/csdavids519/OneHotel)
+
+The project agile task list can be found here: [Github Projects](https://github.com/users/csdavids519/projects/2)
+
+payment testing credit card number: 4242 4242 4242 4242
 ---
 
 ## UX
@@ -134,7 +139,7 @@ A benift to our customers would be to calculate shipping cots before checkout, t
     + [Sitemap Generator](https://www.xml-sitemaps.com/) was used to create the sitemap.xml file.
 
          + [ERD](https://www.xml-sitemaps.com/) 
-
+  https://www.tablesgenerator.com/markdown_tables
 
 ---
 
@@ -202,8 +207,55 @@ GitHub Project Management was used to manage the project. This method keeps clea
 ---
 ## Testing
 
+HTML Validator (ignore errors due to Django HTML) 
 
----
+| Base      | Passed  |
+|-----------|---------|
+| base.html | X       |
+| 404.html  | X       |
+| 500.html  | X       |
+
+| Checkout      | Passed |
+|---------------|--------|
+| checkout.html | X      |
+| payment.html  | X      |
+| shipping.html | X      |
+| success.html  | X      |
+
+
+| Home          | Passed |
+|---------------|--------|
+| index.html    | X      |
+
+| Products            | Passed |
+|---------------------|--------|
+| product_detail.html | X      |
+| products.html       | X      |
+
+
+| account                      | Passed |
+|------------------------------|--------|
+| account_inactive.html        | X      |
+| base.html                    | X      |
+| email_confirm.html           | X      |
+| email.html                   | X      |
+| login.html                   | X      |
+| logout.html                  | X      |
+| password_change.html         | X      |
+| password_reset_done.html     | X      |
+| password_reset_from_key_done | X      |
+| password_reset.html          | X      |
+| password_set.html            | X      |
+| signup_closed.html           | X      |
+| signup.html                  | X      |
+| verification_sent.html       | X      |
+| verified_email_required.html | X      |
+
+
+| email                        | Passed |
+|------------------------------|--------|
+| purchase_confirmation.html   | X      |
+
 
 
 ## Deployment and Payment setup
