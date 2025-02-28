@@ -24,7 +24,7 @@ The github repository can be found here:[GitHub](https://github.com/csdavids519/
 
 The project agile task list can be found here: [Github Projects](https://github.com/users/csdavids519/projects/2)
 
-payment testing credit card number: 4242 4242 4242 4242
+Payment testing credit card number: 4242 4242 4242 4242
 ---
 
 ## UX
