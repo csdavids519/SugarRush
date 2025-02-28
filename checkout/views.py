@@ -17,6 +17,10 @@ from .signals import basket_cleared_signal, order_placed_signal
 
 from django.views.decorators.csrf import csrf_exempt
 
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
@@ -92,7 +96,40 @@ def success(request):
     user = request.user
     shipping_info = ShippingInfo.objects.last()
     order_placed_signal.send(sender=None, user=user, shipping_info_id=shipping_info.id)
+    
+    # send email to user
+    user = request.user
+    messages.success(request, f"Email is on the way! {user}")
+    
+    basket = Basket.objects.filter(user=request.user).last()
+    total_price = basket.basket_products.aggregate(
+        total=Sum(F('product__price') * F('quantity'))
+    )['total']
+    print(f'EMAIL: total_price: {total_price}')
+
+    basket_items = basket.basket_products.all()
+
+    purchase_details = {
+        'user_name': user, 
+        'basket_items' : basket_items,
+        'total': total_price, 
+    }
+    subject = 'SugarRush - Purchase Confirmation'
+    
+    html_message = render_to_string('emails/purchase_confirmation.html', {'purchase_details': purchase_details})
+    plain_message = strip_tags(html_message)
+    
+    send_mail(
+        subject,
+        plain_message,
+        settings.DEFAULT_FROM_EMAIL,
+        [user.email],
+        html_message=html_message,  
+        )
+
     messages.success(request, 'Thanks for your purchase, your candy is on the way!')
+    
+
     return render(request, 'success.html')
 
 
