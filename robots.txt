@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /accounts/
+Disallow: /bag/
+Disallow: /personnel/
+Sitemap: https://sugar-rush-7a055e26dddb.herokuapp.com/sitemap.xml
