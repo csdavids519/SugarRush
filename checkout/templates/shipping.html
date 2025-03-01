@@ -8,7 +8,8 @@
   <nav class='hidden-small' style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item text-secondary" aria-current="page" >Edit Basket</li>
-      <li class="breadcrumb-item text-dark" aria-current="page" style='text-decoration: underline;'>Shipping Details</li>
+      <li class="breadcrumb-item text-dark"
+          aria-current="page" style='text-decoration: underline;'>Shipping Details</li>
       <li class="breadcrumb-item text-secondary" aria-current="page" >Review and Payment</li>
     </ol>
   </nav>
@@ -20,7 +21,8 @@
           {% csrf_token %}
           {{ shipping_form|crispy }}
           <div class="container-fluid d-flex justify-content-center align-items-center">
-            <a href="{% url 'products:products' %}" class="btn btn-outline-dark m-3 btn-2" style="min-width: 10rem;">Keep Shopping</a>
+            <a href="{% url 'products:products' %}"
+               class="btn btn-outline-dark m-3 btn-2" style="min-width: 10rem;">Keep Shopping</a>
             <button class="btn btn-outline-dark m-3 btn-1" type="submit" style="min-width: 10rem;">Next</button>
           </div>
       </form>

@@ -21,7 +21,10 @@
     <div class="row m-3 justify-content-md-center rounded-4" style='background-color: #FFCFD2;'>
       {% comment %} images  {% endcomment %}
       <div class="col m-1 col-lg-2  d-flex justify-content-center align-items-center" >
-        <img src="{{ i.product.product_image.url }}" alt="{{ product.name }}" class='rounded' style='max-height: 100px; width: auto'>
+        <img src="{{ i.product.product_image.url }}"
+             alt="{{ product.name }}"
+             class='rounded'
+             style='max-height: 100px; width: auto'>
       </div>
       {% comment %} product detail  {% endcomment %}
       <div class="col m-1 col-lg-4 text-start">
@@ -48,7 +51,9 @@
           <form action="{% url 'checkout:remove_from_basket' i.id %}" method="POST">
             {% csrf_token %}
             <input type="hidden" name="redirect_url" value="{{ request.path }}" >
-            <button class="btn btn-outline-dark g-3" type="submit" style="width: 80px; background-color: #F1C0E8;">Remove</button>
+            <button class="btn btn-outline-dark g-3"
+            type="submit"
+            style="width: 80px; background-color: #F1C0E8;">Remove</button>
           </form>     
         </div>
       </div>
@@ -58,8 +63,12 @@
   </div>
   {% comment %} end basket list  {% endcomment %}
   <div class="container-fluid d-flex justify-content-center align-items-center">
-    <a href="{% url 'products:products' %}" class="btn btn-outline-dark btn-2 m-3" style="min-width: 10rem;">Keep Shopping</a>
-    <a href="{% url 'checkout:shipping_info' %}" class="btn btn-outline-dark btn-1 m-3" style="min-width: 10rem;">Next</a>
+    <a href="{% url 'products:products' %}"
+       class="btn btn-outline-dark btn-2 m-3"
+       style="min-width: 10rem;">Keep Shopping</a>
+    <a href="{% url 'checkout:shipping_info' %}"
+       class="btn btn-outline-dark btn-1 m-3"
+       style="min-width: 10rem;">Next</a>
   </div>
 </div>
 {% endblock %}
