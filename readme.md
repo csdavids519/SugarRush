@@ -19,11 +19,11 @@ users can see new and popular candy items on the home page that might spark thei
 Once shoppers are happy with their candy selections, we have a simple checkout process, where users will be given an opertunity to make edits to the baasket and confirm, then enter their desired shipping data, this data is saved and strored for the users next perchase so the chekout process is made even more easy with auto completed shipping forms. 
 at the payment screen users can see the current basket items and their total and given a selection of payemnt options to use via Stripe. Once completed a notification is displayed as well as a conformation email is sent with the order info.
 
-The live site can be found here: [Sugar Rush](https://onehotel-764151fc8ccf.herokuapp.com/)
+The live site can be found here: [Sugar Rush](https://sugar-rush-7a055e26dddb.herokuapp.com/)
 
-The github repository can be found here:[GitHub](https://github.com/csdavids519/OneHotel)
+The github repository can be found here:[GitHub](https://github.com/csdavids519/SugarRush)
 
-The project agile task list can be found here: [Github Projects](https://github.com/users/csdavids519/projects/2)
+The project agile task list can be found here: [Github Projects](https://github.com/users/csdavids519/projects/4)
 
 Payment testing credit card number: 4242 4242 4242 4242
 
