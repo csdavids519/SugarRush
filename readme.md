@@ -27,6 +27,10 @@ The project agile task list can be found here: [Github Projects](https://github.
 
 Payment testing credit card number: 4242 4242 4242 4242
 
+Admin testing at Code Institute
+  User: SugarRushAdmin
+  Pass: Admin1
+
 ---
 
 ## Deployment to Heroku
@@ -230,7 +234,8 @@ Sugar Rush color scheme was chosen based off images of real life candy stores. T
 
 ### Wireframes
 
-  [WoWder Wireframes](documentation/design/wowder_wireframes.pdf)
+  [Sugar Rush Wireframes](documentation/images/wire_diagram_1.pdf)
+  [Sugar Rush Wireframes](documentation/images/wire_diagram_2.pdf)
 
 ---
 
