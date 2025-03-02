@@ -1,33 +1,29 @@
-import stripe
-from django.shortcuts import (
-    render, redirect, get_object_or_404
-    )
 
+from django.shortcuts import (render, redirect, get_object_or_404)
 from django.conf import settings
 from django.http import JsonResponse
 from django.db.models import Sum, F
-
-from checkout.models import Basket, BasketProduct
-from products.models import Product
 from django.contrib import messages
-from .models import ShippingInfo
-from .forms import ShippingForm
-from checkout.contexts import update_basket_total
-from .signals import basket_cleared_signal, order_placed_signal
-
 from django.views.decorators.csrf import csrf_exempt
-
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
+from checkout.models import Basket, BasketProduct, Product
+
+from .models import ShippingInfo
+from .forms import ShippingForm
+from .signals import order_placed_signal
+
+from checkout.contexts import update_basket_total
+import stripe
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 def checkout(request):
-
-    """ A view to return the index page """
-    # find the basket based on user name
+    """
+    A view to render the checkout basket edit page with basket data
+    """
     basket = None
     if request.user.is_authenticated:
         try:
@@ -40,13 +36,9 @@ def checkout(request):
 
 
 def shipping_info(request):
-    """ A view to return the shipping page """
-    print('SHIPPING: VIEW LOADED')
-    # Attempt to preload the shipping details from user data
+    """ A view to return the shipping form page """
     if request.user.is_authenticated:
         shipping_data = ShippingInfo.objects.filter(user=request.user).last()
-        # print(f'SHIPPING: {shipping_data.user}')
-        # print(f'SHIPPING: {shipping_data.id}')
         if shipping_data:
             shipping_form = ShippingForm(initial={
                 'full_name': shipping_data.full_name,
@@ -59,27 +51,22 @@ def shipping_info(request):
                 'street_address2': shipping_data.street_address2,
                 'state': shipping_data.state,
             })
-            print('SHIPPING FORM LOADED')
         else:
             shipping_form = ShippingForm()
-            print('SHIPPING: NO SHIPPING DATA FOUND')
     else:
         shipping_form = ShippingForm()
-        print('SHIPPING: NO USER AUTH')
 
     return render(request, 'shipping.html', {'shipping_form': shipping_form})
 
 
 def payment(request):
-    """ A view to return the checkout page """
-    # find the basket based on user name
+    """ A view to return the Stripe payment page """
     try:
         basket = Basket.objects.filter(user=request.user).last()
     except Basket.DoesNotExist:
         basket = Basket.objects.create(user=request.user)
         return render(request, 'payment.html', {'order_results': None})
 
-    #Save shipping form with user name
     if request.method == "POST":
         shipping_form = ShippingForm(request.POST)
         if shipping_form.is_valid():
@@ -91,13 +78,14 @@ def payment(request):
 
 
 def success(request):
-    print('SUCCESS VIEW CALLED')
-    # basket_cleared_signal.send(sender=None, user=request.user)
+    """
+    A view to render the success page and call order placed signal
+    Sends an email to customer that purchase was completed
+    """
     user = request.user
     shipping_info = ShippingInfo.objects.last()
     order_placed_signal.send(sender=None, user=user, shipping_info_id=shipping_info.id)
     
-    # send email to user
     user = request.user
     messages.success(request, f"Email is on the way! {user}")
     
@@ -105,7 +93,6 @@ def success(request):
     total_price = basket.basket_products.aggregate(
         total=Sum(F('product__price') * F('quantity'))
     )['total']
-    print(f'EMAIL: total_price: {total_price}')
 
     basket_items = basket.basket_products.all()
 
@@ -129,34 +116,34 @@ def success(request):
 
     messages.success(request, 'Thanks for your purchase, your candy is on the way!')
     
-
     return render(request, 'success.html')
 
 
 def add_to_basket(request, item_id):
-    """ A view to add current product to the basket list """
+    """ 
+    A view to add current product to the basket list 
+    -  find the users basket
+    - check for existing matching products or create new
+    - update total basket cost
+    """
     product = get_object_or_404(Product, pk=item_id)
     quantity = int(request.POST.get('quantity', 0))
 
-    # find the basket based on user name
     try:
         basket = Basket.objects.filter(user=request.user).last()
     except Basket.DoesNotExist:
         basket = Basket.objects.create(user=request.user)
 
-    # check for existing matching products or create new
     try:
         basket_product = BasketProduct.objects.get(basket=basket, product=product)
         basket_product.quantity += quantity
         basket_product.save()
 
-    # when new item is added to basket, subtract qty 1 from customer requested qty    
     except BasketProduct.DoesNotExist:
         basket_product, created = BasketProduct.objects.get_or_create(basket=basket, product=product)
         basket_product.quantity += quantity-1
         basket_product.save()
 
-    # update the basket total cost count
     update = update_basket_total(request)
     messages.success(request, 'Candy is in the bag!')
 
@@ -164,17 +151,8 @@ def add_to_basket(request, item_id):
     return redirect(redirect_url)
 
 
-def submit_payment(request):
-    if request.method == "POST":
-        order_form = ShippingInfo(request.POST)
-
-        if order_form.is_valid():
-            print(order_form.fields)  # Debugging
-
-    return render(request, 'checkout.html')
-
-
 def update_basket(request, basket_product_id):
+    """ Update user basket total """
     basket_list = get_object_or_404(BasketProduct, id=basket_product_id)
 
     if request.method == "POST":
@@ -190,6 +168,7 @@ def update_basket(request, basket_product_id):
 
 
 def remove_from_basket(request, basket_product_id):
+    """A view to manage item removal from basket"""
     basket_list = get_object_or_404(BasketProduct, id=basket_product_id)
     basket_list.delete()
 
@@ -201,6 +180,10 @@ def remove_from_basket(request, basket_product_id):
 
 @csrf_exempt
 def create_checkout_session(request):
+    """
+    Create Stripe checkout session 
+    Ref: Stripe documentation
+    """
     basket = Basket.objects.filter(user=request.user).last()
     total_price = basket.basket_products.aggregate(
         total=Sum(F('product__price') * F('quantity'))
@@ -233,6 +216,7 @@ def create_checkout_session(request):
 
 
 def session_status(request):
+    """ A view to manage session status from Stripe"""
     session_id = request.GET.get("session_id")
     if session_id:
         session = stripe.checkout.Session.retrieve(session_id)

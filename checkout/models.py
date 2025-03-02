@@ -1,4 +1,3 @@
-# models code reference, from ChatGPT
 from django.db import models
 from products.models import Product
 from django.contrib.auth.models import User
@@ -6,7 +5,7 @@ from django_countries.fields import CountryField
 
 
 class Basket(models.Model):
-    # user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='basket', null=True, blank=True)
+    """ Models for customer Baskets """
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='basket', null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
@@ -15,6 +14,7 @@ class Basket(models.Model):
 
 
 class BasketProduct(models.Model):
+    """ Model for products and tracking quantity"""
     basket = models.ForeignKey(Basket, on_delete=models.CASCADE, related_name='basket_products')
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='products_in_basket')
     quantity = models.PositiveIntegerField(default=1)
@@ -24,6 +24,10 @@ class BasketProduct(models.Model):
 
 
 class ShippingInfo(models.Model):
+    """
+    Model to track customer shipping info
+    Used to pre fill shipping forms and available to display user order history
+    """
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='shipping_user', null=True, blank=True)
     full_name = models.CharField(max_length=50, null=True, blank=True)
     email = models.EmailField(max_length=254, null=True, blank=True)

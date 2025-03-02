@@ -1,10 +1,9 @@
 from django.db import models
 from cloudinary.models import CloudinaryField
 
-# Create your models here.
-
 
 class Product(models.Model):
+    """A model to store product details"""
     FLAVOR = (
         ('Sour', 'Sour'),
         ('Sweet', 'Sweet'),

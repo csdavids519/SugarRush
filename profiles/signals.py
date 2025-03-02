@@ -7,11 +7,11 @@ from checkout.models import Basket
 
 @receiver(post_save, sender=User)
 def create_customer_profile(sender, instance, created, **kwargs):
+    """Signal creates new basket on new user signup """
     if created:
         customer = Customer.objects.create(user=instance)
         basket = Basket.objects.create(user=instance)
 
-        # Link basket to the customer
         customer.basket_id = basket
         customer.save()
 

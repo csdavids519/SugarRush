@@ -13,6 +13,7 @@ class ShippingForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         """
+        Code Reference Boutique_Ado
         Add placeholders and classes, remove auto-generated
         labels and set autofocus on first field
         """

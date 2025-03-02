@@ -51,7 +51,9 @@
                   </button>
                 </div>
                 {% else %}
-                <a href="{% url 'account_login' %}" class="btn btn-outline-dark btn-2 m-3" style="min-width: 10rem;">Login here!</a>
+                <a href="{% url 'account_login' %}"
+                   class="btn btn-outline-dark btn-2 m-3"
+                   style="min-width: 10rem;">Login here!</a>
                 {% endif %}
               </div>
             </div>
@@ -78,7 +80,9 @@
         </div>
       </form>
       <div class="container-fluid d-flex justify-content-center align-items-center">
-        <a href="{% url 'products:products' %}" class="btn btn-outline-dark btn-2 m-3" style="min-width: 10rem;">Keep Shopping</a>
+        <a href="{% url 'products:products' %}"
+           class="btn btn-outline-dark btn-2 m-3" 
+           style="min-width: 10rem;">Keep Shopping</a>
         <a href="{% url 'checkout:checkout' %}" class="btn btn-outline-dark btn-1 m-3" style="min-width: 10rem;">Checkout</a>
       </div>
     </div>

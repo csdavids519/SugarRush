@@ -1,7 +1,6 @@
 from django.contrib import admin
 from .models import Customer, Orders
 
-
 @admin.register(Customer)
 class BasketAdmin(admin.ModelAdmin):
     list_display = ['id',
@@ -30,6 +29,10 @@ class OrdersAdmin(admin.ModelAdmin):
                        ]
     ordering = ['id']
 
-    # Code reference chatGPT to create def git_products
+    
     def get_products(self, obj):
+        """
+        find all basket products with quantity
+        # Code reference chatGPT to create def get_products
+        """
         return ", ".join(f"{i.product.name} (x{i.quantity})" for i in obj.basket_order.basket_products.all())
