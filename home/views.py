@@ -15,5 +15,6 @@ def index(request):
         'promo_popular_2': promo_popular_2,
         'promo_popular_3': promo_popular_3,
     }
+    print(f"User: {request.user}, Authenticated: {request.user.is_authenticated}")
 
     return render(request, 'index.html', context)

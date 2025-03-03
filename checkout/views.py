@@ -8,7 +8,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
-from checkout.models import Basket, BasketProduct, Product
+from checkout.models import Basket, BasketProduct
+from products.models import Product
 
 from .models import ShippingInfo
 from .forms import ShippingForm
@@ -61,6 +62,8 @@ def shipping_info(request):
 
 def payment(request):
     """ A view to return the Stripe payment page """
+    print(f"Session Key PAYMENT: {request.session.session_key}")
+
     try:
         basket = Basket.objects.filter(user=request.user).last()
     except Basket.DoesNotExist:
@@ -73,6 +76,7 @@ def payment(request):
             shipping_info = shipping_form.save(commit=False)
             shipping_info.user = request.user
             shipping_info.save()
+            print(f"Session Key POST: {request.session.session_key}")
 
     return render(request, 'payment.html', {'order_results': basket})
 
@@ -82,7 +86,10 @@ def success(request):
     A view to render the success page and call order placed signal
     Sends an email to customer that purchase was completed
     """
+    print(f"Session Key SUC: {request.session.session_key}")
+
     user = request.user
+    print(f'SUCCESS USER: {user}')
     shipping_info = ShippingInfo.objects.last()
     order_placed_signal.send(sender=None, user=user, shipping_info_id=shipping_info.id)
     
@@ -201,7 +208,7 @@ def create_checkout_session(request):
                         'product_data': {
                             'name': f'Basket for {basket.user}',
                         },
-                        'unit_amount': int(total_price*100)  # Amount in cents
+                        'unit_amount': int(total_price*100)
                     },
                     'quantity': 1,
                 }],

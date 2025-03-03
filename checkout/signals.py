@@ -1,6 +1,8 @@
 from django.dispatch import receiver, Signal
+from django.contrib.auth.models import User
 from .models import Basket, ShippingInfo
 from profiles.models import Customer, Orders
+from django.contrib.auth.models import User
 
 basket_cleared_signal = Signal()
 
@@ -17,7 +19,6 @@ def clear_basket(sender, user, **kwargs):
         customer.save()
     except Basket.DoesNotExist:
         pass
-    
 
 order_placed_signal = Signal()
 
@@ -27,8 +28,7 @@ def create_order_and_new_basket(sender, user, shipping_info_id, **kwargs):
     Signal to combine ordered products and shipping info
     creates a new basket for customers next order maintaining previous history
     """
-    # try:
-    #     print('GET CURRENT BASKET')
+
     basket = Basket.objects.filter(user=user).last()
     if basket:
         shipping_info = ShippingInfo.objects.get(id=shipping_info_id)
@@ -38,22 +38,6 @@ def create_order_and_new_basket(sender, user, shipping_info_id, **kwargs):
             basket_order=basket,
             shipping_order=shipping_info
         )
+
+        new_basket = Basket.objects.create(user=user)
         print('SIGNAL PY WORKING!')
-        # if not basket:
-        #     pass
-        #     print(f"No active basket found for user {user}")
-        #     return
-        # try:
-        #     shipping_info = ShippingInfo.objects.get(id=shipping_info_id)
-        # except ShippingInfo.DoesNotExist:
-        #     pass
-        #     return
-
-        # order = Orders.objects.create(
-        #     user=user,
-        #     basket_order=basket,
-        #     shipping_order=shipping_info
-        # )
-
-    # except Exception as e:
-    #     print(f"Error in order signal: {e}")
