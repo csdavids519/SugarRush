@@ -1,4 +1,4 @@
-# E-commerce website
+# Sugar Rush
 
 ![Main image](documentation/images/header.png)
 
@@ -40,17 +40,17 @@ Steps to deploy on Heroku:
 
 ## UX
 
-The website was designed with UX in mind to create a very simple to navigate store, with fun and fun color selections resembling that of a candy store. Managers have use of the back end database where they can edit product details and other important data in a professional looking environment. 
+The website was designed with UX in mind to create a very simple to navigate store, with fun and fun color selections resembling that of a candy store. Managers have use of the back end database where they can edit product details and other important data in a professional looking environment.
 
 ### Target Audience
 
-This website is intended for people interested in purchasing products online, starting from bread and finishing electronics, such as TV, smartphones, or other products. It was also aimed to lure people into using this website in their daily lives. This was achieved by implementing a discount system for all customers, additional discounts for loyal customers, and a notification system that allows users to be notified when a product is available. This website may hold many products, and it is essential to make sure that the website is easy to use and navigate. 
+This website is intended for people interested in purchasing products online, starting from bread and finishing electronics, such as TV, smartphones, or other products. It was also aimed to lure people into using this website in their daily lives. This was achieved by implementing a discount system for all customers, additional discounts for loyal customers, and a notification system that allows users to be notified when a product is available. This website may hold many products, and it is essential to make sure that the website is easy to use and navigate.
 
 Sugar Rush is aimed towards children without becoming off putting adults. As the candy selection is geared towards groups of all ages, its important the younger target audience also finds some joy in selecting their candy.
 
 ### User Stories
 
-User stories and project progress has been recorded with github 
+User stories and project progress has been recorded with github
 
 view the kanban board here:
 [github projects](hhttps://github.com/users/csdavids519/projects/4/views/1)
@@ -84,7 +84,6 @@ Sugar Rush creates and sells its own unique candy, offering candy products only 
 ## Web Marketing
 
 Facebook and other social media accounts have been created for Sugar Rush as a way to increase reach to existing and potential customers.
-
 
 ---
 
@@ -247,7 +246,7 @@ GitHub Project Management was used to manage the project. This method keeps clea
 
 ### Entity-Relationship Diagram
 
-![ERD](documentation/my_project_visualized.png)
+![ERD](documentation/ERD.pdf)
 
 ---
 
@@ -350,6 +349,11 @@ I have manually tested this project with the following tests:
 - CSS code was checked with [CSS Validation Service](https://jigsaw.w3.org/css-validator/)
 - Python code has been check with a linter extension [Flake8](https://flake8.pycqa.org/en/latest/)
 
+### Bugs and Issues
+
+- Sugar Rush currently has an issue with the Stripe payment processing, unfortunately a request for deadline extension
+  was denied therefore Sugar Rush has been submitted as is to avoid a €150 late submission fee.
+
 ---
 
 ## Credits
@@ -364,8 +368,6 @@ I have manually tested this project with the following tests:
 - [Favicon Generator.](https://favicon.io/): for providing a free platform to generate favicons.
 - [Sitemap Generator](https://www.xml-sitemaps.com/): for providing a free platform to generate sitemaps.
 - [Coolors](https://coolors.co/): for providing a free platform to generate your own palette.
-
-cloudinary
 
 ### Media
 
