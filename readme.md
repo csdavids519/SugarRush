@@ -218,8 +218,8 @@ Sugar Rush color scheme was chosen based off images of real life candy stores. T
 
 ### Wire frames
 
-  [Sugar Rush Wireframes](documentation/images/wire_diagram_1.jpg)
-  [Sugar Rush Wireframes](documentation/images/wire_diagram_2.jpg)
+- [Sugar Rush Wireframes](documentation/images/wire_diagram_1.jpg)
+- [Sugar Rush Wireframes](documentation/images/wire_diagram_2.jpg)
 
 ---
 
@@ -229,7 +229,7 @@ Sugar Rush color scheme was chosen based off images of real life candy stores. T
 
 GitHub Project Management was used to manage the project. This method keeps clear what tasks are the current most pressing to be done items.
 
- [Github Projects](https://github.com/users/csdavids519/projects/4)
+- [Github Projects](https://github.com/users/csdavids519/projects/4)
 
 ---
 
