@@ -53,7 +53,7 @@ Sugar Rush is aimed towards children without becoming off putting adults. As the
 User stories and project progress has been recorded with github
 
 view the kanban board here:
-[github projects](hhttps://github.com/users/csdavids519/projects/4/views/1)
+[Github Projects](https://github.com/users/csdavids519/projects/4)
 
 ---
 
@@ -218,8 +218,8 @@ Sugar Rush color scheme was chosen based off images of real life candy stores. T
 
 ### Wire frames
 
-  [Sugar Rush Wireframes](documentation/images/wire_diagram_1.pdf)
-  [Sugar Rush Wireframes](documentation/images/wire_diagram_2.pdf)
+  [Sugar Rush Wireframes](documentation/images/wire_diagram_1.jpg)
+  [Sugar Rush Wireframes](documentation/images/wire_diagram_2.jpg)
 
 ---
 
@@ -227,13 +227,9 @@ Sugar Rush color scheme was chosen based off images of real life candy stores. T
 
 ### GitHub Project Management
 
-  ![GitHub Project Management](documentation/agile/github_project_management.png)
-
 GitHub Project Management was used to manage the project. This method keeps clear what tasks are the current most pressing to be done items.
 
-![GitHub Project Management](documentation/agile/kanban.png)
-
-![GitHub Project Management](documentation/agile/tasks.png)
+ [Github Projects](https://github.com/users/csdavids519/projects/4)
 
 ---
 
