@@ -15,8 +15,12 @@ class Basket(models.Model):
 
 class BasketProduct(models.Model):
     """ Model for products and tracking quantity"""
-    basket = models.ForeignKey(Basket, on_delete=models.CASCADE, related_name='basket_products')
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='products_in_basket')
+    basket = models.ForeignKey(Basket,
+                               on_delete=models.CASCADE,
+                               related_name='basket_products')
+    product = models.ForeignKey(Product,
+                                on_delete=models.CASCADE,
+                                related_name='products_in_basket')
     quantity = models.PositiveIntegerField(default=1)
 
     def __str__(self):
@@ -28,7 +32,11 @@ class ShippingInfo(models.Model):
     Model to track customer shipping info
     Used to pre fill shipping forms and available to display user order history
     """
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='shipping_user', null=True, blank=True)
+    user = models.ForeignKey(User,
+                             on_delete=models.CASCADE,
+                             related_name='shipping_user',
+                             null=True,
+                             blank=True)
     full_name = models.CharField(max_length=50, null=True, blank=True)
     email = models.EmailField(max_length=254, null=True, blank=True)
     phone_number = models.CharField(max_length=20, null=True, blank=True)

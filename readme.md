@@ -1,27 +1,17 @@
-
-
-    site map: https://www.xml-sitemaps.com/
-
-    https://temp-mail.org/
-
-    cloudinary
-
-https://favicon.io/
-
 # E-commerce website
 
 ![Main image](documentation/images/header.png)
 
 ## About
 
-Candy Rush is an e-commerce website that allows customers to buy unique candy products. It utlizes a log in system that maintains the shopping basket data for each user.
-users can see new and popular candy items on the home page that might spark their interest. Once in the 'Our Candy' section of the website, the full selection of candy products is shown, users can opt to select 'quick buy' to quickly add an item to their shpping cart. Or click the product to view more details and add multiple quanities to the basket at onece.
-Once shoppers are happy with their candy selections, we have a simple checkout process, where users will be given an opertunity to make edits to the baasket and confirm, then enter their desired shipping data, this data is saved and strored for the users next perchase so the chekout process is made even more easy with auto completed shipping forms. 
-at the payment screen users can see the current basket items and their total and given a selection of payemnt options to use via Stripe. Once completed a notification is displayed as well as a conformation email is sent with the order info.
+Candy Rush is an e-commerce website that allows customers to buy unique candy products. It utilizes a log in system that maintains the shopping basket data for each user.
+users can see new and popular candy items on the home page that might spark their interest. Once in the 'Our Candy' section of the website, the full selection of candy products is shown, users can opt to select 'quick buy' to quickly add an item to their shopping cart. Or click the product to view more details and add multiple quantities to the basket at once.
+Once shoppers are happy with their candy selections, we have a simple checkout process, where users will be given an opportunity to make edits to the basket and confirm, then enter their desired shipping data, this data is saved and stored for the users next purchase so the checkout process is made even more easy with auto completed shipping forms. 
+at the payment screen users can see the current basket items and their total and given a selection of payment options to use via Stripe. Once completed a notification is displayed as well as a conformation email is sent with the order info.
 
 The live site can be found here: [Sugar Rush](https://sugar-rush-7a055e26dddb.herokuapp.com/)
 
-The github repository can be found here:[GitHub](https://github.com/csdavids519/SugarRush)
+The github repository can be found here: [GitHub](https://github.com/csdavids519/SugarRush)
 
 The project agile task list can be found here: [Github Projects](https://github.com/users/csdavids519/projects/4)
 
@@ -50,7 +40,7 @@ Steps to deploy on Heroku:
 
 ## UX
 
-The website was designed with UX in mind to create a very simple to navigate store, with fun and fun color selections resembling that of a candy store. Managers have use of the backend database where they can edit product details and other important data in a profecinal looking enviroment. 
+The website was designed with UX in mind to create a very simple to navigate store, with fun and fun color selections resembling that of a candy store. Managers have use of the back end database where they can edit product details and other important data in a professional looking environment. 
 
 ### Target Audience
 
@@ -78,7 +68,7 @@ Candy Rush is focused on a wide group of people of all types and ages, for this 
 
 ### A persona summary of the store personnel
 
-Candy Rush, although fun looking is still a serious and profeciaal compay for this reason the admin section of the web site maintains a business first style approach.
+Candy Rush, although fun looking is still a serious and professorial company for this reason the admin section of the web site maintains a business first style approach.
 
 ### Strategy Trade-Off
 
@@ -95,7 +85,6 @@ Sugar Rush creates and sells its own unique candy, offering candy products only 
 
 Facebook and other social media accounts have been created for Sugar Rush as a way to increase reach to existing and potential customers.
 
-[WoWder Facebook Page](documentation/web_marketing/wowder_facebook_mockup.pdf)
 
 ---
 
@@ -107,15 +96,15 @@ At Candy Rush as our product offerings selection grows we plan to implement a ty
 
 ### Third-party registration
 
-Allowing users to use Facebook or Google accounts to signin would improve the user experience and allow for new customers to quickly sign up.
+Allowing users to use Facebook or Google accounts to sign in would improve the user experience and allow for new customers to quickly sign up.
 
 ### Monthly basket offers
 
-This feature requires more research time to implement, as the Candy Rush store grows with the offerings we wish to impletment an option for users to subscribe to a monthly random basket of candy automatcaly shipped to their door.
+This feature requires more research time to implement, as the Candy Rush store grows with the offerings we wish to implement an option for users to subscribe to a monthly random basket of candy automatically shipped to their door.
 
 ### Delivery cost calculation
 
-A benift to our customers would be to calculate shipping cots before checkout, this feature would need to be researched before implemented and would use the already available shipping info data from the customer.
+A benefit to our customers would be to calculate shipping cots before checkout, this feature would need to be researched before implemented and would use the already available shipping info data from the customer.
 
 ---
 
@@ -123,46 +112,44 @@ A benift to our customers would be to calculate shipping cots before checkout, t
 
 - ### Languages
 
- + [Python 3.11](https://www.python.org): the primary language used to develop the server-side of the website.
-    + [JS](https://www.javascript.com/): the primary language used to develop interactive components of the website.
-    + [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML): the markup language used to create the website.
-    + [CSS](https://developer.mozilla.org/en-US/docs/Web/css): the styling language used to style the website.
+  - [Python 3.11](https://www.python.org): the primary language used to develop the server-side of the website.
+  - [JS](https://www.javascript.com/): the primary language used to develop interactive components of the website.
+  - [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML): the markup language used to create the website.
+  - [CSS](https://developer.mozilla.org/en-US/docs/Web/css): the styling language used to style the website.
 
 - ### Frameworks and libraries:
 
-    + [Django](https://www.djangoproject.com/): python framework used to create all the logic.
+  - [Django](https://www.djangoproject.com/): python framework used to create all the logic.
 
 - ### Databases:
 
-    + [SQLite](https://www.sqlite.org/): was used as a development database.
-    + [PostgreSQL](https://www.postgresql.org/): the database used to store all the data.
-
+  - [SQLite](https://www.sqlite.org/): was used as a development database.
+  - [PostgreSQL](https://www.postgresql.org/): the database used to store all the data.
 
 - ### Other tools:
 
-    + [Git](https://git-scm.com/): the version control system used to manage the code.
-    + [Pip3](https://pypi.org/project/pip/): the package manager used to install the dependencies.
-    + [Gunicorn](https://gunicorn.org/): the web server used to run the website.
-    + [Psycopg2](https://www.psycopg.org/): the database driver used to connect to the database.
-    + [Django-allauth](https://django-allauth.readthedocs.io/en/latest/): the authentication library used to create the user accounts.
-    + [Django-crispy-forms](https://django-cryptography.readthedocs.io/en/latest/): was used to control the rendering behavior of Django forms.
-    + [GitHub](https://github.com/): used to host the website's source code.
-    + [VSCode](https://code.visualstudio.com/): the IDE used to develop the website.
-    + [Chrome DevTools](https://developer.chrome.com/docs/devtools/open/): was used to debug the website.
-    + [Font Awesome](https://fontawesome.com/): was used to create the icons used in the website.
-    + [Coolors](https://coolors.co/202a3c-1c2431-181f2a-0b1523-65e2d9-925cef-6b28e0-ffffff-eeeeee) was used to make a color palette for the website.
-    + [W3C Validator](https://validator.w3.org/): was used to validate HTML5 code for the website.
-    + [W3C CSS validator](https://jigsaw.w3.org/css-validator/): was used to validate CSS code for the website.
-    + [JShint](https://jshint.com/): was used to validate JS code for the website.
-    + [PEP8](https://pep8.org/): was used to validate Python code for the website.
-    + [stripe](https://stripe.com/): was used to create the payment system.
-    + [Sitemap Generator](https://www.xml-sitemaps.com/) was used to create the sitemap.xml file.
+  - [Git](https://git-scm.com/): the version control system used to manage the code.
+  - [Pip3](https://pypi.org/project/pip/): the package manager used to install the dependencies.
+  - [Gunicorn](https://gunicorn.org/): the web server used to run the website.
+  - [Psycopg2](https://www.psycopg.org/): the database driver used to connect to the database.
+  - [Django-allauth](https://django-allauth.readthedocs.io/en/latest/): the authentication library used to create the user accounts.
+  - [Django-crispy-forms](https://django-cryptography.readthedocs.io/en/latest/): was used to control the rendering behavior of Django forms.
+  - [GitHub](https://github.com/): used to host the website's source code.
+  - [VSCode](https://code.visualstudio.com/): the IDE used to develop the website.
+  - [Chrome DevTools](https://developer.chrome.com/docs/devtools/open/): was used to debug the website.
+  - [Font Awesome](https://fontawesome.com/): was used to create the icons used in the website.
+  - [Coolors](https://coolors.co/202a3c-1c2431-181f2a-0b1523-65e2d9-925cef-6b28e0-ffffff-eeeeee) was used to make a color palette for the website.
+  - [W3C Validator](https://validator.w3.org/): was used to validate HTML5 code for the website.
+  - [W3C CSS validator](https://jigsaw.w3.org/css-validator/): was used to validate CSS code for the website.
+  - [JShint](https://jshint.com/): was used to validate JS code for the website.
+  - [PEP8](https://pep8.org/): was used to validate Python code for the website.
+  - [stripe](https://stripe.com/): was used to create the payment system.
+  - [Sitemap Generator](https://www.xml-sitemaps.com/) was used to create the sitemap.xml file.
+  - [Cloudinary](https://cloudinary.com/) was used to serve the images.
+  - [temp-mail](https://temp-mail.org/) Was used to assist with testing email functions.
+  - [ERD](https://www.xml-sitemaps.com/) Was used to create the site map.
+  - [Table Generator](https://www.tablesgenerator.com/markdown_tables) Was used to create tables for the readme file.
 
-         + [ERD](https://www.xml-sitemaps.com/) 
-  https://www.tablesgenerator.com/markdown_tables
-
-
-cloudinary
 ---
 
 ## Features
@@ -172,34 +159,32 @@ cloudinary
 
 ### First Time Customers
 
+### User Login / New User Sign up
 
-
-### User Login / New User Signup
-
-- For first time customers, a signup page is available to create a new account that automaticaly creates a basket and order tracking in the backend for the user.
+- For first time customers, a sign up page is available to create a new account that automatically creates a basket and order tracking in the back end for the user.
 - Conformation emails are sent to ensure the new users have access to the email account.
-- Current logged in status aswell as current basket cost total is visible at all times in the top right corner of the site.
+- Current logged in status as well as current basket cost total is visible at all times in the top right corner of the site.
 
 ### Products
 
 - The 'Our Candy' navigation button links the user to the full list of candy products on offer.
 - Users have the option to select 'quick buy' to quickly add the single item to the basket.
-- Product Detail page is found buy clicking a product, this links the user to a more detailed description of the product and allows for adding mutiple quanties to the basket.
+- Product Detail page is found buy clicking a product, this links the user to a more detailed description of the product and allows for adding multiple quantities to the basket.
 
 ### Basket
 
 - User shopping is tracked via the 'basket' page, where users can see what they have currently collected for purchase.
-- Basket is the start of the payment checkout process and alllows users to edit quanties or fully remove items before commiting to the purchase.
+- Basket is the start of the payment checkout process and allows users to edit quantities or fully remove items before committing to the purchase.
 
 ### Shipping Info
 
-- The shipping info page is the second step in the chekout process
+- The shipping info page is the second step in the checkout process
 - Users are asked for their desired shipping information
-- The process is made easier for returning users as their previous shipping details will be automatically pre loaded in the shipping form.
+- The process is made easier for returning users as their previous shipping details will be automatically pre-loaded in the shipping form.
 
 ### Payment
 
-- On the payment page users are once again able to view thir current basket contents and order total
+- On the payment page users are once again able to view their current basket contents and order total
 - Using the Stripe payment system users are then able to enter payment details and complete the purchase
 
 ### Success
@@ -211,28 +196,28 @@ cloudinary
 
 ## Design
 
-Candy Rush uses a minimalistic but fun approach to design. This helps keep the 'fun' candy store feeling but does not allow the design to interfer with a smooth and easy shopping process.
+Candy Rush uses a minimalistic but fun approach to design. This helps keep the 'fun' candy store feeling but does not allow the design to interfere with a smooth and easy shopping process.
 
 ### Color Scheme
 
-Sugar Rush color scheme was chosen based off images of real life candy stores. This color scheme creates a fun and playful enviroment that should be expected when buying a fun treat.
+Sugar Rush color scheme was chosen based off images of real life candy stores. This color scheme creates a fun and playful environment that should be expected when buying a fun treat.
 
   ![Color Scheme](documentation/images/coolors_pallet.png)
 
 ### Imagery
 
-- all images on Candy Rush have been develeoped with the help of  OPEN ART
-- images chosen for the main page background are to convey the message of happy children with candy to mathch the theam of the candy store.
+- all images on Candy Rush have been developed with the help of  OPEN ART
+- images chosen for the main page background are to convey the message of happy children with candy to match the theme of the candy store.
 
   ![Background 1](documentation/images/kid_xl.jpg)
   ![Background 2](documentation/images/candy_girl_xl.jpg)
 
-- all images of the candy have also been develeoped with OPEN ART  to depict a unique container of candy. 
+- all images of the candy have also been developed with OPEN ART  to depict a unique container of candy.
 
   ![Candy 1](documentation/images/candy_1.jpg)
   ![candy 3](documentation/images/candy_3.jpg)
 
-### Wireframes
+### Wire frames
 
   [Sugar Rush Wireframes](documentation/images/wire_diagram_1.pdf)
   [Sugar Rush Wireframes](documentation/images/wire_diagram_2.pdf)

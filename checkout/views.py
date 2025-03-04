@@ -86,16 +86,15 @@ def success(request):
     A view to render the success page and call order placed signal
     Sends an email to customer that purchase was completed
     """
-    print(f"Session Key SUC: {request.session.session_key}")
 
     user = request.user
-    print(f'SUCCESS USER: {user}')
     shipping_info = ShippingInfo.objects.last()
-    order_placed_signal.send(sender=None, user=user, shipping_info_id=shipping_info.id)
-    
+    order_placed_signal.send(
+        sender=None, user=user, shipping_info_id=shipping_info.id)
+
     user = request.user
     messages.success(request, f"Email is on the way! {user}")
-    
+
     basket = Basket.objects.filter(user=request.user).last()
     total_price = basket.basket_products.aggregate(
         total=Sum(F('product__price') * F('quantity'))
@@ -104,31 +103,35 @@ def success(request):
     basket_items = basket.basket_products.all()
 
     purchase_details = {
-        'user_name': user, 
-        'basket_items' : basket_items,
-        'total': total_price, 
+        'user_name': user,
+        'basket_items': basket_items,
+        'total': total_price,
     }
     subject = 'SugarRush - Purchase Confirmation'
-    
-    html_message = render_to_string('emails/purchase_confirmation.html', {'purchase_details': purchase_details})
+
+    html_message = render_to_string(
+        'emails/purchase_confirmation.html',
+        {'purchase_details': purchase_details}
+        )
     plain_message = strip_tags(html_message)
-    
+
     send_mail(
         subject,
         plain_message,
         settings.DEFAULT_FROM_EMAIL,
         [user.email],
-        html_message=html_message,  
+        html_message=html_message,
         )
 
-    messages.success(request, 'Thanks for your purchase, your candy is on the way!')
-    
+    messages.success(request,
+                     'Thanks for your purchase, your candy is on the way!')
+
     return render(request, 'success.html')
 
 
 def add_to_basket(request, item_id):
-    """ 
-    A view to add current product to the basket list 
+    """
+    A view to add current product to the basket list
     -  find the users basket
     - check for existing matching products or create new
     - update total basket cost
@@ -142,12 +145,18 @@ def add_to_basket(request, item_id):
         basket = Basket.objects.create(user=request.user)
 
     try:
-        basket_product = BasketProduct.objects.get(basket=basket, product=product)
+        basket_product = BasketProduct.objects.get(
+            basket=basket,
+            product=product
+            )
         basket_product.quantity += quantity
         basket_product.save()
 
     except BasketProduct.DoesNotExist:
-        basket_product, created = BasketProduct.objects.get_or_create(basket=basket, product=product)
+        basket_product, created = BasketProduct.objects.get_or_create(
+                                        basket=basket,
+                                        product=product
+                                        )
         basket_product.quantity += quantity-1
         basket_product.save()
 
