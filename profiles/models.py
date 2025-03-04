@@ -20,15 +20,19 @@ class Customer(models.Model):
 
 
 class Orders(models.Model):
-    """ Model to collect ordered products and attach associated shipping data"""
+    """Model to collect ordered products and attach associated shipping data"""
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-         related_name='order_user',
-         null=True,
-         blank=True)
-    basket_order = models.ForeignKey(Basket, on_delete=models.SET_NULL,
-                                    null=True, blank=True)
-    shipping_order = models.ForeignKey(ShippingInfo, on_delete=models.SET_NULL,
-                                    null=True, blank=True)
+        related_name='order_user',
+        null=True,
+        blank=True)
+    basket_order = models.ForeignKey(Basket,
+                                     on_delete=models.SET_NULL,
+                                     null=True,
+                                     blank=True)
+    shipping_order = models.ForeignKey(ShippingInfo,
+                                       on_delete=models.SET_NULL,
+                                       null=True,
+                                       blank=True)
     date = models.DateTimeField(default=timezone.now)

@@ -86,7 +86,6 @@ def success(request):
     A view to render the success page and call order placed signal
     Sends an email to customer that purchase was completed
     """
-
     user = request.user
     shipping_info = ShippingInfo.objects.last()
     order_placed_signal.send(
@@ -189,7 +188,7 @@ def remove_from_basket(request, basket_product_id):
     basket_list.delete()
 
     messages.success(request, 'Basket updated!')
-    
+
     redirect_url = request.POST.get('redirect_url', '/')
     return redirect(redirect_url)
 
@@ -210,7 +209,7 @@ def create_checkout_session(request):
         YOUR_DOMAIN = 'http://localhost:8000/checkout/'
         try:
             session = stripe.checkout.Session.create(
-                ui_mode = 'embedded',
+                ui_mode='embedded',
                 line_items=[{
                     'price_data': {
                         'currency': 'eur',
@@ -238,6 +237,10 @@ def session_status(request):
         session = stripe.checkout.Session.retrieve(session_id)
         return JsonResponse({
             "status": session.status,
-            "customer_email": session.customer_details.email if session.customer_details else None
+            "customer_email": (
+                session.customer_details.email
+                if session.customer_details
+                else None
+            )
         })
     return JsonResponse({"error": "Session ID required"}, status=400)

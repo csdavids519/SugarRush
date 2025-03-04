@@ -22,8 +22,16 @@ class Product(models.Model):
     image = CloudinaryField('image', null=True, blank=True) 
     price = models.DecimalField(max_digits=6, decimal_places=2, null=False)
     description = models.TextField(null=True, blank=True)
-    flavor = models.CharField(max_length=254,blank=True, null=True, choices=FLAVOR)
-    type = models.CharField(max_length=254,blank=True, null=True, choices=TYPE)
+    flavor = models.CharField(max_length=254,
+                              blank=True,
+                              null=True,
+                              choices=FLAVOR
+                              )
+    type = models.CharField(max_length=254,
+                            blank=True,
+                            null=True,
+                            choices=TYPE
+                            )
 
     def __str__(self):
         return str(self.product_id)
