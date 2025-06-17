@@ -38,6 +38,28 @@ Steps to deploy on Heroku:
 5. Choose a branch to deploy
 6. Deploy project
 
+
+
+### Local Deployment
+*Install Python development requirements on the local system*
+sudo apt install python3 python3-venv python3-pip python3-dev libpq-dev
+
+
+*Create the virtual enviroment*
+python3 -m venv .venv
+source .venv/bin/activate
+
+
+*Install project requiremnts*
+pip install -r requirements.txt
+
+
+*Run Django migrations*
+python manage.py migrate
+
+
+
+
 ## UX
 
 The website was designed with UX in mind to create a very simple to navigate store, with fun and fun color selections resembling that of a candy store. Managers have use of the back end database where they can edit product details and other important data in a professional looking environment.
