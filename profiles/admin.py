@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Customer, Orders
+from .models import Customer, Order
 
 
 @admin.register(Customer)
@@ -12,7 +12,7 @@ class BasketAdmin(admin.ModelAdmin):
     ordering = ['id']
 
 
-@admin.register(Orders)
+@admin.register(Order)
 class OrdersAdmin(admin.ModelAdmin):
     list_display = ['id',
                     'user',

@@ -19,7 +19,7 @@ class Customer(models.Model):
         return f"Customer {self.user}"
 
 
-class Orders(models.Model):
+class Order(models.Model):
     """Model to collect ordered products and attach associated shipping data"""
     user = models.ForeignKey(
         User,

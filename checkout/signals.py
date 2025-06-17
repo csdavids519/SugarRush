@@ -1,7 +1,7 @@
 from django.dispatch import receiver, Signal
 from django.contrib.auth.models import User
 from .models import Basket, ShippingInfo
-from profiles.models import Customer, Orders
+from profiles.models import Customer, Order
 from django.contrib.auth.models import User
 
 basket_cleared_signal = Signal()
@@ -35,7 +35,7 @@ def create_order_and_new_basket(sender, user, shipping_info_id, **kwargs):
     if basket:
         shipping_info = ShippingInfo.objects.get(id=shipping_info_id)
 
-        order = Orders.objects.create(
+        order = Order.objects.create(
             user=user,
             basket_order=basket,
             shipping_order=shipping_info
