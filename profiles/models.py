@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from checkout.models import Basket, ShippingInfo
+from products.models import Product
 from django.utils import timezone
 
 
@@ -36,3 +37,16 @@ class Order(models.Model):
                                        null=True,
                                        blank=True)
     date = models.DateTimeField(default=timezone.now)
+
+
+class Review(models.Model):
+    """Model to collect user store and product reviews"""
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True, blank=True)
+    comments = models.TextField()
+    rating = models.PositiveBigIntegerField()
+    created = models.DateTimeField(auto_now=True)
+    updated = models.DateTimeField(auto_now=True)
+    
+    def __str__(self):
+        return f"Review by {self.user}"
