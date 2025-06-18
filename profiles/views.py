@@ -21,7 +21,7 @@ def order_history(request):
 
 def review_list(request):
     """ view to create list of current user reviews """
-    reviews = Review.objects.all()
+    reviews = Review.objects.filter(user=request.user)
     return render(request, 'review_list.html', {'reviews': reviews})
 
 

@@ -70,7 +70,7 @@ SITE_ID = 1
 
 ACCOUNT_LOGIN_METHODS = {'email', 'username'}
 ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = "mandatory" #if not DEBUG else "none"
+ACCOUNT_EMAIL_VERIFICATION = "mandatory" if not DEBUG else "none"
 ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
 ACCOUNT_USERNAME_MIN_LENGTH = 4
 LOGIN_URL = '/accounts/login/'
