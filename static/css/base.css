@@ -35,13 +35,26 @@ body {
     background-color: #CFBAF0;
 }
 
+.review-list {
+    background-color: #bec0c2ab;
+    border: 1px solid #000000;
+    list-style-type: none;
+    padding: 0.75rem 1.25rem;
+    font-size: 1rem;
+    color: #212529;
+    border-radius: 0.75rem;
+    margin-bottom: 0.5rem;
+    transition: background-color 0.2s ease-in-out;
+}
+
+
 .hidden-small {
     display: none;
-}        
+}
 
 .hidden-large {
     display: block;
-}        
+}
 
 .payment-style {
     margin-top: 5rem;
@@ -51,14 +64,13 @@ body {
     margin-top: 5rem;
 }
 
-/* medium screens  and up */
-@media (min-width: 800px) {
 
-}
+/* medium screens  and up */
+@media (min-width: 800px) {}
 
 
 /* Large screens (lg) and up */
-@media (min-width: 992px) { 
+@media (min-width: 992px) {
     #topheader {
         min-height: 50px;
     }
@@ -69,11 +81,11 @@ body {
 
     .hidden-small {
         display: block;
-    }        
+    }
 
     .hidden-large {
-            display: none;
-        }        
+        display: none;
+    }
 
     .payment-style {
         margin-top: 25vh;
