@@ -53,4 +53,4 @@ def review_delete(request, pk):
     if request.method == 'POST':
         review.delete()
         return redirect('profiles:review_list')
-    return render(request, 'review_confirm_delete.html', {'review': review})
+    return render(request, 'profiles:review_list', {'review': review})
