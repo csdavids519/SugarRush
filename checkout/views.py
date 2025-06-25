@@ -10,15 +10,13 @@ from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from checkout.models import Basket, BasketProduct
 from products.models import Product
+from .forms import OrderForm
 
 from .models import ShippingInfo
-from .forms import ShippingForm
 from .signals import order_placed_signal
 
 from checkout.contexts import update_basket_total
 import stripe
-
-stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 def checkout(request):
@@ -36,49 +34,49 @@ def checkout(request):
     return render(request, 'checkout.html', {'basket_results': basket})
 
 
-def shipping_info(request):
-    """ A view to return the shipping form page """
-    if request.user.is_authenticated:
-        shipping_data = ShippingInfo.objects.filter(user=request.user).last()
-        if shipping_data:
-            shipping_form = ShippingForm(initial={
-                'full_name': shipping_data.full_name,
-                'email': shipping_data.email,
-                'phone_number': shipping_data.phone_number,
-                'country': shipping_data.country,
-                'postcode': shipping_data.postcode,
-                'town_or_city': shipping_data.town_or_city,
-                'street_address1': shipping_data.street_address1,
-                'street_address2': shipping_data.street_address2,
-                'state': shipping_data.state,
-            })
-        else:
-            shipping_form = ShippingForm()
-    else:
-        shipping_form = ShippingForm()
+# def shipping_info(request):
+#     """ A view to return the shipping form page """
+#     if request.user.is_authenticated:
+#         shipping_data = ShippingInfo.objects.filter(user=request.user).last()
+#         if shipping_data:
+#             shipping_form = ShippingForm(initial={
+#                 'full_name': shipping_data.full_name,
+#                 'email': shipping_data.email,
+#                 'phone_number': shipping_data.phone_number,
+#                 'country': shipping_data.country,
+#                 'postcode': shipping_data.postcode,
+#                 'town_or_city': shipping_data.town_or_city,
+#                 'street_address1': shipping_data.street_address1,
+#                 'street_address2': shipping_data.street_address2,
+#                 'state': shipping_data.state,
+#             })
+#         else:
+#             shipping_form = ShippingForm()
+#     else:
+#         shipping_form = ShippingForm()
 
-    return render(request, 'shipping.html', {'shipping_form': shipping_form})
+#     return render(request, 'shipping.html', {'shipping_form': shipping_form})
 
 
 def payment(request):
     """ A view to return the Stripe payment page """
-    print(f"Session Key PAYMENT: {request.session.session_key}")
 
     try:
         basket = Basket.objects.filter(user=request.user).last()
     except Basket.DoesNotExist:
         basket = Basket.objects.create(user=request.user)
         return render(request, 'payment.html', {'order_results': None})
+            
+    order_form = OrderForm()
+    context = {
+        'order_results': basket,
+        'order_form': order_form,
+        'stripe_public_key': 'pk_test_51QsjeH02ahKmoBWWiupTVTSOypH3073b25gWzF4vB0vk9SIvAWpCFPVkE5Dp5P2R6eNmvBRevBxR07Xzyv1QHV6s00IWGTX1Cx',
+        'client_secret': 'test client secret',
+    }
 
-    if request.method == "POST":
-        shipping_form = ShippingForm(request.POST)
-        if shipping_form.is_valid():
-            shipping_info = shipping_form.save(commit=False)
-            shipping_info.user = request.user
-            shipping_info.save()
-            print(f"Session Key POST: {request.session.session_key}")
-
-    return render(request, 'payment.html', {'order_results': basket})
+    print(f'PAYMENT: {context}')
+    return render(request, 'payment.html', context)
 
 
 def success(request):
@@ -193,54 +191,24 @@ def remove_from_basket(request, basket_product_id):
     return redirect(redirect_url)
 
 
-@csrf_exempt
 def create_checkout_session(request):
     """
     Create Stripe checkout session 
-    Ref: Stripe documentation
+    Ref: Boutique ado
     """
-    basket = Basket.objects.filter(user=request.user).last()
-    total_price = basket.basket_products.aggregate(
-        total=Sum(F('product__price') * F('quantity'))
-    )['total']
-    print(f'total_price: {total_price}')
 
-    if request.method == "POST":
-        YOUR_DOMAIN = 'http://localhost:8000/checkout/'
-        try:
-            session = stripe.checkout.Session.create(
-                ui_mode='embedded',
-                line_items=[{
-                    'price_data': {
-                        'currency': 'eur',
-                        'product_data': {
-                            'name': f'Basket for {basket.user}',
-                        },
-                        'unit_amount': int(total_price*100)
-                    },
-                    'quantity': 1,
-                }],
-                mode='payment',
-                return_url=YOUR_DOMAIN + 'success/',
-            )
-            return JsonResponse({"clientSecret": session.client_secret})
-        except Exception as e:
-            return JsonResponse({"error": str(e)}, status=400)
+    bag = request.session.get('bag', {})
+    if not bag:
+        messages.error(request, "There's nothing in your bag at the moment")
+        return redirect(reverse('products'))
 
-    return JsonResponse({"error": "Invalid request"}, status=400)
+    order_form = OrderForm()
+    template = 'checkout/checkout.html'
+    context = {
+        'order_form': order_form,
+        'stripe_public_key': 'pk_test_51QsjeH02ahKmoBWWiupTVTSOypH3073b25gWzF4vB0vk9SIvAWpCFPVkE5Dp5P2R6eNmvBRevBxR07Xzyv1QHV6s00IWGTX1Cx',
+        'client_secret': 'test client se3cret',
+    }
 
+    return render(request, template, context)
 
-def session_status(request):
-    """ A view to manage session status from Stripe"""
-    session_id = request.GET.get("session_id")
-    if session_id:
-        session = stripe.checkout.Session.retrieve(session_id)
-        return JsonResponse({
-            "status": session.status,
-            "customer_email": (
-                session.customer_details.email
-                if session.customer_details
-                else None
-            )
-        })
-    return JsonResponse({"error": "Session ID required"}, status=400)
