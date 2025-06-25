@@ -8,7 +8,7 @@ urlpatterns = [
     path('add/<item_id>/', views.add_to_basket, name='add_to_basket'),
     path('payment/', views.payment, name='payment'),
     path('success/', views.success, name='success'),
-    path('shipping/', views.shipping_info, name='shipping_info'),
+#     path('shipping/', views.shipping_info, name='shipping_info'),
     path('basket/update/<int:basket_product_id>/',
          views.update_basket,
          name='update_basket'),
@@ -18,5 +18,4 @@ urlpatterns = [
     path('create-checkout-session/',
          views.create_checkout_session,
          name='create_checkout_session'),
-    path('session-status/', views.session_status, name='session_status'),
 ]
