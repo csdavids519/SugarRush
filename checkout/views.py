@@ -207,24 +207,24 @@ def remove_from_basket(request, basket_product_id):
     return redirect(redirect_url)
 
 
-def create_checkout_session(request):
-    """
-    Create Stripe checkout session 
-    Ref: Boutique ado
-    """
+# def create_checkout_session(request):
+#     """
+#     Create Stripe checkout session 
+#     Ref: Boutique ado
+#     """
 
-    bag = request.session.get('bag', {})
-    if not bag:
-        messages.error(request, "There's nothing in your bag at the moment")
-        return redirect(reverse('products'))
+#     bag = request.session.get('bag', {})
+#     if not bag:
+#         messages.error(request, "There's nothing in your bag at the moment")
+#         return redirect(reverse('products'))
 
-    order_form = OrderForm()
-    template = 'checkout/checkout.html'
-    context = {
-        'order_form': order_form,
-        'stripe_public_key': 'pk_test_51QsjeH02ahKmoBWWiupTVTSOypH3073b25gWzF4vB0vk9SIvAWpCFPVkE5Dp5P2R6eNmvBRevBxR07Xzyv1QHV6s00IWGTX1Cx',
-        'client_secret': 'test client se3cret',
-    }
+#     order_form = OrderForm()
+#     template = 'checkout/checkout.html'
+#     context = {
+#         'order_form': order_form,
+#         'stripe_public_key': 'pk_test_51QsjeH02ahKmoBWWiupTVTSOypH3073b25gWzF4vB0vk9SIvAWpCFPVkE5Dp5P2R6eNmvBRevBxR07Xzyv1QHV6s00IWGTX1Cx',
+#         'client_secret': 'test client se3cret',
+#     }
 
-    return render(request, template, context)
+#     return render(request, template, context)
 

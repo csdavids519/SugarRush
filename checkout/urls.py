@@ -15,7 +15,7 @@ urlpatterns = [
     path('basket/remove/<int:basket_product_id>/',
          views.remove_from_basket,
          name='remove_from_basket'),
-    path('create-checkout-session/',
-         views.create_checkout_session,
-         name='create_checkout_session'),
+#     path('create-checkout-session/',
+#          views.create_checkout_session,
+#          name='create_checkout_session'),
 ]
