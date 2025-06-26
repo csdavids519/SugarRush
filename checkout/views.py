@@ -60,6 +60,8 @@ def checkout(request):
 
 def payment(request):
     """ A view to return the Stripe payment page """
+    stripe_public_key = settings.STRIPE_PUBLIC_KEY
+    stripe_secret_key = settings.STRIPE_SECRET_KEY
 
     try:
         basket = Basket.objects.filter(user=request.user).last()
@@ -67,15 +69,29 @@ def payment(request):
         basket = Basket.objects.create(user=request.user)
         return render(request, 'payment.html', {'order_results': None})
             
+    total_price = basket.basket_products.aggregate(
+        total=Sum(F('product__price') * F('quantity'))
+    )['total']
+    stripe_total = round(total_price * 100)
+    stripe.api_key = stripe_secret_key
+    intent = stripe.PaymentIntent.create(
+        amount=stripe_total,
+        currency=settings.STRIPE_CURRENCY,
+    )
+    
+    
     order_form = OrderForm()
+    if not stripe_public_key:
+        messages.warning(request, 'Stripe public key is missing. \
+            Did you forget to set it in your environment?')
+
     context = {
         'order_results': basket,
         'order_form': order_form,
-        'stripe_public_key': 'pk_test_51QsjeH02ahKmoBWWiupTVTSOypH3073b25gWzF4vB0vk9SIvAWpCFPVkE5Dp5P2R6eNmvBRevBxR07Xzyv1QHV6s00IWGTX1Cx',
-        'client_secret': 'test client secret',
+        'stripe_public_key': stripe_public_key,
+        'client_secret': intent.client_secret,
     }
 
-    print(f'PAYMENT: {context}')
     return render(request, 'payment.html', context)
 
 
