@@ -9,6 +9,17 @@ class ReviewForm(forms.ModelForm):
         model = Review
         fields = ['product', 'comments', 'rating']
         
+    def clean_rating(self):
+        rating = self.cleaned_data.get('rating')
+        if rating < 1 or rating > 5:
+            raise forms.ValidationError("Rating must be between 1 and 5.")
+        return rating
+        
+        
+# TBD ADD NOTICE TO USER ABOUT RATING FILTER LIMIT
+        
+        
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['product'].label_from_instance = lambda obj: obj.name
+

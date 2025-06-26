@@ -36,17 +36,15 @@ body {
 }
 
 .review-list {
-    background-color: #bec0c2ab;
+    background-color: #FFCFD2;
     border: 1px solid #000000;
     list-style-type: none;
     padding: 0.75rem 1.25rem;
     font-size: 1rem;
-    color: #212529;
-    border-radius: 0.75rem;
+    color: #000000;
+    border-radius: 1rem;
     margin-bottom: 0.5rem;
-    transition: background-color 0.2s ease-in-out;
 }
-
 
 .hidden-small {
     display: none;
