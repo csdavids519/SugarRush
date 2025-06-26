@@ -20,7 +20,7 @@
         <p class="card-text">Flavor: {{ product.flavor }}</p>
         <p class="card-text">Type: {{ product.type }}</p>
         <p class="text-start font-weight-bold m-0 fs-4 ">${{ product.price }}</p>
-        </div>
+      </div>
       <form
         class="form"
         action="{% url 'checkout:add_to_basket' product.id %}"
@@ -45,7 +45,7 @@
                 {% if user.is_authenticated %}
                 <div class="input-group-append">
                   <button
-                    class="increment-qty btn btn-black rounded-0 increment-qty_{{ product.id }}"
+                    class="increment-qty btn btn-black btn btn-outline-dark btn-1 m-3"
                     data-item_id="{{ product.id }}">
                     <i class="fas fa-plus"></i> Add to Basket
                   </button>

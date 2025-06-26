@@ -24,14 +24,19 @@ def checkout(request):
     A view to render the checkout basket edit page with basket data
     """
     basket = None
+    has_items = False
+        
     if request.user.is_authenticated:
         try:
             basket = Basket.objects.filter(user=request.user).last()
         except Basket.DoesNotExist:
             basket = Basket.objects.create(user=request.user)
-            return render(request, 'checkout.html', {'basket_results': None})
+            return render(request, 'checkout.html', {'basket_results': None, 'has_items': False})
+        
+        if basket and basket.basket_products.exists():
+            has_items = True
 
-    return render(request, 'checkout.html', {'basket_results': basket})
+    return render(request, 'checkout.html', {'basket_results': basket, 'has_items': has_items})
 
 
 # def shipping_info(request):

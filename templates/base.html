@@ -100,6 +100,23 @@
     {% include 'includes/main-footer.html' %}
   </footer>
 
+  <!-- Toast messages JS-->
+  <div>
+    {% if messages %}
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        {% for message in messages %}
+        var toastElement = document.getElementById('toastMessage');
+        if (toastElement) {
+          toastElement.querySelector('.toast-body').innerText = "{{ message }}";
+          var toast = new bootstrap.Toast(toastElement);
+          toast.show();
+        }
+        {% endfor %}
+      });
+    </script>
+    {% endif %}
+  </div>
 
 </body>
 

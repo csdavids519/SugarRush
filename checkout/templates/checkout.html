@@ -7,14 +7,13 @@
   <nav class='hidden-small' style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item text-dark" aria-current="page" style='text-decoration: underline;'>Edit Basket</li>
-      <li class="breadcrumb-item text-secondary" aria-current="page" >Shipping Details</li>
       <li class="breadcrumb-item text-secondary" aria-current="page" >Review and Payment</li>
     </ol>
   </nav>
   {% comment %} basket list  {% endcomment %}
   <div class="container rounded-4" style='margin-top: 5rem;'>
-    {% if not basket_results %}
-      <p>Nothing here, keep shopping!</p>
+    {% if not has_items %}
+      <p class="text-center fw-bold fs-4">Nothing here, keep shopping!</p>
     {% else %}
     {% for i in basket_results.basket_products.all %}
     {% comment %} product rows  {% endcomment %}
@@ -30,7 +29,7 @@
       <div class="col m-1 col-lg-4 text-start">
         <p class='fs-4'>{{ i.product.name }}</p>
         <p class='fs-6'>${{ i.product.price }} (x{{ i.quantity }})</p>
-        <p class='fs-6'>Total: $ {% widthratio i.quantity 1 i.product.price %}</p>
+        <p class='fs-6'>Total: ${{ grand_total|floatformat:2 }}</p>
       </div>  
       {% comment %} qty edits  {% endcomment %}
       <div class="col g-3 m-1 col-lg-2 d-flex align-items-center">
