@@ -61,14 +61,12 @@ def checkout(request):
 
 #     return render(request, 'shipping.html', {'shipping_form': shipping_form})
 
-
 def payment(request):
     """ A view to return the Stripe payment page """
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
     
     if request.method == 'POST':
-
         form_data = {
             'full_name': request.POST['full_name'],
             'email': request.POST['email'],
@@ -87,8 +85,12 @@ def payment(request):
             order.basket_order = Basket.objects.filter(user=request.user).last()
             order.save()
 
-    # Store shipping info in session
-    request.session['shipping_data'] = order_form.cleaned_data
+            # Save shipping data into session
+            request.session['shipping_data'] = order_form.cleaned_data
+        else:
+            messages.error(request, "Invalid form data. Please try again.")
+    else:
+        order_form = OrderForm()
 
     try:
         basket = Basket.objects.filter(user=request.user).last()
@@ -105,11 +107,6 @@ def payment(request):
         amount=stripe_total,
         currency=settings.STRIPE_CURRENCY,
     )
-
-    order_form = OrderForm()
-    if not stripe_public_key:
-        messages.warning(request, 'Stripe public key is missing. \
-            Did you forget to set it in your environment?')
 
     context = {
         'order_results': basket,
