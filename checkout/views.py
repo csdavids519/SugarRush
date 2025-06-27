@@ -67,13 +67,33 @@ def payment(request):
     """ A view to return the Stripe payment page """
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
+    
+    if request.method == 'POST':
+
+        form_data = {
+            'full_name': request.POST['full_name'],
+            'email': request.POST['email'],
+            'phone_number': request.POST['phone_number'],
+            'country': request.POST['country'],
+            'postcode': request.POST['postcode'],
+            'town_or_city': request.POST['town_or_city'],
+            'street_address1': request.POST['street_address1'],
+            'street_address2': request.POST['street_address2'],
+            'county': request.POST['county'],
+        }
+        order_form = OrderForm(form_data)
+        if order_form.is_valid():
+            order = order_form.save(commit=False)
+            pid = request.POST.get('client_secret').split('_secret')[0]
+            order.stripe_pid = pid
+            order.save()
 
     try:
         basket = Basket.objects.filter(user=request.user).last()
     except Basket.DoesNotExist:
         basket = Basket.objects.create(user=request.user)
         return render(request, 'payment.html', {'order_results': None})
-            
+
     total_price = basket.basket_products.aggregate(
         total=Sum(F('product__price') * F('quantity'))
     )['total']
@@ -83,7 +103,7 @@ def payment(request):
         amount=stripe_total,
         currency=settings.STRIPE_CURRENCY,
     )
-    
+
     order_form = OrderForm()
     if not stripe_public_key:
         messages.warning(request, 'Stripe public key is missing. \
@@ -107,7 +127,7 @@ def success(request):
     user = request.user
     shipping_info = ShippingInfo.objects.last()
     order_placed_signal.send(
-        sender=None, user=user, shipping_info_id=shipping_info.id)
+        sender=None, user=user)
 
     user = request.user
     messages.success(request, f"Email is on the way! {user}")
