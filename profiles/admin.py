@@ -17,14 +17,12 @@ class OrdersAdmin(admin.ModelAdmin):
     list_display = ['id',
                     'user',
                     'basket_order',
-                    'shipping_order',
                     'get_products',
                     'date'
                     ]
     readonly_fields = ['id',
                        'user',
                        'basket_order',
-                       'shipping_order',
                        'get_products',
                        'date'
                        ]

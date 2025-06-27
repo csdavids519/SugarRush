@@ -1,6 +1,6 @@
 from django.dispatch import receiver, Signal
 from django.contrib.auth.models import User
-from .models import Basket, ShippingInfo
+from .models import Basket
 from profiles.models import Customer, Order
 from django.contrib.auth.models import User
 
@@ -26,18 +26,26 @@ order_placed_signal = Signal()
 
 
 @receiver(order_placed_signal)
-def create_order_and_new_basket(sender, user, shipping_info_id, **kwargs):
+def create_order_and_new_basket(sender, user, shipping_data, **kwargs):
     """
     Signal to combine ordered products and shipping info
     creates a new basket for customers next order maintaining previous history
     """
     basket = Basket.objects.filter(user=user).last()
-    if basket:
-        shipping_info = ShippingInfo.objects.get(id=shipping_info_id)
+    if not basket:
+        return
 
-        order = Order.objects.create(
-            user=user,
-            basket_order=basket,
-            shipping_order=shipping_info
-        )
-        new_basket = Basket.objects.create(user=user)
+    Order.objects.create(
+        user=user,
+        basket_order=basket,
+        full_name=shipping_data.get('full_name'),
+        email=shipping_data.get('email'),
+        phone_number=shipping_data.get('phone_number'),
+        street_address1=shipping_data.get('street_address1'),
+        street_address2=shipping_data.get('street_address2'),
+        town_or_city=shipping_data.get('town_or_city'),
+        postcode=shipping_data.get('postcode'),
+        country=shipping_data.get('country'),
+    )
+
+    Basket.objects.create(user=user)

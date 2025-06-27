@@ -12,7 +12,6 @@ from checkout.models import Basket, BasketProduct
 from products.models import Product
 from .forms import OrderForm
 
-from .models import ShippingInfo
 from .signals import order_placed_signal
 
 from checkout.contexts import update_basket_total
@@ -84,9 +83,12 @@ def payment(request):
         order_form = OrderForm(form_data)
         if order_form.is_valid():
             order = order_form.save(commit=False)
-            pid = request.POST.get('client_secret').split('_secret')[0]
-            order.stripe_pid = pid
+            order.user = request.user
+            order.basket_order = Basket.objects.filter(user=request.user).last()
             order.save()
+
+    # Store shipping info in session
+    request.session['shipping_data'] = order_form.cleaned_data
 
     try:
         basket = Basket.objects.filter(user=request.user).last()
@@ -125,11 +127,18 @@ def success(request):
     Sends an email to customer that purchase was completed
     """
     user = request.user
-    shipping_info = ShippingInfo.objects.last()
-    order_placed_signal.send(
-        sender=None, user=user)
+    
+    shipping_data = request.session.get('shipping_data')
+    if shipping_data:
+        order_placed_signal.send(
+            sender=None,
+            user=request.user,
+            shipping_data=shipping_data
+        )
+        del request.session['shipping_data']
+    else:
+        messages.error(request, "Shipping info missing. Order may be incomplete.")
 
-    user = request.user
     messages.success(request, f"Email is on the way! {user}")
 
     basket = Basket.objects.filter(user=request.user).last()

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Basket, BasketProduct, ShippingInfo
+from .models import Basket, BasketProduct
 
 
 class BasketProductInline(admin.TabularInline):
@@ -30,20 +30,3 @@ class BasketProductAdmin(admin.ModelAdmin):
     """Register basket product module"""
     list_display = ['id']
 
-
-@admin.register(ShippingInfo)
-class ShippingInfoAdmin(admin.ModelAdmin):
-    """Register Shipping info module"""
-    list_display = ['id', 'user', 'full_name', 'email']
-    readonly_fields = ['id',
-                       'user',
-                       'full_name',
-                       'email',
-                       'phone_number',
-                       'country',
-                       'postcode',
-                       'town_or_city',
-                       'street_address1',
-                       'street_address2',
-                       'state',
-                       ]
