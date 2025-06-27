@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Customer, Order
+from .models import Customer, Order, Review
 
 
 @admin.register(Customer)
@@ -38,3 +38,13 @@ class OrdersAdmin(admin.ModelAdmin):
         return ", ".join(
             f"{i.product.name} (x{i.quantity})"
             for i in obj.basket_order.basket_products.all())
+
+
+@admin.register(Review)
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ['id',
+                    'user',
+                    'created',
+                    'updated',
+                    ]
+    ordering = ['updated']
