@@ -33,9 +33,12 @@ class OrdersAdmin(admin.ModelAdmin):
         find all basket products with quantity
         # Code reference chatGPT to create def get_products
         """
+        if not obj.basket_order:
+            return "No basket"
         return ", ".join(
             f"{i.product.name} (x{i.quantity})"
-            for i in obj.basket_order.basket_products.all())
+            for i in obj.basket_order.basket_products.all()
+        )
 
 
 @admin.register(Review)
