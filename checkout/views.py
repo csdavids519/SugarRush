@@ -92,7 +92,8 @@ def payment(request):
 
             # Save shipping data into session
             request.session['shipping_data'] = order_form.cleaned_data
-            print("Shipping data saved:", request.session['shipping_data']) 
+            print("Shipping data saved:", request.session['shipping_data'])
+            return redirect('checkout:success') 
         else:
             messages.error(request, "Invalid form data. Please try again.")
     else:
