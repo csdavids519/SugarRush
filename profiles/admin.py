@@ -16,13 +16,13 @@ class BasketAdmin(admin.ModelAdmin):
 class OrdersAdmin(admin.ModelAdmin):
     list_display = ['id',
                     'user',
-                    'basket_order',
+                    'get_shipping_address',
                     'get_products',
                     'date'
                     ]
     readonly_fields = ['id',
                        'user',
-                       'basket_order',
+                       'get_shipping_address',
                        'get_products',
                        'date'
                        ]
@@ -39,6 +39,19 @@ class OrdersAdmin(admin.ModelAdmin):
             f"{i.product.name} (x{i.quantity})"
             for i in obj.basket_order.basket_products.all()
         )
+        
+    def get_shipping_address(self, obj):
+        """Return formatted shipping address"""
+        parts = [
+            obj.street_address1,
+            obj.street_address2,
+            obj.town_or_city,
+            obj.postcode,
+            str(obj.country),
+        ]
+        return ", ".join(filter(None, parts))
+    get_shipping_address.short_description = 'Shipping Address'
+
 
 
 @admin.register(Review)
