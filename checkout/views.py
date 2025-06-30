@@ -66,7 +66,10 @@ def payment(request):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
     
+    
+    print("!!!!!!!!!!!!!!!!!!!!! PRE POST !!!!!!!!!!!!!!!!!!!!!") 
     if request.method == 'POST':
+        print("!!!!!!!!!!!!!!!!!!!!! POST CALLED !!!!!!!!!!!!!!!!!!!!!") 
         form_data = {
             'full_name': request.POST['full_name'],
             'email': request.POST['email'],
@@ -76,10 +79,12 @@ def payment(request):
             'town_or_city': request.POST['town_or_city'],
             'street_address1': request.POST['street_address1'],
             'street_address2': request.POST['street_address2'],
-            'county': request.POST['county'],
         }
+        print("!!!!!!!!!!!!!!!!!!!!! CALL ORDER FORM !!!!!!!!!!!!!!!!!!!!!") 
         order_form = OrderForm(form_data)
+        print("!!!!!!!!!!!!!!!!!!!!! START ORDER FORM !!!!!!!!!!!!!!!!!!!!!") 
         if order_form.is_valid():
+            print("!!!!!!!!!!!!!!!!!!!!! VALID FORM !!!!!!!!!!!!!!!!!!!!!") 
             order = order_form.save(commit=False)
             order.user = request.user
             order.basket_order = Basket.objects.filter(user=request.user).last()
@@ -87,9 +92,11 @@ def payment(request):
 
             # Save shipping data into session
             request.session['shipping_data'] = order_form.cleaned_data
+            print("Shipping data saved:", request.session['shipping_data']) 
         else:
             messages.error(request, "Invalid form data. Please try again.")
     else:
+        print("!!!!!!!!!!!!!!!!!!!!! POST FAILED? !!!!!!!!!!!!!!!!!!!!!") 
         order_form = OrderForm()
 
     try:
@@ -126,15 +133,14 @@ def success(request):
     user = request.user
     
     shipping_data = request.session.get('shipping_data')
-    if shipping_data:
-        order_placed_signal.send(
-            sender=None,
-            user=request.user,
-            shipping_data=shipping_data
+    order_placed_signal.send(
+        sender=None,
+        user=request.user,
+        shipping_data=shipping_data
         )
-        del request.session['shipping_data']
-    else:
-        messages.error(request, "Shipping info missing. Order may be incomplete.")
+    del request.session['shipping_data']
+    # else:
+    #     messages.error(request, "Shipping info missing. Order may be incomplete.")
 
     messages.success(request, f"Email is on the way! {user}")
 

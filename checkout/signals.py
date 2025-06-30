@@ -31,6 +31,7 @@ def create_order_and_new_basket(sender, user, shipping_data, **kwargs):
     Signal to combine ordered products and shipping info
     creates a new basket for customers next order maintaining previous history
     """
+    print('!!!!!!!!!!!! order_placed_signal !!!!!!!!!!!!!!!!!!!!')
     basket = Basket.objects.filter(user=user).last()
     if not basket:
         return
