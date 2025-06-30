@@ -5,14 +5,33 @@
 </head>
 <body>
     <h1>Thank You for Your Purchase!</h1>
+
     <p>Hello {{ purchase_details.user_name }},</p>
+
     <p>Your order has been successfully placed! Here are the details:</p>
+
+    <h2>Order Summary</h2>
     <ul>
         {% for item in purchase_details.basket_items %}
-            <li>Item: {{ item.product.name }} - Quantity: {{ item.quantity }} - Price: {{ item.product.price }}</li>
+            <li>
+                Item: {{ item.product.name }} - Quantity: {{ item.quantity }} - Price: {{ item.product.price }}
+            </li>
         {% endfor %}
-        <li>Total: {{ purchase_details.total }}</li>
+        <li><strong>Total:</strong> {{ purchase_details.total }}</li>
     </ul>
+
+    <h2>Shipping Information</h2>
+    <ul>
+        <li>Name: {{ purchase_details.shipping.full_name }}</li>
+        <li>Email: {{ purchase_details.shipping.email }}</li>
+        <li>Phone: {{ purchase_details.shipping.phone_number }}</li>
+        <li>Address Line 1: {{ purchase_details.shipping.street_address1 }}</li>
+        <li>Address Line 2: {{ purchase_details.shipping.street_address2 }}</li>
+        <li>Town/City: {{ purchase_details.shipping.town_or_city }}</li>
+        <li>Postcode: {{ purchase_details.shipping.postcode }}</li>
+        <li>Country: {{ purchase_details.shipping.country }}</li>
+    </ul>
+
     <p>Thank you for shopping with us!</p>
 </body>
 </html>

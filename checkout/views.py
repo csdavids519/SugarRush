@@ -132,30 +132,27 @@ def success(request):
     Sends an email to customer that purchase was completed
     """
     user = request.user
-    
-    shipping_data = request.session.get('shipping_data')
-    order_placed_signal.send(
-        sender=None,
-        user=request.user,
-        shipping_data=shipping_data
-        )
-    del request.session['shipping_data']
-    # else:
-    #     messages.error(request, "Shipping info missing. Order may be incomplete.")
-
-    messages.success(request, f"Email is on the way! {user}")
-
-    basket = Basket.objects.filter(user=request.user).last()
+    basket = Basket.objects.filter(user=user).last()
     total_price = basket.basket_products.aggregate(
         total=Sum(F('product__price') * F('quantity'))
     )['total']
+        
+    shipping_data = request.session.get('shipping_data')
+    order_placed_signal.send(
+        sender=None,
+        user=user,
+        shipping_data=shipping_data
+        )
+    del request.session['shipping_data']
+    messages.success(request, f"Email is on the way! {user}")
 
-    basket_items = basket.basket_products.all()
+    basket_items = basket.basket_products.select_related('product')
 
     purchase_details = {
         'user_name': user,
         'basket_items': basket_items,
         'total': total_price,
+        'shipping': shipping_data,
     }
     subject = 'SugarRush - Purchase Confirmation'
 
@@ -172,7 +169,6 @@ def success(request):
         [user.email],
         html_message=html_message,
         )
-
     messages.success(request,
                      'Thanks for your purchase, your candy is on the way!')
 

@@ -53,7 +53,6 @@ class OrdersAdmin(admin.ModelAdmin):
     get_shipping_address.short_description = 'Shipping Address'
 
 
-
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
     list_display = ['id',
