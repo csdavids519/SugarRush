@@ -22,4 +22,5 @@ class ReviewForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['product'].label_from_instance = lambda obj: obj.name
+        self.fields['rating'].help_text = "Please rate between 1 and 5 only."
 

@@ -76,7 +76,9 @@
 
   <!-- Toasts -->
   <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-    <div id="toastMessage" class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive"
+    {% for message in messages %}
+    <div id="toastMessage{{ forloop.counter }}"
+      class="toast align-items-center text-bg-{{ message.tags }} border-0 mb-2" role="alert" aria-live="assertive"
       aria-atomic="true">
       <div class="d-flex">
         <div class="toast-body">
@@ -86,6 +88,7 @@
           aria-label="Close"></button>
       </div>
     </div>
+    {% endfor %}
   </div>
 
   <!-- Block Content -->
@@ -106,12 +109,9 @@
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         {% for message in messages %}
-        var toastElement = document.getElementById('toastMessage');
-        if (toastElement) {
-          toastElement.querySelector('.toast-body').innerText = "{{ message }}";
-          var toast = new bootstrap.Toast(toastElement);
-          toast.show();
-        }
+        var toastElement = document.getElementById("toastMessage{{ forloop.counter }}");
+        var toast = new bootstrap.Toast(toastElement);
+        toast.show();
         {% endfor %}
       });
     </script>

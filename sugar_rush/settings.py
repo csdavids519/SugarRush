@@ -118,7 +118,7 @@ TEMPLATES = [
 ]
 
 MESSAGE_TAGS = {
-    messages.DEBUG: "debug",
+    messages.DEBUG: "secondary",
     messages.INFO: "info",
     messages.SUCCESS: "success",
     messages.WARNING: "warning",

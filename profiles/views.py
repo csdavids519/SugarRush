@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from profiles.models import Customer
 from .models import Review
 from .forms import ReviewForm
+from django.contrib import messages
 
 
 def profiles(request):
@@ -10,13 +11,13 @@ def profiles(request):
     return render(request, 'profiles.html')
 
 
-def order_history(request):
-    """ A view to return the index page """
-    try:
-        orders = Customer.objects.get(user=request.user)
-    except Customer.DoesNotExist:
-        return render(request, 'order_history.html', {'order_results': None})
-    return render(request, 'order_history.html', {'order_results': orders})
+# def order_history(request):
+#     """ A view to return the index page """
+#     try:
+#         orders = Customer.objects.get(user=request.user)
+#     except Customer.DoesNotExist:
+#         return render(request, 'order_history.html', {'order_results': None})
+#     return render(request, 'order_history.html', {'order_results': orders})
 
 
 def review_list(request):
@@ -32,7 +33,10 @@ def review_create(request):
         review = form.save(commit=False)
         review.user = request.user
         review.save()
+        messages.success(request, "Review submitted.")
         return redirect('profiles:review_list')
+    else:
+        messages.error(request, "There was an error with your submission.")
     return render(request, 'review_form.html', {'form': form})
 
 
