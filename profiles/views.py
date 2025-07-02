@@ -1,23 +1,14 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from profiles.models import Customer
-from .models import Review
-from .forms import ReviewForm
 from django.contrib import messages
+from django.shortcuts import render, get_object_or_404, redirect
+
+from .forms import ReviewForm
+from .models import Review
 
 
 def profiles(request):
     """ A view to return the index page """
 
     return render(request, 'profiles.html')
-
-
-# def order_history(request):
-#     """ A view to return the index page """
-#     try:
-#         orders = Customer.objects.get(user=request.user)
-#     except Customer.DoesNotExist:
-#         return render(request, 'order_history.html', {'order_results': None})
-#     return render(request, 'order_history.html', {'order_results': orders})
 
 
 def review_list(request):
@@ -44,7 +35,6 @@ def review_update(request, pk):
     """ view to edit an existing review """
     review = get_object_or_404(Review, pk=pk, user=request.user)
     form = ReviewForm(request.POST or None, instance=review)
-    print("Review:", review.pk)
     if form.is_valid():
         form.save()
         return redirect('profiles:review_list')

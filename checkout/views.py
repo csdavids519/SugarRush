@@ -1,23 +1,20 @@
+import uuid
+import stripe
 
-from django.shortcuts import (render, redirect, get_object_or_404)
 from django.conf import settings
-from django.http import JsonResponse
-from django.db.models import Sum, F
 from django.contrib import messages
-from django.views.decorators.csrf import csrf_exempt
 from django.core.mail import send_mail
+from django.db.models import Sum, F
+from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
-from checkout.models import Basket, BasketProduct
-from products.models import Product
-from .forms import OrderForm
-import uuid
-from django.utils import timezone
 
+from .forms import OrderForm
 from .signals import order_placed_signal
 
+from checkout.models import Basket, BasketProduct
 from checkout.contexts import update_basket_total
-import stripe
+from products.models import Product
 
 
 def checkout(request):
@@ -39,44 +36,15 @@ def checkout(request):
 
     return render(request, 'checkout.html', {'basket_results': basket, 'has_items': has_items})
 
-
-# def shipping_info(request):
-#     """ A view to return the shipping form page """
-#     if request.user.is_authenticated:
-#         shipping_data = ShippingInfo.objects.filter(user=request.user).last()
-#         if shipping_data:
-#             shipping_form = ShippingForm(initial={
-#                 'full_name': shipping_data.full_name,
-#                 'email': shipping_data.email,
-#                 'phone_number': shipping_data.phone_number,
-#                 'country': shipping_data.country,
-#                 'postcode': shipping_data.postcode,
-#                 'town_or_city': shipping_data.town_or_city,
-#                 'street_address1': shipping_data.street_address1,
-#                 'street_address2': shipping_data.street_address2,
-#                 'state': shipping_data.state,
-#             })
-#         else:
-#             shipping_form = ShippingForm()
-#     else:
-#         shipping_form = ShippingForm()
-
-#     return render(request, 'shipping.html', {'shipping_form': shipping_form})
-
-
 def payment(request):
     """ A view to return the Stripe payment page """
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
-    print("!!!!!!!!!!!!!!!!!!!!! PRE POST !!!!!!!!!!!!!!!!!!!!!") 
     if request.method == 'POST':
         # Prevent double orders
         if request.session.get("order_processed"):
             return redirect('checkout:success')
-
-        print("!!!!!!!!!!!!!!!!!!!!! POST CALLED !!!!!!!!!!!!!!!!!!!!!")
-        print(f"[DEBUG] Payment POST triggered for user at {timezone.now()}") 
 
         form_data = {
             'full_name': request.POST['full_name'],
@@ -89,17 +57,12 @@ def payment(request):
             'street_address2': request.POST['street_address2'],
         }
 
-        print("!!!!!!!!!!!!!!!!!!!!! CALL ORDER FORM !!!!!!!!!!!!!!!!!!!!!") 
         order_form = OrderForm(form_data)
-        print("!!!!!!!!!!!!!!!!!!!!! START ORDER FORM !!!!!!!!!!!!!!!!!!!!!") 
 
         if order_form.is_valid():
-            print("!!!!!!!!!!!!!!!!!!!!! VALID FORM !!!!!!!!!!!!!!!!!!!!!") 
-
             request.session['purchase_id'] = str(uuid.uuid4())
             request.session['shipping_data'] = order_form.cleaned_data
             request.session['order_processed'] = True
-            print("Shipping data saved:", request.session['shipping_data'])
 
             return redirect('checkout:success')
 
@@ -107,7 +70,6 @@ def payment(request):
             messages.error(request, "Invalid form data. Please try again.")
 
     else:
-        print("!!!!!!!!!!!!!!!!!!!!! POST FAILED? !!!!!!!!!!!!!!!!!!!!!") 
         order_form = OrderForm()
 
     try:
@@ -151,7 +113,6 @@ def success(request):
     shipping_data = request.session.get('shipping_data')
 
     # Call Signal
-    print("!!!!!!!!!!!! order_placed_signal !!!!!!!!!!!!!!!!!!!!")
     order_placed_signal.send(
         sender=None,
         user=user,
@@ -163,6 +124,7 @@ def success(request):
     request.session.pop('order_processed', None)
     request.session.pop('purchase_id', None)
 
+    # Collect email data
     basket_items = basket.basket_products.select_related('product')
 
     purchase_details = {
@@ -258,26 +220,4 @@ def remove_from_basket(request, basket_product_id):
 
     redirect_url = request.POST.get('redirect_url', '/')
     return redirect(redirect_url)
-
-
-# def create_checkout_session(request):
-#     """
-#     Create Stripe checkout session 
-#     Ref: Boutique ado
-#     """
-
-#     bag = request.session.get('bag', {})
-#     if not bag:
-#         messages.error(request, "There's nothing in your bag at the moment")
-#         return redirect(reverse('products'))
-
-#     order_form = OrderForm()
-#     template = 'checkout/checkout.html'
-#     context = {
-#         'order_form': order_form,
-#         'stripe_public_key': 'pk_test_51QsjeH02ahKmoBWWiupTVTSOypH3073b25gWzF4vB0vk9SIvAWpCFPVkE5Dp5P2R6eNmvBRevBxR07Xzyv1QHV6s00IWGTX1Cx',
-#         'client_secret': 'test client se3cret',
-#     }
-
-#     return render(request, template, context)
 

@@ -1,9 +1,11 @@
 from django.db import models
+from django.utils import timezone
 from django.contrib.auth.models import User
+
+from django_countries.fields import CountryField
+
 from checkout.models import Basket
 from products.models import Product
-from django.utils import timezone
-from django_countries.fields import CountryField
 
 
 class Customer(models.Model):

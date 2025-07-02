@@ -1,8 +1,8 @@
-from django.dispatch import receiver, Signal
-from django.contrib.auth.models import User
+from django.dispatch import Signal, receiver
+
 from .models import Basket
 from profiles.models import Customer, Order
-from django.contrib.auth.models import User
+
 
 basket_cleared_signal = Signal()
 
@@ -31,8 +31,6 @@ def create_order_and_new_basket(sender, user, shipping_data, **kwargs):
     Signal to combine ordered products and shipping info
     creates a new basket for customers next order maintaining previous history
     """
-    print('!!!!!!!!!!!! order_placed_signal !!!!!!!!!!!!!!!!!!!!')
-    print(f"[DEBUG] order_placed_signal triggered for {user}")
     basket = Basket.objects.filter(user=user).last()
     if not basket:
         return
