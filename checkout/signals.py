@@ -32,6 +32,7 @@ def create_order_and_new_basket(sender, user, shipping_data, **kwargs):
     creates a new basket for customers next order maintaining previous history
     """
     print('!!!!!!!!!!!! order_placed_signal !!!!!!!!!!!!!!!!!!!!')
+    print(f"[DEBUG] order_placed_signal triggered for {user}")
     basket = Basket.objects.filter(user=user).last()
     if not basket:
         return

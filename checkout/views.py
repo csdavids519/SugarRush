@@ -11,6 +11,8 @@ from django.utils.html import strip_tags
 from checkout.models import Basket, BasketProduct
 from products.models import Product
 from .forms import OrderForm
+import uuid
+from django.utils import timezone
 
 from .signals import order_placed_signal
 
@@ -61,15 +63,21 @@ def checkout(request):
 
 #     return render(request, 'shipping.html', {'shipping_form': shipping_form})
 
+
 def payment(request):
     """ A view to return the Stripe payment page """
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
-    
-    
+
     print("!!!!!!!!!!!!!!!!!!!!! PRE POST !!!!!!!!!!!!!!!!!!!!!") 
     if request.method == 'POST':
-        print("!!!!!!!!!!!!!!!!!!!!! POST CALLED !!!!!!!!!!!!!!!!!!!!!") 
+        # Prevent double orders
+        if request.session.get("order_processed"):
+            return redirect('checkout:success')
+
+        print("!!!!!!!!!!!!!!!!!!!!! POST CALLED !!!!!!!!!!!!!!!!!!!!!")
+        print(f"[DEBUG] Payment POST triggered for user at {timezone.now()}") 
+
         form_data = {
             'full_name': request.POST['full_name'],
             'email': request.POST['email'],
@@ -80,22 +88,24 @@ def payment(request):
             'street_address1': request.POST['street_address1'],
             'street_address2': request.POST['street_address2'],
         }
+
         print("!!!!!!!!!!!!!!!!!!!!! CALL ORDER FORM !!!!!!!!!!!!!!!!!!!!!") 
         order_form = OrderForm(form_data)
         print("!!!!!!!!!!!!!!!!!!!!! START ORDER FORM !!!!!!!!!!!!!!!!!!!!!") 
+
         if order_form.is_valid():
             print("!!!!!!!!!!!!!!!!!!!!! VALID FORM !!!!!!!!!!!!!!!!!!!!!") 
-            order = order_form.save(commit=False)
-            order.user = request.user
-            order.basket_order = Basket.objects.filter(user=request.user).last()
-            order.save()
 
-            # Save shipping data into session
+            request.session['purchase_id'] = str(uuid.uuid4())
             request.session['shipping_data'] = order_form.cleaned_data
+            request.session['order_processed'] = True
             print("Shipping data saved:", request.session['shipping_data'])
-            return redirect('checkout:success') 
+
+            return redirect('checkout:success')
+
         else:
             messages.error(request, "Invalid form data. Please try again.")
+
     else:
         print("!!!!!!!!!!!!!!!!!!!!! POST FAILED? !!!!!!!!!!!!!!!!!!!!!") 
         order_form = OrderForm()
@@ -108,7 +118,8 @@ def payment(request):
 
     total_price = basket.basket_products.aggregate(
         total=Sum(F('product__price') * F('quantity'))
-    )['total']
+    )['total'] or 0
+
     stripe_total = round(total_price * 100)
     stripe.api_key = stripe_secret_key
     intent = stripe.PaymentIntent.create(
@@ -125,26 +136,32 @@ def payment(request):
 
     return render(request, 'payment.html', context)
 
-
 def success(request):
     """
-    A view to render the success page and call order placed signal
-    Sends an email to customer that purchase was completed
+    A view to render the success page and call order placed signal.
+    Sends an email to customer that purchase was completed.
     """
     user = request.user
+
     basket = Basket.objects.filter(user=user).last()
     total_price = basket.basket_products.aggregate(
         total=Sum(F('product__price') * F('quantity'))
-    )['total']
-        
+    )['total'] or 0
+
     shipping_data = request.session.get('shipping_data')
+
+    # Call Signal
+    print("!!!!!!!!!!!! order_placed_signal !!!!!!!!!!!!!!!!!!!!")
     order_placed_signal.send(
         sender=None,
         user=user,
         shipping_data=shipping_data
-        )
-    del request.session['shipping_data']
-    messages.success(request, f"Email is on the way! {user}")
+    )
+
+    # Clean up session
+    request.session.pop('shipping_data', None)
+    request.session.pop('order_processed', None)
+    request.session.pop('purchase_id', None)
 
     basket_items = basket.basket_products.select_related('product')
 
@@ -154,12 +171,14 @@ def success(request):
         'total': total_price,
         'shipping': shipping_data,
     }
+
+    # Email
     subject = 'SugarRush - Purchase Confirmation'
 
     html_message = render_to_string(
         'emails/purchase_confirmation.html',
         {'purchase_details': purchase_details}
-        )
+    )
     plain_message = strip_tags(html_message)
 
     send_mail(
@@ -168,9 +187,9 @@ def success(request):
         settings.DEFAULT_FROM_EMAIL,
         [user.email],
         html_message=html_message,
-        )
-    messages.success(request,
-                     'Thanks for your purchase, your candy is on the way!')
+    )
+
+    messages.success(request, 'Thanks for your purchase, your candy is on the way!')
 
     return render(request, 'success.html')
 
@@ -222,6 +241,7 @@ def update_basket(request, basket_product_id):
         if qty_update > 0:
             basket_list.quantity = qty_update
             basket_list.save()
+            
 
     messages.success(request, 'Basket updated!')
 
