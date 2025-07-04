@@ -102,9 +102,11 @@ body {
     .lg-promo {
         margin-top: 50px;
     }
+
+    .lg-success {
+        margin-top: 250px;
+    }
 }
-
-
 
 /* Large screens (lg) and up */
 @media (min-width: 992px) {
