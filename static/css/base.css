@@ -1,15 +1,4 @@
-/* color pallet:  
-FBF8CC
-FDE4CF
-FFCFD2
-F1C0E8
-CFBAF0
-A3C4F3
-90DBF4
-8EECF5
-98F5E1
-B9FBC0 */
-
+/* static/css */
 header {
     background-color: #F1C0E8;
 }
@@ -36,15 +25,17 @@ body {
 }
 
 .review-list {
-    background-color: #FFCFD2;
+    background-color: #bec0c2ab;
     border: 1px solid #000000;
     list-style-type: none;
     padding: 0.75rem 1.25rem;
     font-size: 1rem;
-    color: #000000;
-    border-radius: 1rem;
+    color: #212529;
+    border-radius: 0.75rem;
     margin-bottom: 0.5rem;
+    transition: background-color 0.2s ease-in-out;
 }
+
 
 .hidden-small {
     display: none;
@@ -58,14 +49,46 @@ body {
     margin-top: 5rem;
 }
 
-.mobile-margin {
-    margin-top: 5rem;
+
+/* Small screen adjustments */
+@media (max-width: 799px) {
+    .mobile-navbar-offset {
+        margin-top: 110px;
+    }
+
+    h2, h3 {
+        font-size: 1.5rem;
+    }
+
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .col-2,
+    .col-10 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    .review-list img {
+        margin: 0 auto 1rem;
+        display: block;
+    }
+
+    .review-list .text-start {
+        text-align: center !important;
+    }
+
+    .mobile-stack {
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
+    .text-center-on-mobile {
+        text-align: center !important;
+    }
 }
-
-
-/* medium screens  and up */
-@media (min-width: 800px) {}
-
 
 /* Large screens (lg) and up */
 @media (min-width: 992px) {
