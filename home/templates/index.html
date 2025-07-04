@@ -6,7 +6,7 @@
             background-size: cover; 
             width: 100%; 
             min-height: 50vh;">
-    <div class="container" >
+    <div class="container">
         <div class="row justify-content-end">
             <div class="col-12 col-md-6 text-center text-center-on-mobile p-1">
                 <h2 class="my-4">See What's New!</h2>
@@ -14,7 +14,7 @@
         </div>
         <div class="row justify-content-end">
             <div class="col col-md-4 p-3 d-flex align-items-center flex-column">
-                <div class='p-3 rounded-4' style='background-color: rgba(144, 219, 244, 0.5);'>
+                <div class='p-3 rounded-4 lg-promo' style='background-color: rgba(144, 219, 244, 0.5);'>
                     <div class="flex-shrink-0 mb-3 mb-md-0 text-center">
                         <a href="{% url 'products:product_detail' product_id=promo_new.id %}">
                             <img src="{{ promo_new.image.url }}" alt="{{ promo_new.name }}" class="rounded-4"

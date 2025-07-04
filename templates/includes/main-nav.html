@@ -1,31 +1,38 @@
 <nav class=" hidden-small navbar navbar-expand-lg rounded border border-dark" style='background-color: #8EECF5'>
   <div class="container-fluid">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link {% if request.resolver_match.url_name == 'products' %}active{% endif %}" href="{% url 'products:products' %}"> Our Candy</a>
+          <a class="nav-link {% if request.resolver_match.url_name == 'products' %}active{% endif %}"
+            href="{% url 'products:products' %}"> Our Candy</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link {% if request.resolver_match.url_name == 'checkout' %}active{% endif %}" href="{% url 'checkout:checkout' %}">Basket</a>
+          <a class="nav-link {% if request.resolver_match.url_name == 'checkout' %}active{% endif %}"
+            href="{% url 'checkout:checkout' %}">Basket</a>
         </li>
         {% if user.is_authenticated %}
         <li class="nav-item">
-          <a class="nav-link {% if request.resolver_match.url_name == 'account_logout' %}active{% endif %}" href="{% url 'account_logout' %}">Logout</a>
+          <a class="nav-link {% if request.resolver_match.url_name == 'account_logout' %}active{% endif %}"
+            href="{% url 'account_logout' %}">Logout</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link {% if request.resolver_match.url_name == 'review_list' %}active{% endif %}" href="{% url 'profiles:review_list' %}">Reviews</a>
+          <a class="nav-link {% if request.resolver_match.url_name == 'review_list' %}active{% endif %}"
+            href="{% url 'profiles:review_list' %}">Reviews</a>
         </li>
         {% else %}
         <li class="nav-item">
-          <a class="nav-link {% if request.resolver_match.url_name == 'account_login' %}active{% endif %}" href="{% url 'account_login' %}">Login</a>
+          <a class="nav-link {% if request.resolver_match.url_name == 'account_login' %}active{% endif %}"
+            href="{% url 'account_login' %}">Login</a>
         </li>
         {% endif %}
         {% if user.is_superuser %}
         <li class="nav-item">
-          <a class="nav-link {% if request.resolver_match.url_name == 'admin' %}active{% endif %}" href="{% url 'admin:index' %}">Management</a>
+          <a class="nav-link {% if request.resolver_match.url_name == 'admin' %}active{% endif %}"
+            href="{% url 'admin:index' %}">Management</a>
         </li>
         {% endif %}
       </ul>
@@ -36,12 +43,13 @@
       </h2>
     </div>
     <div class="ms-auto">
-      <p class= "text-end m-3 fw-light text-dark">
+      <p class="text-end m-3 fw-light text-dark">
         {% if user.is_authenticated %}
-          Logged in as: {{ user }} | Total: ${{ grand_total|floatformat:2 }}
+        Logged in as: {{ user }} | Total: ${{ grand_total|floatformat:2 }}
         {% else %}
-          user not logged in
+        user not logged in
         {% endif %}
       </p>
+    </div>
   </div>
 </nav>

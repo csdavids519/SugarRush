@@ -25,7 +25,7 @@ body {
 }
 
 .review-list {
-    background-color: #bec0c2ab;
+    background-color: #F1C0E8;
     border: 1px solid #000000;
     list-style-type: none;
     padding: 0.75rem 1.25rem;
@@ -35,7 +35,6 @@ body {
     margin-bottom: 0.5rem;
     transition: background-color 0.2s ease-in-out;
 }
-
 
 .hidden-small {
     display: none;
@@ -56,7 +55,15 @@ body {
         margin-top: 110px;
     }
 
-    h2, h3 {
+    .mobile-payment-style {
+        margin-left: auto;
+        margin-right: auto;
+        float: none;
+        margin-top: 0vh;
+    }
+
+    h2,
+    h3 {
         font-size: 1.5rem;
     }
 
@@ -89,6 +96,15 @@ body {
         text-align: center !important;
     }
 }
+
+/* Med screens and up */
+@media (min-width: 799px) {
+    .lg-promo {
+        margin-top: 50px;
+    }
+}
+
+
 
 /* Large screens (lg) and up */
 @media (min-width: 992px) {
