@@ -8,6 +8,7 @@ from django.db.models import Sum, F
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
+from django.contrib.auth.decorators import login_required 
 
 from .forms import OrderForm
 from .signals import order_placed_signal
@@ -16,7 +17,7 @@ from checkout.models import Basket, BasketProduct
 from checkout.contexts import update_basket_total
 from products.models import Product
 
-
+@login_required
 def checkout(request):
     """
     A view to render the checkout basket edit page with basket data
@@ -36,6 +37,7 @@ def checkout(request):
 
     return render(request, 'checkout.html', {'basket_results': basket, 'has_items': has_items})
 
+@login_required
 def payment(request):
     """ A view to return the Stripe payment page """
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
@@ -98,6 +100,7 @@ def payment(request):
 
     return render(request, 'payment.html', context)
 
+@login_required
 def success(request):
     """
     A view to render the success page and call order placed signal.
@@ -156,6 +159,7 @@ def success(request):
     return render(request, 'success.html')
 
 
+@login_required
 def add_to_basket(request, item_id):
     """
     A view to add current product to the basket list
@@ -194,6 +198,7 @@ def add_to_basket(request, item_id):
     return redirect(redirect_url)
 
 
+@login_required
 def update_basket(request, basket_product_id):
     """ Update user basket total """
     basket_list = get_object_or_404(BasketProduct, id=basket_product_id)
@@ -211,6 +216,7 @@ def update_basket(request, basket_product_id):
     return redirect(redirect_url)
 
 
+@login_required
 def remove_from_basket(request, basket_product_id):
     """A view to manage item removal from basket"""
     basket_list = get_object_or_404(BasketProduct, id=basket_product_id)
