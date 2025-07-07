@@ -105,7 +105,15 @@ Sugar Rush creates and sells its own unique candy, offering candy products only 
 
 ## Web Marketing
 
+### Facebook
 Facebook and other social media accounts have been created for Sugar Rush as a way to increase reach to existing and potential customers.
+
+![FaceBook_SugarRush](documentation/images/fb_sugar_rush.png)
+
+
+### MailChimp
+Planned weekly marketing email to subscribers to offer a discount on a different candy type each week to increase repeat shpping engagement.
+
 
 ---
 
@@ -126,6 +134,9 @@ This feature requires more research time to implement, as the Candy Rush store g
 ### Delivery cost calculation
 
 A benefit to our customers would be to calculate shipping cots before checkout, this feature would need to be researched before implemented and would use the already available shipping info data from the customer.
+
+### Display of order history
+The profile page should include a history of previous orders from the user account.
 
 ---
 
