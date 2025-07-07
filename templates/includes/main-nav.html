@@ -15,11 +15,11 @@
           <a class="nav-link {% if request.resolver_match.url_name == 'products' %}active{% endif %}"
             href="{% url 'products:products' %}"> Our Candy</a>
         </li>
+        {% if user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link {% if request.resolver_match.url_name == 'checkout' %}active{% endif %}"
             href="{% url 'checkout:checkout' %}">Basket</a>
         </li>
-        {% if user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link {% if request.resolver_match.url_name == 'account_logout' %}active{% endif %}"
             href="{% url 'account_logout' %}">Logout</a>
