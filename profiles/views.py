@@ -20,14 +20,15 @@ def review_list(request):
 def review_create(request):
     """ view to create a new review """
     form = ReviewForm(request.POST or None)
-    if form.is_valid():
-        review = form.save(commit=False)
-        review.user = request.user
-        review.save()
-        messages.success(request, "Review submitted.")
-        return redirect('profiles:review_list')
-    else:
-        messages.error(request, "There was an error with your submission.")
+    if request.method == 'POST':
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.user = request.user
+            review.save()
+            messages.success(request, "Review submitted.")
+            return redirect('profiles:review_list')
+        else:
+            messages.error(request, "There was an error with your submission.")
     return render(request, 'review_form.html', {'form': form})
 
 
