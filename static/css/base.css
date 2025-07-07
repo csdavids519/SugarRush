@@ -14,10 +14,6 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 80vh;
-  }
-
-.navbar-style {
-    z-index: 1200;
 }
 
 .no-link-style {
@@ -57,6 +53,11 @@ body {
     margin-top: 5rem;
 }
 
+/* mail chimp */
+#mc_embed_signup {
+    clear: left;
+    font: 14px Helvetica, Arial, sans-serif;
+}
 
 /* Small screen adjustments */
 @media (max-width: 799px) {
@@ -117,7 +118,7 @@ body {
     }
 
     .lg-navbar-offset {
-        margin-top: 120px;
+        margin-top: 300px;
     }
 }
 
