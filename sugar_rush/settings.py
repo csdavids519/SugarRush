@@ -25,7 +25,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True #'DEVELOPMENT' in os.environ
+DEBUG = False
 print(f'~~~~~~~~~~~~~~~DEBUG_STATUS:{DEBUG}~~~~~~~~~~~~~~~')
 ALLOWED_HOSTS = ['localhost',
                  '127.0.0.1',
@@ -68,7 +68,7 @@ SITE_ID = 1
 
 ACCOUNT_LOGIN_METHODS = {'email', 'username'}
 ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = "mandatory" if not DEBUG else "none"
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
 ACCOUNT_USERNAME_MIN_LENGTH = 4
 LOGIN_URL = '/accounts/login/'
