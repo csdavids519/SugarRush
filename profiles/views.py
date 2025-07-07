@@ -1,22 +1,25 @@
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
 
 from .forms import ReviewForm
 from .models import Review
 
-
+@login_required
 def profiles(request):
     """ A view to return the index page """
 
     return render(request, 'profiles.html')
 
 
+@login_required
 def review_list(request):
     """ view to create list of current user reviews """
     reviews = Review.objects.filter(user=request.user)
     return render(request, 'review_list.html', {'reviews': reviews})
 
 
+@login_required
 def review_create(request):
     """ view to create a new review """
     form = ReviewForm(request.POST or None)
@@ -32,6 +35,7 @@ def review_create(request):
     return render(request, 'review_form.html', {'form': form})
 
 
+@login_required
 def review_update(request, pk):
     """ view to edit an existing review """
     review = get_object_or_404(Review, pk=pk, user=request.user)
@@ -42,6 +46,7 @@ def review_update(request, pk):
     return render(request, 'review_form.html', {'form': form})
 
 
+@login_required
 def review_delete(request, pk):
     """ view to delete a reveiw """
     review = get_object_or_404(Review, pk=pk, user=request.user)
