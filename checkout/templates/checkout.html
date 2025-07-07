@@ -2,36 +2,34 @@
 {% load static %}
 
 {% block content %}
-<div class='container-fluid pt-3 mt-5'> 
-  {% comment %} breadcrumbs  {% endcomment %}
+<div class='container-fluid pt-3'>
+  {% comment %} breadcrumbs {% endcomment %}
   <nav class='hidden-small' style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item text-dark" aria-current="page" style='text-decoration: underline;'>Edit Basket</li>
-      <li class="breadcrumb-item text-secondary" aria-current="page" >Review and Payment</li>
+      <li class="breadcrumb-item text-secondary" aria-current="page">Review and Payment</li>
     </ol>
   </nav>
-  {% comment %} basket list  {% endcomment %}
+  {% comment %} basket list {% endcomment %}
   <div class="container rounded-4" style='margin-top: 5rem;'>
     {% if not has_items %}
-      <p class="text-center fw-bold fs-4">Nothing here, keep shopping!</p>
+    <p class="text-center fw-bold fs-4">Nothing here, keep shopping!</p>
     {% else %}
     {% for i in basket_results.basket_products.all %}
-    {% comment %} product rows  {% endcomment %}
+    {% comment %} product rows {% endcomment %}
     <div class="row m-3 justify-content-md-center rounded-4" style='background-color: #FFCFD2;'>
-      {% comment %} images  {% endcomment %}
-      <div class="col m-1 col-lg-2  d-flex justify-content-center align-items-center" >
-        <img src="{{ i.product.image.url }}"
-             alt="{{ product.name }}"
-             class='rounded'
-             style='max-height: 100px; width: auto'>
+      {% comment %} images {% endcomment %}
+      <div class="col m-1 col-lg-2  d-flex justify-content-center align-items-center">
+        <img src="{{ i.product.image.url }}" alt="{{ product.name }}" class='rounded'
+          style='max-height: 100px; width: auto'>
       </div>
-      {% comment %} product detail  {% endcomment %}
+      {% comment %} product detail {% endcomment %}
       <div class="col m-1 col-lg-4 text-start">
         <p class='fs-4'>{{ i.product.name }}</p>
         <p class='fs-6'>${{ i.product.price }} (x{{ i.quantity }})</p>
         <p class='fs-6'>Total: ${{ grand_total|floatformat:2 }}</p>
-      </div>  
-      {% comment %} qty edits  {% endcomment %}
+      </div>
+      {% comment %} qty edits {% endcomment %}
       <div class="col g-3 m-1 col-lg-2 d-flex align-items-center">
         <div class="col p-3 mx-3 d-flex align-items-center">
           <form action="{% url 'checkout:update_basket' i.id %}" method="POST">
@@ -40,19 +38,18 @@
               <input type="number" name="quantity" value="{{ i.quantity }}" min="1" style="width: 80px; ">
             </div>
             <div class="row">
-            <button class="btn btn-outline-dark" type="submit" style='background-color:#B9FBC0;'>Update</button>
+              <button class="btn btn-outline-dark" type="submit" style='background-color:#B9FBC0;'>Update</button>
             </div>
-            <input type="hidden" name="redirect_url" value="{{ request.path }}" >
+            <input type="hidden" name="redirect_url" value="{{ request.path }}">
           </form>
         </div>
-        {% comment %} qty edit buttons  {% endcomment %}
+        {% comment %} qty edit buttons {% endcomment %}
         <div class="col g-3">
           <form action="{% url 'checkout:remove_from_basket' i.id %}" method="POST">
             {% csrf_token %}
-            <input type="hidden" name="redirect_url" value="{{ request.path }}" >
-            <button class="btn btn-outline-dark g-3"
-            type="submit"
-            style="width: 80px; background-color: #F1C0E8;">Remove</button>
+            <input type="hidden" name="redirect_url" value="{{ request.path }}">
+            <button class="btn btn-outline-dark g-3" type="submit"
+              style="width: 80px; background-color: #F1C0E8;">Remove</button>
           </form>
         </div>
       </div>
@@ -60,14 +57,13 @@
     {% endfor %}
     {% endif %}
   </div>
-  {% comment %} end basket list  {% endcomment %}
+  {% comment %} end basket list {% endcomment %}
   <div class="container-fluid d-flex justify-content-center align-items-center">
-    <a href="{% url 'products:products' %}"
-       class="btn btn-outline-dark btn-2 m-3"
-       style="min-width: 10rem;">Keep Shopping</a>
-    <a href="{% url 'checkout:payment' %}"
-       class="btn btn-outline-dark btn-1 m-3"
-       style="min-width: 10rem;">Next</a>
+    <a href="{% url 'products:products' %}" class="btn btn-outline-dark btn-2 m-3" style="min-width: 10rem;">Keep
+      Shopping</a>
+    {% if request.user.is_authenticated and basket_results.basket_products.all %}
+      <a href="{% url 'checkout:payment' %}" class="btn btn-outline-dark btn-1 m-3" style="min-width: 10rem;">Next</a>
+    {% endif %}
   </div>
 </div>
 {% endblock %}
