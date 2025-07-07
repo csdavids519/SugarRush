@@ -17,9 +17,9 @@ The project agile task list can be found here: [Github Projects](https://github.
 
 Payment testing credit card number: 4242 4242 4242 4242
 
-Admin testing at Code Institute
-  User: SRADMIN
-  Pass: ADMIN
+Admin testing at Code Institute:
+  - User: SRADMIN
+  - Pass: ADMIN
 
 ---
 
