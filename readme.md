@@ -18,8 +18,8 @@ The project agile task list can be found here: [Github Projects](https://github.
 Payment testing credit card number: 4242 4242 4242 4242
 
 Admin testing at Code Institute
-  User: SugarRushAdmin
-  Pass: Admin1
+  User: SRADMIN
+  Pass: ADMIN
 
 ---
 
@@ -275,7 +275,7 @@ GitHub Project Management was used to manage the project. This method keeps clea
 
 ### Entity-Relationship Diagram
 
-![ERD](documentation/ERD.pdf)
+![ERD](documentation/images/erd_diagram.png)
 
 ---
 
@@ -378,10 +378,20 @@ I have manually tested this project with the following tests:
 - CSS code was checked with [CSS Validation Service](https://jigsaw.w3.org/css-validator/)
 - Python code has been check with a linter extension [Flake8](https://flake8.pycqa.org/en/latest/)
 
+
+
+![Validate_base_css](documentation/images/validate_base_css.png)
+![Validate_checkout_css](documentation/images/validate_checkout_css.png)
+![Validate_index](documentation/images/validate_index.png)
+![Validate_checkout](documentation/images/validate_checkout.png)
+![Validate_payment](documentation/images/validate_payment.png)
+![Validate_success](documentation/images/validate_sucess.png)
+
+
 ### Bugs and Issues
 
-- Sugar Rush currently has an issue with the Stripe payment processing, unfortunately a request for deadline extension
-  was denied therefore Sugar Rush has been submitted as is to avoid a €150 late submission fee.
+- Further protection against malicious code injection vulnerabilities could be investigated.
+- An improved model for managing the order history could be implemented.
 
 ---
 
