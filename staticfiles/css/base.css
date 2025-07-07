@@ -1,14 +1,19 @@
-/* staticfiles/css */
+/* static/css */
 header {
     background-color: #F1C0E8;
 }
 
 body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     background-color: #FBF8CC;
 }
 
-.navbar-style {
-    z-index: 1200;
+.page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 80vh;
 }
 
 .no-link-style {
@@ -25,7 +30,7 @@ body {
 }
 
 .review-list {
-    background-color: #bec0c2ab;
+    background-color: #F1C0E8;
     border: 1px solid #000000;
     list-style-type: none;
     padding: 0.75rem 1.25rem;
@@ -35,7 +40,6 @@ body {
     margin-bottom: 0.5rem;
     transition: background-color 0.2s ease-in-out;
 }
-
 
 .hidden-small {
     display: none;
@@ -49,10 +53,27 @@ body {
     margin-top: 5rem;
 }
 
+/* mail chimp */
+#mc_embed_signup {
+    clear: left;
+    font: 14px Helvetica, Arial, sans-serif;
+}
 
 /* Small screen adjustments */
 @media (max-width: 799px) {
-    h2, h3 {
+    .mobile-navbar-offset {
+        margin-top: 110px;
+    }
+
+    .mobile-payment-style {
+        margin-left: auto;
+        margin-right: auto;
+        float: none;
+        margin-top: 0vh;
+    }
+
+    h2,
+    h3 {
         font-size: 1.5rem;
     }
 
@@ -73,16 +94,31 @@ body {
     }
 
     .review-list .text-start {
-        text-align: center !important;
+        text-align: center;
     }
 
     .mobile-stack {
-        flex-direction: column !important;
-        align-items: center !important;
+        flex-direction: column ;
+        align-items: center;
     }
 
     .text-center-on-mobile {
-        text-align: center !important;
+        text-align: center;
+    }
+}
+
+/* Med screens and up */
+@media (min-width: 799px) {
+    .lg-promo {
+        margin-top: 50px;
+    }
+
+    .lg-success {
+        margin-top: 250px;
+    }
+
+    .lg-navbar-offset {
+        margin-top: 120px;
     }
 }
 
