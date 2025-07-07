@@ -26,7 +26,7 @@ class OrdersAdmin(admin.ModelAdmin):
                        'get_products',
                        'date'
                        ]
-    ordering = ['id']
+    ordering = ['-date']
 
     def get_products(self, obj):
         """
