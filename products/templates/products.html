@@ -6,7 +6,7 @@
   <div class="row">
     {% for product in products %}
     <div class="col-12 col-md-6 col-lg-4 py-3 px-5">
-      <div class="card h-100 border-3 p-1" style="border: 2px solid #F1C0E8; background-color: #FFCFD2;">
+      <div class="card h-100 d-flex flex-column border-3 p-1" style="border: 2px solid #F1C0E8; background-color: #FFCFD2;">
         <a href="{% url 'products:product_detail' product_id=product.id %}" class="no-link-style">
           {% comment %} card header  {% endcomment %}
           <div class="card-header" style="background-color: #98F5E1;">
@@ -20,7 +20,7 @@
           </div>
         </a>
         {% comment %} card footer  {% endcomment %}
-        <div class="card-footer text-body-secondary" style="background-color: #8EECF5;" >
+        <div class="card-footer mt-auto text-body-secondary" style="background-color: #8EECF5;">
           <div class="row">
             <div class="col d-flex align-items-center">
               <p class="text-start font-weight-bold m-0 fs-4 ">
