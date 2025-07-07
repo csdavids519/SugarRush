@@ -380,12 +380,12 @@ I have manually tested this project with the following tests:
 
 
 
-[Validate_base_css](documentation/images/validate_base_css.png)
-[Validate_checkout_css](documentation/images/validate_checkout_css.png)
-[Validate_index](documentation/images/validate_index.png)
-[Validate_checkout](documentation/images/validate_checkout.png)
-[Validate_payment](documentation/images/validate_payment.png)
-[Validate_success](documentation/images/validate_sucess.png)
+- [Validate_base_css](documentation/images/validate_base_css.png)
+- [Validate_checkout_css](documentation/images/validate_checkout_css.png)
+- [Validate_index](documentation/images/validate_index.png)
+- [Validate_checkout](documentation/images/validate_checkout.png)
+- [Validate_payment](documentation/images/validate_payment.png)
+- [Validate_success](documentation/images/validate_success.png)
 
 
 ### Bugs and Issues
