@@ -4,8 +4,17 @@ header {
 }
 
 body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     background-color: #FBF8CC;
 }
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 80vh;
+  }
 
 .navbar-style {
     z-index: 1200;
@@ -105,6 +114,10 @@ body {
 
     .lg-success {
         margin-top: 250px;
+    }
+
+    .lg-navbar-offset {
+        margin-top: 120px;
     }
 }
 
